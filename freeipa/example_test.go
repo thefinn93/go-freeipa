@@ -32,6 +32,7 @@
 package freeipa_test
 
 import (
+	"context"
 	"crypto/tls"
 	"fmt"
 	"log"
@@ -44,12 +45,14 @@ import (
 )
 
 func Example_addUser() {
+	ctx := context.Background()
+
 	tspt := &http.Transport{
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: true, // WARNING DO NOT USE THIS OPTION IN PRODUCTION
 		},
 	}
-	c, e := freeipa.Connect("dc1.test.local", tspt, "admin", "walrus123")
+	c, e := freeipa.Connect(ctx, "dc1.test.local", tspt, "admin", "walrus123")
 	if e != nil {
 		log.Fatal(e)
 	}
@@ -57,7 +60,7 @@ func Example_addUser() {
 	rand.Seed(time.Now().UTC().UnixNano())
 	uid := fmt.Sprintf("jdoe%v", rand.Int())
 
-	res, e := c.UserAdd(&freeipa.UserAddArgs{
+	res, e := c.UserAdd(ctx, &freeipa.UserAddArgs{
 		Givenname: "John",
 		Sn:        "Doe",
 	}, &freeipa.UserAddOptionalArgs{
@@ -72,17 +75,19 @@ func Example_addUser() {
 }
 
 func Example_errorHandling() {
+	ctx := context.Background()
+
 	tspt := &http.Transport{
 		TLSClientConfig: &tls.Config{
 			InsecureSkipVerify: true, // WARNING DO NOT USE THIS OPTION IN PRODUCTION
 		},
 	}
-	c, e := freeipa.Connect("dc1.test.local", tspt, "admin", "walrus123")
+	c, e := freeipa.Connect(ctx, "dc1.test.local", tspt, "admin", "walrus123")
 	if e != nil {
 		log.Fatal(e)
 	}
 
-	_, e = c.UserShow(&freeipa.UserShowArgs{}, &freeipa.UserShowOptionalArgs{
+	_, e = c.UserShow(ctx, &freeipa.UserShowArgs{}, &freeipa.UserShowOptionalArgs{
 		UID: freeipa.String("somemissinguid"),
 	})
 	if e == nil {
@@ -101,6 +106,7 @@ func Example_errorHandling() {
 }
 
 func Example_kerberosLogin() {
+	ctx := context.Background()
 
 	krb5Principal := "host/cc.in2p3.fr"
 	krb5Realm := "CC.IN2P3.FR"
@@ -130,13 +136,13 @@ func Example_kerberosLogin() {
 		},
 	}
 
-	c, err := freeipa.ConnectWithKerberos("dc1.test.local", tspt, krb5ConnectOption)
+	c, err := freeipa.ConnectWithKerberos(ctx, "dc1.test.local", tspt, krb5ConnectOption)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	sizeLimit := 5
-	res, err := c.UserFind("", &freeipa.UserFindArgs{}, &freeipa.UserFindOptionalArgs{
+	res, err := c.UserFind(ctx, "", &freeipa.UserFindArgs{}, &freeipa.UserFindOptionalArgs{
 		Sizelimit: &sizeLimit,
 	})
 	if err != nil {

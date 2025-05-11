@@ -59,6 +59,7 @@ package freeipa
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -95,7 +96,7 @@ func (t *Error) Error() string {
 }
 
 // Connect connects to the FreeIPA server and performs an initial login.
-func Connect(host string, tspt http.RoundTripper, user, pw string) (*Client, error) {
+func Connect(ctx context.Context, host string, tspt http.RoundTripper, user, pw string) (*Client, error) {
 	jar, e := cookiejar.New(&cookiejar.Options{
 		PublicSuffixList: nil, // this should be fine, since we only use one server
 	})
@@ -111,13 +112,13 @@ func Connect(host string, tspt http.RoundTripper, user, pw string) (*Client, err
 		user: user,
 		pw:   pw,
 	}
-	if e := c.login(); e != nil {
+	if e := c.login(ctx); e != nil {
 		return nil, errors.WithMessage(e, "initial login failed")
 	}
 	return c, nil
 }
 
-func ConnectWithKerberos(host string, tspt http.RoundTripper, k5ConnectOpts *KerberosConnectOptions) (*Client, error) {
+func ConnectWithKerberos(ctx context.Context, host string, tspt http.RoundTripper, k5ConnectOpts *KerberosConnectOptions) (*Client, error) {
 	jar, e := cookiejar.New(&cookiejar.Options{
 		PublicSuffixList: nil, // this should be fine, since we only use one server
 	})
@@ -151,24 +152,24 @@ func ConnectWithKerberos(host string, tspt http.RoundTripper, k5ConnectOpts *Ker
 		user:     k5ConnectOpts.Username,
 		k5client: k5client,
 	}
-	if e := c.login(); e != nil {
+	if e := c.login(ctx); e != nil {
 		return nil, fmt.Errorf("initial login failed: %v", e)
 	}
 	return c, nil
 }
 
-func (c *Client) exec(req *request) (io.ReadCloser, error) {
-	res, e := c.sendRequest(req)
+func (c *Client) exec(ctx context.Context, req *request) (io.ReadCloser, error) {
+	res, e := c.sendRequest(ctx, req)
 	if e != nil {
 		return nil, e
 	}
 
 	if res.StatusCode == http.StatusUnauthorized {
 		res.Body.Close()
-		if e := c.login(); e != nil {
+		if e := c.login(ctx); e != nil {
 			return nil, errors.WithMessage(e, "renewed login failed")
 		}
-		res, e = c.sendRequest(req)
+		res, e = c.sendRequest(ctx, req)
 		if e != nil {
 			return nil, e
 		}
@@ -182,9 +183,9 @@ func (c *Client) exec(req *request) (io.ReadCloser, error) {
 	return res.Body, nil
 }
 
-func (c *Client) login() error {
+func (c *Client) login(ctx context.Context) error {
 	if c.k5client != nil {
-		return c.loginWithKerberos()
+		return c.loginWithKerberos(ctx)
 	}
 
 	data := url.Values{
@@ -196,6 +197,8 @@ func (c *Client) login() error {
 	if e != nil {
 		return errors.WithMessage(e, "building login HTTP request")
 	}
+
+	req = req.WithContext(ctx)
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Add("Referer", fmt.Sprintf("https://%s/ipa", c.host))
@@ -215,7 +218,7 @@ func (c *Client) login() error {
 	return nil
 }
 
-func (c *Client) loginWithKerberos() error {
+func (c *Client) loginWithKerberos(ctx context.Context) error {
 
 	k5LoginEndpoint := fmt.Sprintf("https://%s/ipa/session/login_kerberos", c.host)
 	spnegoCl := spnego.NewClient(c.k5client, c.hc, "")
@@ -224,6 +227,8 @@ func (c *Client) loginWithKerberos() error {
 	if err != nil {
 		return errors.WithMessage(err, "building login HTTP request")
 	}
+
+	req = req.WithContext(ctx)
 
 	req.Header.Add("Referer", fmt.Sprintf("https://%s/ipa", c.host))
 
@@ -239,7 +244,7 @@ func (c *Client) loginWithKerberos() error {
 	return nil
 }
 
-func (c *Client) sendRequest(req *request) (*http.Response, error) {
+func (c *Client) sendRequest(ctx context.Context, req *request) (*http.Response, error) {
 	reqB, e := json.Marshal(req)
 	if e != nil {
 		return nil, e
@@ -248,6 +253,7 @@ func (c *Client) sendRequest(req *request) (*http.Response, error) {
 	if e != nil {
 		return nil, e
 	}
+	reqH = reqH.WithContext(ctx)
 	reqH.Header.Set("Content-Type", "application/json")
 	reqH.Header.Set("Accept", "application/json")
 	reqH.Header.Set("Referer", fmt.Sprintf("https://%v/ipa/ui", c.host))

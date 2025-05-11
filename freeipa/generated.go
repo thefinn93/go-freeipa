@@ -3,6 +3,7 @@
 package freeipa;
 
 import (
+  "context"
   "time"
 	"encoding/json"
   "fmt"
@@ -22,6 +23,7 @@ type request struct {
 Create new ACI.
 */
 func (c *Client) AciAdd(
+  ctx context.Context,
   reqArgs *AciAddArgs,
   optArgs *AciAddOptionalArgs, // can be nil
 ) (*AciAddResult, error) {
@@ -38,7 +40,7 @@ func (c *Client) AciAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -211,6 +213,7 @@ func (t *AciAddResult) String() string {
 Delete ACI.
 */
 func (c *Client) AciDel(
+  ctx context.Context,
   reqArgs *AciDelArgs,
   optArgs *AciDelOptionalArgs, // can be nil
 ) (*AciDelResult, error) {
@@ -227,7 +230,7 @@ func (c *Client) AciDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -338,6 +341,7 @@ Search for ACIs.
     members of that group indirectly.
 */
 func (c *Client) AciFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *AciFindArgs,
   optArgs *AciFindOptionalArgs, // can be nil
@@ -355,7 +359,7 @@ func (c *Client) AciFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -536,6 +540,7 @@ func (t *AciFindResult) String() string {
 Modify ACI.
 */
 func (c *Client) AciMod(
+  ctx context.Context,
   reqArgs *AciModArgs,
   optArgs *AciModOptionalArgs, // can be nil
 ) (*AciModResult, error) {
@@ -552,7 +557,7 @@ func (c *Client) AciMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -719,6 +724,7 @@ func (t *AciModResult) String() string {
 Rename an ACI.
 */
 func (c *Client) AciRename(
+  ctx context.Context,
   reqArgs *AciRenameArgs,
   optArgs *AciRenameOptionalArgs, // can be nil
 ) (*AciRenameResult, error) {
@@ -735,7 +741,7 @@ func (c *Client) AciRename(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -908,6 +914,7 @@ func (t *AciRenameResult) String() string {
 Display a single ACI given an ACI name.
 */
 func (c *Client) AciShow(
+  ctx context.Context,
   reqArgs *AciShowArgs,
   optArgs *AciShowOptionalArgs, // can be nil
 ) (*AciShowResult, error) {
@@ -924,7 +931,7 @@ func (c *Client) AciShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -1037,6 +1044,7 @@ func (t *AciShowResult) String() string {
 Determine whether ipa-adtrust-install has been run on this system
 */
 func (c *Client) AdtrustIsEnabled(
+  ctx context.Context,
   reqArgs *AdtrustIsEnabledArgs,
   optArgs *AdtrustIsEnabledOptionalArgs, // can be nil
 ) (*AdtrustIsEnabledResult, error) {
@@ -1053,7 +1061,7 @@ func (c *Client) AdtrustIsEnabled(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -1120,6 +1128,7 @@ func (t *AdtrustIsEnabledResult) String() string {
 Add an automember rule.
 */
 func (c *Client) AutomemberAdd(
+  ctx context.Context,
   reqArgs *AutomemberAddArgs,
   optArgs *AutomemberAddOptionalArgs, // can be nil
 ) (*AutomemberAddResult, error) {
@@ -1136,7 +1145,7 @@ func (c *Client) AutomemberAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -1263,6 +1272,7 @@ func (t *AutomemberAddResult) String() string {
 Add conditions to an automember rule.
 */
 func (c *Client) AutomemberAddCondition(
+  ctx context.Context,
   reqArgs *AutomemberAddConditionArgs,
   optArgs *AutomemberAddConditionOptionalArgs, // can be nil
 ) (*AutomemberAddConditionResult, error) {
@@ -1279,7 +1289,7 @@ func (c *Client) AutomemberAddCondition(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -1426,6 +1436,7 @@ func (t *AutomemberAddConditionResult) String() string {
 Remove default (fallback) group for all unmatched entries.
 */
 func (c *Client) AutomemberDefaultGroupRemove(
+  ctx context.Context,
   reqArgs *AutomemberDefaultGroupRemoveArgs,
   optArgs *AutomemberDefaultGroupRemoveOptionalArgs, // can be nil
 ) (*AutomemberDefaultGroupRemoveResult, error) {
@@ -1442,7 +1453,7 @@ func (c *Client) AutomemberDefaultGroupRemove(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -1543,6 +1554,7 @@ func (t *AutomemberDefaultGroupRemoveResult) String() string {
 Set default (fallback) group for all unmatched entries.
 */
 func (c *Client) AutomemberDefaultGroupSet(
+  ctx context.Context,
   reqArgs *AutomemberDefaultGroupSetArgs,
   optArgs *AutomemberDefaultGroupSetOptionalArgs, // can be nil
 ) (*AutomemberDefaultGroupSetResult, error) {
@@ -1559,7 +1571,7 @@ func (c *Client) AutomemberDefaultGroupSet(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -1666,6 +1678,7 @@ func (t *AutomemberDefaultGroupSetResult) String() string {
 Display information about the default (fallback) automember groups.
 */
 func (c *Client) AutomemberDefaultGroupShow(
+  ctx context.Context,
   reqArgs *AutomemberDefaultGroupShowArgs,
   optArgs *AutomemberDefaultGroupShowOptionalArgs, // can be nil
 ) (*AutomemberDefaultGroupShowResult, error) {
@@ -1682,7 +1695,7 @@ func (c *Client) AutomemberDefaultGroupShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -1783,6 +1796,7 @@ func (t *AutomemberDefaultGroupShowResult) String() string {
 Delete an automember rule.
 */
 func (c *Client) AutomemberDel(
+  ctx context.Context,
   reqArgs *AutomemberDelArgs,
   optArgs *AutomemberDelOptionalArgs, // can be nil
 ) (*AutomemberDelResult, error) {
@@ -1799,7 +1813,7 @@ func (c *Client) AutomemberDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -1894,6 +1908,7 @@ func (t *AutomemberDelResult) String() string {
 Search for automember rules.
 */
 func (c *Client) AutomemberFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *AutomemberFindArgs,
   optArgs *AutomemberFindOptionalArgs, // can be nil
@@ -1911,7 +1926,7 @@ func (c *Client) AutomemberFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -2033,6 +2048,7 @@ Search for orphan automember rules. The command might need to be run as
     a privileged user user to get all orphan rules.
 */
 func (c *Client) AutomemberFindOrphans(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *AutomemberFindOrphansArgs,
   optArgs *AutomemberFindOrphansOptionalArgs, // can be nil
@@ -2050,7 +2066,7 @@ func (c *Client) AutomemberFindOrphans(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -2177,6 +2193,7 @@ func (t *AutomemberFindOrphansResult) String() string {
 Modify an automember rule.
 */
 func (c *Client) AutomemberMod(
+  ctx context.Context,
   reqArgs *AutomemberModArgs,
   optArgs *AutomemberModOptionalArgs, // can be nil
 ) (*AutomemberModResult, error) {
@@ -2193,7 +2210,7 @@ func (c *Client) AutomemberMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -2333,6 +2350,7 @@ func (t *AutomemberModResult) String() string {
 Rebuild auto membership.
 */
 func (c *Client) AutomemberRebuild(
+  ctx context.Context,
   reqArgs *AutomemberRebuildArgs,
   optArgs *AutomemberRebuildOptionalArgs, // can be nil
 ) (*AutomemberRebuildResult, error) {
@@ -2349,7 +2367,7 @@ func (c *Client) AutomemberRebuild(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -2468,6 +2486,7 @@ func (t *AutomemberRebuildResult) String() string {
 Remove conditions from an automember rule.
 */
 func (c *Client) AutomemberRemoveCondition(
+  ctx context.Context,
   reqArgs *AutomemberRemoveConditionArgs,
   optArgs *AutomemberRemoveConditionOptionalArgs, // can be nil
 ) (*AutomemberRemoveConditionResult, error) {
@@ -2484,7 +2503,7 @@ func (c *Client) AutomemberRemoveCondition(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -2631,6 +2650,7 @@ func (t *AutomemberRemoveConditionResult) String() string {
 Display information about an automember rule.
 */
 func (c *Client) AutomemberShow(
+  ctx context.Context,
   reqArgs *AutomemberShowArgs,
   optArgs *AutomemberShowOptionalArgs, // can be nil
 ) (*AutomemberShowResult, error) {
@@ -2647,7 +2667,7 @@ func (c *Client) AutomemberShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -2754,6 +2774,7 @@ func (t *AutomemberShowResult) String() string {
 Create a new automount key.
 */
 func (c *Client) AutomountkeyAdd(
+  ctx context.Context,
   reqArgs *AutomountkeyAddArgs,
   optArgs *AutomountkeyAddOptionalArgs, // can be nil
 ) (*AutomountkeyAddResult, error) {
@@ -2770,7 +2791,7 @@ func (c *Client) AutomountkeyAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -2903,6 +2924,7 @@ func (t *AutomountkeyAddResult) String() string {
 Delete an automount key.
 */
 func (c *Client) AutomountkeyDel(
+  ctx context.Context,
   reqArgs *AutomountkeyDelArgs,
   optArgs *AutomountkeyDelOptionalArgs, // can be nil
 ) (*AutomountkeyDelResult, error) {
@@ -2919,7 +2941,7 @@ func (c *Client) AutomountkeyDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -3032,6 +3054,7 @@ func (t *AutomountkeyDelResult) String() string {
 Search for an automount key.
 */
 func (c *Client) AutomountkeyFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *AutomountkeyFindArgs,
   optArgs *AutomountkeyFindOptionalArgs, // can be nil
@@ -3049,7 +3072,7 @@ func (c *Client) AutomountkeyFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -3188,6 +3211,7 @@ func (t *AutomountkeyFindResult) String() string {
 Modify an automount key.
 */
 func (c *Client) AutomountkeyMod(
+  ctx context.Context,
   reqArgs *AutomountkeyModArgs,
   optArgs *AutomountkeyModOptionalArgs, // can be nil
 ) (*AutomountkeyModResult, error) {
@@ -3204,7 +3228,7 @@ func (c *Client) AutomountkeyMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -3362,6 +3386,7 @@ func (t *AutomountkeyModResult) String() string {
 Display an automount key.
 */
 func (c *Client) AutomountkeyShow(
+  ctx context.Context,
   reqArgs *AutomountkeyShowArgs,
   optArgs *AutomountkeyShowOptionalArgs, // can be nil
 ) (*AutomountkeyShowResult, error) {
@@ -3378,7 +3403,7 @@ func (c *Client) AutomountkeyShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -3503,6 +3528,7 @@ func (t *AutomountkeyShowResult) String() string {
 Create a new automount location.
 */
 func (c *Client) AutomountlocationAdd(
+  ctx context.Context,
   reqArgs *AutomountlocationAddArgs,
   optArgs *AutomountlocationAddOptionalArgs, // can be nil
 ) (*AutomountlocationAddResult, error) {
@@ -3519,7 +3545,7 @@ func (c *Client) AutomountlocationAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -3634,6 +3660,7 @@ func (t *AutomountlocationAddResult) String() string {
 Delete an automount location.
 */
 func (c *Client) AutomountlocationDel(
+  ctx context.Context,
   reqArgs *AutomountlocationDelArgs,
   optArgs *AutomountlocationDelOptionalArgs, // can be nil
 ) (*AutomountlocationDelResult, error) {
@@ -3650,7 +3677,7 @@ func (c *Client) AutomountlocationDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -3745,6 +3772,7 @@ func (t *AutomountlocationDelResult) String() string {
 Search for an automount location.
 */
 func (c *Client) AutomountlocationFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *AutomountlocationFindArgs,
   optArgs *AutomountlocationFindOptionalArgs, // can be nil
@@ -3762,7 +3790,7 @@ func (c *Client) AutomountlocationFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -3889,6 +3917,7 @@ func (t *AutomountlocationFindResult) String() string {
 Display an automount location.
 */
 func (c *Client) AutomountlocationShow(
+  ctx context.Context,
   reqArgs *AutomountlocationShowArgs,
   optArgs *AutomountlocationShowOptionalArgs, // can be nil
 ) (*AutomountlocationShowResult, error) {
@@ -3905,7 +3934,7 @@ func (c *Client) AutomountlocationShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -4012,6 +4041,7 @@ func (t *AutomountlocationShowResult) String() string {
 Generate automount files for a specific location.
 */
 func (c *Client) AutomountlocationTofiles(
+  ctx context.Context,
   reqArgs *AutomountlocationTofilesArgs,
   optArgs *AutomountlocationTofilesOptionalArgs, // can be nil
 ) (*AutomountlocationTofilesResult, error) {
@@ -4028,7 +4058,7 @@ func (c *Client) AutomountlocationTofiles(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -4101,6 +4131,7 @@ func (t *AutomountlocationTofilesResult) String() string {
 Create a new automount map.
 */
 func (c *Client) AutomountmapAdd(
+  ctx context.Context,
   reqArgs *AutomountmapAddArgs,
   optArgs *AutomountmapAddOptionalArgs, // can be nil
 ) (*AutomountmapAddResult, error) {
@@ -4117,7 +4148,7 @@ func (c *Client) AutomountmapAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -4244,6 +4275,7 @@ func (t *AutomountmapAddResult) String() string {
 Create a new indirect mount point.
 */
 func (c *Client) AutomountmapAddIndirect(
+  ctx context.Context,
   reqArgs *AutomountmapAddIndirectArgs,
   optArgs *AutomountmapAddIndirectOptionalArgs, // can be nil
 ) (*AutomountmapAddIndirectResult, error) {
@@ -4260,7 +4292,7 @@ func (c *Client) AutomountmapAddIndirect(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -4399,6 +4431,7 @@ func (t *AutomountmapAddIndirectResult) String() string {
 Delete an automount map.
 */
 func (c *Client) AutomountmapDel(
+  ctx context.Context,
   reqArgs *AutomountmapDelArgs,
   optArgs *AutomountmapDelOptionalArgs, // can be nil
 ) (*AutomountmapDelResult, error) {
@@ -4415,7 +4448,7 @@ func (c *Client) AutomountmapDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -4516,6 +4549,7 @@ func (t *AutomountmapDelResult) String() string {
 Search for an automount map.
 */
 func (c *Client) AutomountmapFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *AutomountmapFindArgs,
   optArgs *AutomountmapFindOptionalArgs, // can be nil
@@ -4533,7 +4567,7 @@ func (c *Client) AutomountmapFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -4672,6 +4706,7 @@ func (t *AutomountmapFindResult) String() string {
 Modify an automount map.
 */
 func (c *Client) AutomountmapMod(
+  ctx context.Context,
   reqArgs *AutomountmapModArgs,
   optArgs *AutomountmapModOptionalArgs, // can be nil
 ) (*AutomountmapModResult, error) {
@@ -4688,7 +4723,7 @@ func (c *Client) AutomountmapMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -4828,6 +4863,7 @@ func (t *AutomountmapModResult) String() string {
 Display an automount map.
 */
 func (c *Client) AutomountmapShow(
+  ctx context.Context,
   reqArgs *AutomountmapShowArgs,
   optArgs *AutomountmapShowOptionalArgs, // can be nil
 ) (*AutomountmapShowResult, error) {
@@ -4844,7 +4880,7 @@ func (c *Client) AutomountmapShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -4957,6 +4993,7 @@ func (t *AutomountmapShowResult) String() string {
 Create a CA.
 */
 func (c *Client) CaAdd(
+  ctx context.Context,
   reqArgs *CaAddArgs,
   optArgs *CaAddOptionalArgs, // can be nil
 ) (*CaAddResult, error) {
@@ -4973,7 +5010,7 @@ func (c *Client) CaAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -5106,6 +5143,7 @@ func (t *CaAddResult) String() string {
 Delete a CA (must be disabled first).
 */
 func (c *Client) CaDel(
+  ctx context.Context,
   reqArgs *CaDelArgs,
   optArgs *CaDelOptionalArgs, // can be nil
 ) (*CaDelResult, error) {
@@ -5122,7 +5160,7 @@ func (c *Client) CaDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -5217,6 +5255,7 @@ func (t *CaDelResult) String() string {
 Disable a CA.
 */
 func (c *Client) CaDisable(
+  ctx context.Context,
   reqArgs *CaDisableArgs,
   optArgs *CaDisableOptionalArgs, // can be nil
 ) (*CaDisableResult, error) {
@@ -5233,7 +5272,7 @@ func (c *Client) CaDisable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -5322,6 +5361,7 @@ func (t *CaDisableResult) String() string {
 Enable a CA.
 */
 func (c *Client) CaEnable(
+  ctx context.Context,
   reqArgs *CaEnableArgs,
   optArgs *CaEnableOptionalArgs, // can be nil
 ) (*CaEnableResult, error) {
@@ -5338,7 +5378,7 @@ func (c *Client) CaEnable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -5427,6 +5467,7 @@ func (t *CaEnableResult) String() string {
 Search for CAs.
 */
 func (c *Client) CaFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *CaFindArgs,
   optArgs *CaFindOptionalArgs, // can be nil
@@ -5444,7 +5485,7 @@ func (c *Client) CaFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -5595,6 +5636,7 @@ func (t *CaFindResult) String() string {
 Checks if any of the servers has the CA service enabled.
 */
 func (c *Client) CaIsEnabled(
+  ctx context.Context,
   reqArgs *CaIsEnabledArgs,
   optArgs *CaIsEnabledOptionalArgs, // can be nil
 ) (*CaIsEnabledResult, error) {
@@ -5611,7 +5653,7 @@ func (c *Client) CaIsEnabled(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -5694,6 +5736,7 @@ func (t *CaIsEnabledResult) String() string {
 Modify CA configuration.
 */
 func (c *Client) CaMod(
+  ctx context.Context,
   reqArgs *CaModArgs,
   optArgs *CaModOptionalArgs, // can be nil
 ) (*CaModResult, error) {
@@ -5710,7 +5753,7 @@ func (c *Client) CaMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -5850,6 +5893,7 @@ func (t *CaModResult) String() string {
 Display the properties of a CA.
 */
 func (c *Client) CaShow(
+  ctx context.Context,
   reqArgs *CaShowArgs,
   optArgs *CaShowOptionalArgs, // can be nil
 ) (*CaShowResult, error) {
@@ -5866,7 +5910,7 @@ func (c *Client) CaShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -5979,6 +6023,7 @@ func (t *CaShowResult) String() string {
 Create a new CA ACL.
 */
 func (c *Client) CaaclAdd(
+  ctx context.Context,
   reqArgs *CaaclAddArgs,
   optArgs *CaaclAddOptionalArgs, // can be nil
 ) (*CaaclAddResult, error) {
@@ -5995,7 +6040,7 @@ func (c *Client) CaaclAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -6158,6 +6203,7 @@ func (t *CaaclAddResult) String() string {
 Add CAs to a CA ACL.
 */
 func (c *Client) CaaclAddCa(
+  ctx context.Context,
   reqArgs *CaaclAddCaArgs,
   optArgs *CaaclAddCaOptionalArgs, // can be nil
 ) (*CaaclAddCaResult, error) {
@@ -6174,7 +6220,7 @@ func (c *Client) CaaclAddCa(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -6287,6 +6333,7 @@ func (t *CaaclAddCaResult) String() string {
 Add target hosts and hostgroups to a CA ACL.
 */
 func (c *Client) CaaclAddHost(
+  ctx context.Context,
   reqArgs *CaaclAddHostArgs,
   optArgs *CaaclAddHostOptionalArgs, // can be nil
 ) (*CaaclAddHostResult, error) {
@@ -6303,7 +6350,7 @@ func (c *Client) CaaclAddHost(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -6422,6 +6469,7 @@ func (t *CaaclAddHostResult) String() string {
 Add profiles to a CA ACL.
 */
 func (c *Client) CaaclAddProfile(
+  ctx context.Context,
   reqArgs *CaaclAddProfileArgs,
   optArgs *CaaclAddProfileOptionalArgs, // can be nil
 ) (*CaaclAddProfileResult, error) {
@@ -6438,7 +6486,7 @@ func (c *Client) CaaclAddProfile(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -6551,6 +6599,7 @@ func (t *CaaclAddProfileResult) String() string {
 Add services to a CA ACL.
 */
 func (c *Client) CaaclAddService(
+  ctx context.Context,
   reqArgs *CaaclAddServiceArgs,
   optArgs *CaaclAddServiceOptionalArgs, // can be nil
 ) (*CaaclAddServiceResult, error) {
@@ -6567,7 +6616,7 @@ func (c *Client) CaaclAddService(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -6680,6 +6729,7 @@ func (t *CaaclAddServiceResult) String() string {
 Add users and groups to a CA ACL.
 */
 func (c *Client) CaaclAddUser(
+  ctx context.Context,
   reqArgs *CaaclAddUserArgs,
   optArgs *CaaclAddUserOptionalArgs, // can be nil
 ) (*CaaclAddUserResult, error) {
@@ -6696,7 +6746,7 @@ func (c *Client) CaaclAddUser(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -6815,6 +6865,7 @@ func (t *CaaclAddUserResult) String() string {
 Delete a CA ACL.
 */
 func (c *Client) CaaclDel(
+  ctx context.Context,
   reqArgs *CaaclDelArgs,
   optArgs *CaaclDelOptionalArgs, // can be nil
 ) (*CaaclDelResult, error) {
@@ -6831,7 +6882,7 @@ func (c *Client) CaaclDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -6926,6 +6977,7 @@ func (t *CaaclDelResult) String() string {
 Disable a CA ACL.
 */
 func (c *Client) CaaclDisable(
+  ctx context.Context,
   reqArgs *CaaclDisableArgs,
   optArgs *CaaclDisableOptionalArgs, // can be nil
 ) (*CaaclDisableResult, error) {
@@ -6942,7 +6994,7 @@ func (c *Client) CaaclDisable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -7031,6 +7083,7 @@ func (t *CaaclDisableResult) String() string {
 Enable a CA ACL.
 */
 func (c *Client) CaaclEnable(
+  ctx context.Context,
   reqArgs *CaaclEnableArgs,
   optArgs *CaaclEnableOptionalArgs, // can be nil
 ) (*CaaclEnableResult, error) {
@@ -7047,7 +7100,7 @@ func (c *Client) CaaclEnable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -7136,6 +7189,7 @@ func (t *CaaclEnableResult) String() string {
 Search for CA ACLs.
 */
 func (c *Client) CaaclFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *CaaclFindArgs,
   optArgs *CaaclFindOptionalArgs, // can be nil
@@ -7153,7 +7207,7 @@ func (c *Client) CaaclFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -7328,6 +7382,7 @@ func (t *CaaclFindResult) String() string {
 Modify a CA ACL.
 */
 func (c *Client) CaaclMod(
+  ctx context.Context,
   reqArgs *CaaclModArgs,
   optArgs *CaaclModOptionalArgs, // can be nil
 ) (*CaaclModResult, error) {
@@ -7344,7 +7399,7 @@ func (c *Client) CaaclMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -7520,6 +7575,7 @@ func (t *CaaclModResult) String() string {
 Remove CAs from a CA ACL.
 */
 func (c *Client) CaaclRemoveCa(
+  ctx context.Context,
   reqArgs *CaaclRemoveCaArgs,
   optArgs *CaaclRemoveCaOptionalArgs, // can be nil
 ) (*CaaclRemoveCaResult, error) {
@@ -7536,7 +7592,7 @@ func (c *Client) CaaclRemoveCa(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -7649,6 +7705,7 @@ func (t *CaaclRemoveCaResult) String() string {
 Remove target hosts and hostgroups from a CA ACL.
 */
 func (c *Client) CaaclRemoveHost(
+  ctx context.Context,
   reqArgs *CaaclRemoveHostArgs,
   optArgs *CaaclRemoveHostOptionalArgs, // can be nil
 ) (*CaaclRemoveHostResult, error) {
@@ -7665,7 +7722,7 @@ func (c *Client) CaaclRemoveHost(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -7784,6 +7841,7 @@ func (t *CaaclRemoveHostResult) String() string {
 Remove profiles from a CA ACL.
 */
 func (c *Client) CaaclRemoveProfile(
+  ctx context.Context,
   reqArgs *CaaclRemoveProfileArgs,
   optArgs *CaaclRemoveProfileOptionalArgs, // can be nil
 ) (*CaaclRemoveProfileResult, error) {
@@ -7800,7 +7858,7 @@ func (c *Client) CaaclRemoveProfile(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -7913,6 +7971,7 @@ func (t *CaaclRemoveProfileResult) String() string {
 Remove services from a CA ACL.
 */
 func (c *Client) CaaclRemoveService(
+  ctx context.Context,
   reqArgs *CaaclRemoveServiceArgs,
   optArgs *CaaclRemoveServiceOptionalArgs, // can be nil
 ) (*CaaclRemoveServiceResult, error) {
@@ -7929,7 +7988,7 @@ func (c *Client) CaaclRemoveService(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -8042,6 +8101,7 @@ func (t *CaaclRemoveServiceResult) String() string {
 Remove users and groups from a CA ACL.
 */
 func (c *Client) CaaclRemoveUser(
+  ctx context.Context,
   reqArgs *CaaclRemoveUserArgs,
   optArgs *CaaclRemoveUserOptionalArgs, // can be nil
 ) (*CaaclRemoveUserResult, error) {
@@ -8058,7 +8118,7 @@ func (c *Client) CaaclRemoveUser(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -8177,6 +8237,7 @@ func (t *CaaclRemoveUserResult) String() string {
 Display the properties of a CA ACL.
 */
 func (c *Client) CaaclShow(
+  ctx context.Context,
   reqArgs *CaaclShowArgs,
   optArgs *CaaclShowOptionalArgs, // can be nil
 ) (*CaaclShowResult, error) {
@@ -8193,7 +8254,7 @@ func (c *Client) CaaclShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -8306,6 +8367,7 @@ func (t *CaaclShowResult) String() string {
 Search for existing certificates.
 */
 func (c *Client) CertFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *CertFindArgs,
   optArgs *CertFindOptionalArgs, // can be nil
@@ -8323,7 +8385,7 @@ func (c *Client) CertFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -8588,6 +8650,7 @@ func (t *CertFindResult) String() string {
 Take a revoked certificate off hold.
 */
 func (c *Client) CertRemoveHold(
+  ctx context.Context,
   reqArgs *CertRemoveHoldArgs,
   optArgs *CertRemoveHoldOptionalArgs, // can be nil
 ) (*CertRemoveHoldResult, error) {
@@ -8604,7 +8667,7 @@ func (c *Client) CertRemoveHold(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -8683,6 +8746,7 @@ func (t *CertRemoveHoldResult) String() string {
 Submit a certificate signing request.
 */
 func (c *Client) CertRequest(
+  ctx context.Context,
   reqArgs *CertRequestArgs,
   optArgs *CertRequestOptionalArgs, // can be nil
 ) (*CertRequestResult, error) {
@@ -8699,7 +8763,7 @@ func (c *Client) CertRequest(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -8836,6 +8900,7 @@ func (t *CertRequestResult) String() string {
 Revoke a certificate.
 */
 func (c *Client) CertRevoke(
+  ctx context.Context,
   reqArgs *CertRevokeArgs,
   optArgs *CertRevokeOptionalArgs, // can be nil
 ) (*CertRevokeResult, error) {
@@ -8852,7 +8917,7 @@ func (c *Client) CertRevoke(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -8937,6 +9002,7 @@ func (t *CertRevokeResult) String() string {
 Retrieve an existing certificate.
 */
 func (c *Client) CertShow(
+  ctx context.Context,
   reqArgs *CertShowArgs,
   optArgs *CertShowOptionalArgs, // can be nil
 ) (*CertShowResult, error) {
@@ -8953,7 +9019,7 @@ func (c *Client) CertShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -9078,6 +9144,7 @@ func (t *CertShowResult) String() string {
 Check the status of a certificate signing request.
 */
 func (c *Client) CertStatus(
+  ctx context.Context,
   reqArgs *CertStatusArgs,
   optArgs *CertStatusOptionalArgs, // can be nil
 ) (*CertStatusResult, error) {
@@ -9094,7 +9161,7 @@ func (c *Client) CertStatus(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -9205,6 +9272,7 @@ Search for users matching the provided certificate.
     please refer to sss_cache documentation.
 */
 func (c *Client) CertmapMatch(
+  ctx context.Context,
   reqArgs *CertmapMatchArgs,
   optArgs *CertmapMatchOptionalArgs, // can be nil
 ) (*CertmapMatchResult, error) {
@@ -9221,7 +9289,7 @@ func (c *Client) CertmapMatch(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -9330,6 +9398,7 @@ func (t *CertmapMatchResult) String() string {
 Modify Certificate Identity Mapping configuration.
 */
 func (c *Client) CertmapconfigMod(
+  ctx context.Context,
   reqArgs *CertmapconfigModArgs,
   optArgs *CertmapconfigModOptionalArgs, // can be nil
 ) (*CertmapconfigModResult, error) {
@@ -9346,7 +9415,7 @@ func (c *Client) CertmapconfigMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -9474,6 +9543,7 @@ func (t *CertmapconfigModResult) String() string {
 Show the current Certificate Identity Mapping configuration.
 */
 func (c *Client) CertmapconfigShow(
+  ctx context.Context,
   reqArgs *CertmapconfigShowArgs,
   optArgs *CertmapconfigShowOptionalArgs, // can be nil
 ) (*CertmapconfigShowResult, error) {
@@ -9490,7 +9560,7 @@ func (c *Client) CertmapconfigShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -9591,6 +9661,7 @@ func (t *CertmapconfigShowResult) String() string {
 Create a new Certificate Identity Mapping Rule.
 */
 func (c *Client) CertmapruleAdd(
+  ctx context.Context,
   reqArgs *CertmapruleAddArgs,
   optArgs *CertmapruleAddOptionalArgs, // can be nil
 ) (*CertmapruleAddResult, error) {
@@ -9607,7 +9678,7 @@ func (c *Client) CertmapruleAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -9758,6 +9829,7 @@ func (t *CertmapruleAddResult) String() string {
 Delete a Certificate Identity Mapping Rule.
 */
 func (c *Client) CertmapruleDel(
+  ctx context.Context,
   reqArgs *CertmapruleDelArgs,
   optArgs *CertmapruleDelOptionalArgs, // can be nil
 ) (*CertmapruleDelResult, error) {
@@ -9774,7 +9846,7 @@ func (c *Client) CertmapruleDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -9869,6 +9941,7 @@ func (t *CertmapruleDelResult) String() string {
 Disable a Certificate Identity Mapping Rule.
 */
 func (c *Client) CertmapruleDisable(
+  ctx context.Context,
   reqArgs *CertmapruleDisableArgs,
   optArgs *CertmapruleDisableOptionalArgs, // can be nil
 ) (*CertmapruleDisableResult, error) {
@@ -9885,7 +9958,7 @@ func (c *Client) CertmapruleDisable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -9974,6 +10047,7 @@ func (t *CertmapruleDisableResult) String() string {
 Enable a Certificate Identity Mapping Rule.
 */
 func (c *Client) CertmapruleEnable(
+  ctx context.Context,
   reqArgs *CertmapruleEnableArgs,
   optArgs *CertmapruleEnableOptionalArgs, // can be nil
 ) (*CertmapruleEnableResult, error) {
@@ -9990,7 +10064,7 @@ func (c *Client) CertmapruleEnable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -10079,6 +10153,7 @@ func (t *CertmapruleEnableResult) String() string {
 Search for Certificate Identity Mapping Rules.
 */
 func (c *Client) CertmapruleFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *CertmapruleFindArgs,
   optArgs *CertmapruleFindOptionalArgs, // can be nil
@@ -10096,7 +10171,7 @@ func (c *Client) CertmapruleFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -10259,6 +10334,7 @@ func (t *CertmapruleFindResult) String() string {
 Modify a Certificate Identity Mapping Rule.
 */
 func (c *Client) CertmapruleMod(
+  ctx context.Context,
   reqArgs *CertmapruleModArgs,
   optArgs *CertmapruleModOptionalArgs, // can be nil
 ) (*CertmapruleModResult, error) {
@@ -10275,7 +10351,7 @@ func (c *Client) CertmapruleMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -10439,6 +10515,7 @@ func (t *CertmapruleModResult) String() string {
 Display information about a Certificate Identity Mapping Rule.
 */
 func (c *Client) CertmapruleShow(
+  ctx context.Context,
   reqArgs *CertmapruleShowArgs,
   optArgs *CertmapruleShowOptionalArgs, // can be nil
 ) (*CertmapruleShowResult, error) {
@@ -10455,7 +10532,7 @@ func (c *Client) CertmapruleShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -10562,6 +10639,7 @@ func (t *CertmapruleShowResult) String() string {
 Delete a Certificate Profile.
 */
 func (c *Client) CertprofileDel(
+  ctx context.Context,
   reqArgs *CertprofileDelArgs,
   optArgs *CertprofileDelOptionalArgs, // can be nil
 ) (*CertprofileDelResult, error) {
@@ -10578,7 +10656,7 @@ func (c *Client) CertprofileDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -10673,6 +10751,7 @@ func (t *CertprofileDelResult) String() string {
 Search for Certificate Profiles.
 */
 func (c *Client) CertprofileFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *CertprofileFindArgs,
   optArgs *CertprofileFindOptionalArgs, // can be nil
@@ -10690,7 +10769,7 @@ func (c *Client) CertprofileFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -10829,6 +10908,7 @@ func (t *CertprofileFindResult) String() string {
 Import a Certificate Profile.
 */
 func (c *Client) CertprofileImport(
+  ctx context.Context,
   reqArgs *CertprofileImportArgs,
   optArgs *CertprofileImportOptionalArgs, // can be nil
 ) (*CertprofileImportResult, error) {
@@ -10845,7 +10925,7 @@ func (c *Client) CertprofileImport(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -10964,6 +11044,7 @@ func (t *CertprofileImportResult) String() string {
 Modify Certificate Profile configuration.
 */
 func (c *Client) CertprofileMod(
+  ctx context.Context,
   reqArgs *CertprofileModArgs,
   optArgs *CertprofileModOptionalArgs, // can be nil
 ) (*CertprofileModResult, error) {
@@ -10980,7 +11061,7 @@ func (c *Client) CertprofileMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -11126,6 +11207,7 @@ func (t *CertprofileModResult) String() string {
 Display the properties of a Certificate Profile.
 */
 func (c *Client) CertprofileShow(
+  ctx context.Context,
   reqArgs *CertprofileShowArgs,
   optArgs *CertprofileShowOptionalArgs, // can be nil
 ) (*CertprofileShowResult, error) {
@@ -11142,7 +11224,7 @@ func (c *Client) CertprofileShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -11255,6 +11337,7 @@ func (t *CertprofileShowResult) String() string {
 Search for classes.
 */
 func (c *Client) ClassFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *ClassFindArgs,
   optArgs *ClassFindOptionalArgs, // can be nil
@@ -11272,7 +11355,7 @@ func (c *Client) ClassFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -11381,6 +11464,7 @@ func (t *ClassFindResult) String() string {
 Display information about a class.
 */
 func (c *Client) ClassShow(
+  ctx context.Context,
   reqArgs *ClassShowArgs,
   optArgs *ClassShowOptionalArgs, // can be nil
 ) (*ClassShowResult, error) {
@@ -11397,7 +11481,7 @@ func (c *Client) ClassShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -11498,6 +11582,7 @@ func (t *ClassShowResult) String() string {
 Search for commands.
 */
 func (c *Client) CommandFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *CommandFindArgs,
   optArgs *CommandFindOptionalArgs, // can be nil
@@ -11515,7 +11600,7 @@ func (c *Client) CommandFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -11624,6 +11709,7 @@ func (t *CommandFindResult) String() string {
 Display information about a command.
 */
 func (c *Client) CommandShow(
+  ctx context.Context,
   reqArgs *CommandShowArgs,
   optArgs *CommandShowOptionalArgs, // can be nil
 ) (*CommandShowResult, error) {
@@ -11640,7 +11726,7 @@ func (c *Client) CommandShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -11741,6 +11827,7 @@ func (t *CommandShowResult) String() string {
 Determine whether Schema Compatibility plugin is configured to serve trusted domain users and groups
 */
 func (c *Client) CompatIsEnabled(
+  ctx context.Context,
   reqArgs *CompatIsEnabledArgs,
   optArgs *CompatIsEnabledOptionalArgs, // can be nil
 ) (*CompatIsEnabledResult, error) {
@@ -11757,7 +11844,7 @@ func (c *Client) CompatIsEnabled(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -11824,6 +11911,7 @@ func (t *CompatIsEnabledResult) String() string {
 Modify configuration options.
 */
 func (c *Client) ConfigMod(
+  ctx context.Context,
   reqArgs *ConfigModArgs,
   optArgs *ConfigModOptionalArgs, // can be nil
 ) (*ConfigModResult, error) {
@@ -11840,7 +11928,7 @@ func (c *Client) ConfigMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -12112,6 +12200,7 @@ func (t *ConfigModResult) String() string {
 Show the current configuration.
 */
 func (c *Client) ConfigShow(
+  ctx context.Context,
   reqArgs *ConfigShowArgs,
   optArgs *ConfigShowOptionalArgs, // can be nil
 ) (*ConfigShowResult, error) {
@@ -12128,7 +12217,7 @@ func (c *Client) ConfigShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -12229,6 +12318,7 @@ func (t *ConfigShowResult) String() string {
 Add Class of Service entry
 */
 func (c *Client) CosentryAdd(
+  ctx context.Context,
   reqArgs *CosentryAddArgs,
   optArgs *CosentryAddOptionalArgs, // can be nil
 ) (*CosentryAddResult, error) {
@@ -12245,7 +12335,7 @@ func (c *Client) CosentryAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -12372,6 +12462,7 @@ func (t *CosentryAddResult) String() string {
 Delete Class of Service entry
 */
 func (c *Client) CosentryDel(
+  ctx context.Context,
   reqArgs *CosentryDelArgs,
   optArgs *CosentryDelOptionalArgs, // can be nil
 ) (*CosentryDelResult, error) {
@@ -12388,7 +12479,7 @@ func (c *Client) CosentryDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -12483,6 +12574,7 @@ func (t *CosentryDelResult) String() string {
 Search for Class of Service entry
 */
 func (c *Client) CosentryFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *CosentryFindArgs,
   optArgs *CosentryFindOptionalArgs, // can be nil
@@ -12500,7 +12592,7 @@ func (c *Client) CosentryFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -12639,6 +12731,7 @@ func (t *CosentryFindResult) String() string {
 Modify Class of Service entry
 */
 func (c *Client) CosentryMod(
+  ctx context.Context,
   reqArgs *CosentryModArgs,
   optArgs *CosentryModOptionalArgs, // can be nil
 ) (*CosentryModResult, error) {
@@ -12655,7 +12748,7 @@ func (c *Client) CosentryMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -12795,6 +12888,7 @@ func (t *CosentryModResult) String() string {
 Display Class of Service entry
 */
 func (c *Client) CosentryShow(
+  ctx context.Context,
   reqArgs *CosentryShowArgs,
   optArgs *CosentryShowOptionalArgs, // can be nil
 ) (*CosentryShowResult, error) {
@@ -12811,7 +12905,7 @@ func (c *Client) CosentryShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -12918,6 +13012,7 @@ func (t *CosentryShowResult) String() string {
 Add a new delegation.
 */
 func (c *Client) DelegationAdd(
+  ctx context.Context,
   reqArgs *DelegationAddArgs,
   optArgs *DelegationAddOptionalArgs, // can be nil
 ) (*DelegationAddResult, error) {
@@ -12934,7 +13029,7 @@ func (c *Client) DelegationAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -13059,6 +13154,7 @@ func (t *DelegationAddResult) String() string {
 Delete a delegation.
 */
 func (c *Client) DelegationDel(
+  ctx context.Context,
   reqArgs *DelegationDelArgs,
   optArgs *DelegationDelOptionalArgs, // can be nil
 ) (*DelegationDelResult, error) {
@@ -13075,7 +13171,7 @@ func (c *Client) DelegationDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -13164,6 +13260,7 @@ func (t *DelegationDelResult) String() string {
 Search for delegations.
 */
 func (c *Client) DelegationFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *DelegationFindArgs,
   optArgs *DelegationFindOptionalArgs, // can be nil
@@ -13181,7 +13278,7 @@ func (c *Client) DelegationFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -13320,6 +13417,7 @@ func (t *DelegationFindResult) String() string {
 Modify a delegation.
 */
 func (c *Client) DelegationMod(
+  ctx context.Context,
   reqArgs *DelegationModArgs,
   optArgs *DelegationModOptionalArgs, // can be nil
 ) (*DelegationModResult, error) {
@@ -13336,7 +13434,7 @@ func (c *Client) DelegationMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -13461,6 +13559,7 @@ func (t *DelegationModResult) String() string {
 Display information about a delegation.
 */
 func (c *Client) DelegationShow(
+  ctx context.Context,
   reqArgs *DelegationShowArgs,
   optArgs *DelegationShowOptionalArgs, // can be nil
 ) (*DelegationShowResult, error) {
@@ -13477,7 +13576,7 @@ func (c *Client) DelegationShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -13578,6 +13677,7 @@ func (t *DelegationShowResult) String() string {
 Checks if any of the servers has the DNS service enabled.
 */
 func (c *Client) DNSIsEnabled(
+  ctx context.Context,
   reqArgs *DNSIsEnabledArgs,
   optArgs *DNSIsEnabledOptionalArgs, // can be nil
 ) (*DNSIsEnabledResult, error) {
@@ -13594,7 +13694,7 @@ func (c *Client) DNSIsEnabled(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -13677,6 +13777,7 @@ func (t *DNSIsEnabledResult) String() string {
 Resolve a host name in DNS. (Deprecated)
 */
 func (c *Client) DNSResolve(
+  ctx context.Context,
   reqArgs *DNSResolveArgs,
   optArgs *DNSResolveOptionalArgs, // can be nil
 ) (*DNSResolveResult, error) {
@@ -13693,7 +13794,7 @@ func (c *Client) DNSResolve(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -13782,6 +13883,7 @@ func (t *DNSResolveResult) String() string {
 Update location and IPA server DNS records
 */
 func (c *Client) DNSUpdateSystemRecords(
+  ctx context.Context,
   reqArgs *DNSUpdateSystemRecordsArgs,
   optArgs *DNSUpdateSystemRecordsOptionalArgs, // can be nil
 ) (*DNSUpdateSystemRecordsResult, error) {
@@ -13798,7 +13900,7 @@ func (c *Client) DNSUpdateSystemRecords(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -13891,6 +13993,7 @@ func (t *DNSUpdateSystemRecordsResult) String() string {
 Modify global DNS configuration.
 */
 func (c *Client) DnsconfigMod(
+  ctx context.Context,
   reqArgs *DnsconfigModArgs,
   optArgs *DnsconfigModOptionalArgs, // can be nil
 ) (*DnsconfigModResult, error) {
@@ -13907,7 +14010,7 @@ func (c *Client) DnsconfigMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -14053,6 +14156,7 @@ func (t *DnsconfigModResult) String() string {
 Show the current global DNS configuration.
 */
 func (c *Client) DnsconfigShow(
+  ctx context.Context,
   reqArgs *DnsconfigShowArgs,
   optArgs *DnsconfigShowOptionalArgs, // can be nil
 ) (*DnsconfigShowResult, error) {
@@ -14069,7 +14173,7 @@ func (c *Client) DnsconfigShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -14170,6 +14274,7 @@ func (t *DnsconfigShowResult) String() string {
 Create new DNS forward zone.
 */
 func (c *Client) DnsforwardzoneAdd(
+  ctx context.Context,
   reqArgs *DnsforwardzoneAddArgs,
   optArgs *DnsforwardzoneAddOptionalArgs, // can be nil
 ) (*DnsforwardzoneAddResult, error) {
@@ -14186,7 +14291,7 @@ func (c *Client) DnsforwardzoneAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -14325,6 +14430,7 @@ func (t *DnsforwardzoneAddResult) String() string {
 Add a permission for per-forward zone access delegation.
 */
 func (c *Client) DnsforwardzoneAddPermission(
+  ctx context.Context,
   reqArgs *DnsforwardzoneAddPermissionArgs,
   optArgs *DnsforwardzoneAddPermissionOptionalArgs, // can be nil
 ) (*DnsforwardzoneAddPermissionResult, error) {
@@ -14341,7 +14447,7 @@ func (c *Client) DnsforwardzoneAddPermission(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -14430,6 +14536,7 @@ func (t *DnsforwardzoneAddPermissionResult) String() string {
 Delete DNS forward zone.
 */
 func (c *Client) DnsforwardzoneDel(
+  ctx context.Context,
   reqArgs *DnsforwardzoneDelArgs,
   optArgs *DnsforwardzoneDelOptionalArgs, // can be nil
 ) (*DnsforwardzoneDelResult, error) {
@@ -14446,7 +14553,7 @@ func (c *Client) DnsforwardzoneDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -14541,6 +14648,7 @@ func (t *DnsforwardzoneDelResult) String() string {
 Disable DNS Forward Zone.
 */
 func (c *Client) DnsforwardzoneDisable(
+  ctx context.Context,
   reqArgs *DnsforwardzoneDisableArgs,
   optArgs *DnsforwardzoneDisableOptionalArgs, // can be nil
 ) (*DnsforwardzoneDisableResult, error) {
@@ -14557,7 +14665,7 @@ func (c *Client) DnsforwardzoneDisable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -14646,6 +14754,7 @@ func (t *DnsforwardzoneDisableResult) String() string {
 Enable DNS Forward Zone.
 */
 func (c *Client) DnsforwardzoneEnable(
+  ctx context.Context,
   reqArgs *DnsforwardzoneEnableArgs,
   optArgs *DnsforwardzoneEnableOptionalArgs, // can be nil
 ) (*DnsforwardzoneEnableResult, error) {
@@ -14662,7 +14771,7 @@ func (c *Client) DnsforwardzoneEnable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -14751,6 +14860,7 @@ func (t *DnsforwardzoneEnableResult) String() string {
 Search for DNS forward zones.
 */
 func (c *Client) DnsforwardzoneFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *DnsforwardzoneFindArgs,
   optArgs *DnsforwardzoneFindOptionalArgs, // can be nil
@@ -14768,7 +14878,7 @@ func (c *Client) DnsforwardzoneFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -14919,6 +15029,7 @@ func (t *DnsforwardzoneFindResult) String() string {
 Modify DNS forward zone.
 */
 func (c *Client) DnsforwardzoneMod(
+  ctx context.Context,
   reqArgs *DnsforwardzoneModArgs,
   optArgs *DnsforwardzoneModOptionalArgs, // can be nil
 ) (*DnsforwardzoneModResult, error) {
@@ -14935,7 +15046,7 @@ func (c *Client) DnsforwardzoneMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -15081,6 +15192,7 @@ func (t *DnsforwardzoneModResult) String() string {
 Remove a permission for per-forward zone access delegation.
 */
 func (c *Client) DnsforwardzoneRemovePermission(
+  ctx context.Context,
   reqArgs *DnsforwardzoneRemovePermissionArgs,
   optArgs *DnsforwardzoneRemovePermissionOptionalArgs, // can be nil
 ) (*DnsforwardzoneRemovePermissionResult, error) {
@@ -15097,7 +15209,7 @@ func (c *Client) DnsforwardzoneRemovePermission(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -15186,6 +15298,7 @@ func (t *DnsforwardzoneRemovePermissionResult) String() string {
 Display information about a DNS forward zone.
 */
 func (c *Client) DnsforwardzoneShow(
+  ctx context.Context,
   reqArgs *DnsforwardzoneShowArgs,
   optArgs *DnsforwardzoneShowOptionalArgs, // can be nil
 ) (*DnsforwardzoneShowResult, error) {
@@ -15202,7 +15315,7 @@ func (c *Client) DnsforwardzoneShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -15309,6 +15422,7 @@ func (t *DnsforwardzoneShowResult) String() string {
 Add new DNS resource record.
 */
 func (c *Client) DnsrecordAdd(
+  ctx context.Context,
   reqArgs *DnsrecordAddArgs,
   optArgs *DnsrecordAddOptionalArgs, // can be nil
 ) (*DnsrecordAddResult, error) {
@@ -15325,7 +15439,7 @@ func (c *Client) DnsrecordAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -16010,6 +16124,7 @@ func (t *DnsrecordAddResult) String() string {
 Delete DNS resource record.
 */
 func (c *Client) DnsrecordDel(
+  ctx context.Context,
   reqArgs *DnsrecordDelArgs,
   optArgs *DnsrecordDelOptionalArgs, // can be nil
 ) (*DnsrecordDelResult, error) {
@@ -16026,7 +16141,7 @@ func (c *Client) DnsrecordDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -16331,6 +16446,7 @@ func (t *DnsrecordDelResult) String() string {
 Delete DNS record entry.
 */
 func (c *Client) DnsrecordDelentry(
+  ctx context.Context,
   reqArgs *DnsrecordDelentryArgs,
   optArgs *DnsrecordDelentryOptionalArgs, // can be nil
 ) (*DnsrecordDelentryResult, error) {
@@ -16347,7 +16463,7 @@ func (c *Client) DnsrecordDelentry(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -16448,6 +16564,7 @@ func (t *DnsrecordDelentryResult) String() string {
 Search for DNS resources.
 */
 func (c *Client) DnsrecordFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *DnsrecordFindArgs,
   optArgs *DnsrecordFindOptionalArgs, // can be nil
@@ -16465,7 +16582,7 @@ func (c *Client) DnsrecordFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -16796,6 +16913,7 @@ func (t *DnsrecordFindResult) String() string {
 Modify a DNS resource record.
 */
 func (c *Client) DnsrecordMod(
+  ctx context.Context,
   reqArgs *DnsrecordModArgs,
   optArgs *DnsrecordModOptionalArgs, // can be nil
 ) (*DnsrecordModResult, error) {
@@ -16812,7 +16930,7 @@ func (c *Client) DnsrecordMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -17498,6 +17616,7 @@ func (t *DnsrecordModResult) String() string {
 Display DNS resource.
 */
 func (c *Client) DnsrecordShow(
+  ctx context.Context,
   reqArgs *DnsrecordShowArgs,
   optArgs *DnsrecordShowOptionalArgs, // can be nil
 ) (*DnsrecordShowResult, error) {
@@ -17514,7 +17633,7 @@ func (c *Client) DnsrecordShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -17633,6 +17752,7 @@ func (t *DnsrecordShowResult) String() string {
 Split DNS record to parts
 */
 func (c *Client) DnsrecordSplitParts(
+  ctx context.Context,
   reqArgs *DnsrecordSplitPartsArgs,
   optArgs *DnsrecordSplitPartsOptionalArgs, // can be nil
 ) (*DnsrecordSplitPartsResult, error) {
@@ -17649,7 +17769,7 @@ func (c *Client) DnsrecordSplitParts(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -17728,6 +17848,7 @@ func (t *DnsrecordSplitPartsResult) String() string {
 Search for DNS servers.
 */
 func (c *Client) DnsserverFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *DnsserverFindArgs,
   optArgs *DnsserverFindOptionalArgs, // can be nil
@@ -17745,7 +17866,7 @@ func (c *Client) DnsserverFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -17890,6 +18011,7 @@ func (t *DnsserverFindResult) String() string {
 Modify DNS server configuration
 */
 func (c *Client) DnsserverMod(
+  ctx context.Context,
   reqArgs *DnsserverModArgs,
   optArgs *DnsserverModOptionalArgs, // can be nil
 ) (*DnsserverModResult, error) {
@@ -17906,7 +18028,7 @@ func (c *Client) DnsserverMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -18052,6 +18174,7 @@ func (t *DnsserverModResult) String() string {
 Display configuration of a DNS server.
 */
 func (c *Client) DnsserverShow(
+  ctx context.Context,
   reqArgs *DnsserverShowArgs,
   optArgs *DnsserverShowOptionalArgs, // can be nil
 ) (*DnsserverShowResult, error) {
@@ -18068,7 +18191,7 @@ func (c *Client) DnsserverShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -18175,6 +18298,7 @@ func (t *DnsserverShowResult) String() string {
 Create new DNS zone (SOA record).
 */
 func (c *Client) DnszoneAdd(
+  ctx context.Context,
   reqArgs *DnszoneAddArgs,
   optArgs *DnszoneAddOptionalArgs, // can be nil
 ) (*DnszoneAddResult, error) {
@@ -18191,7 +18315,7 @@ func (c *Client) DnszoneAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -18450,6 +18574,7 @@ func (t *DnszoneAddResult) String() string {
 Add a permission for per-zone access delegation.
 */
 func (c *Client) DnszoneAddPermission(
+  ctx context.Context,
   reqArgs *DnszoneAddPermissionArgs,
   optArgs *DnszoneAddPermissionOptionalArgs, // can be nil
 ) (*DnszoneAddPermissionResult, error) {
@@ -18466,7 +18591,7 @@ func (c *Client) DnszoneAddPermission(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -18555,6 +18680,7 @@ func (t *DnszoneAddPermissionResult) String() string {
 Delete DNS zone (SOA record).
 */
 func (c *Client) DnszoneDel(
+  ctx context.Context,
   reqArgs *DnszoneDelArgs,
   optArgs *DnszoneDelOptionalArgs, // can be nil
 ) (*DnszoneDelResult, error) {
@@ -18571,7 +18697,7 @@ func (c *Client) DnszoneDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -18666,6 +18792,7 @@ func (t *DnszoneDelResult) String() string {
 Disable DNS Zone.
 */
 func (c *Client) DnszoneDisable(
+  ctx context.Context,
   reqArgs *DnszoneDisableArgs,
   optArgs *DnszoneDisableOptionalArgs, // can be nil
 ) (*DnszoneDisableResult, error) {
@@ -18682,7 +18809,7 @@ func (c *Client) DnszoneDisable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -18771,6 +18898,7 @@ func (t *DnszoneDisableResult) String() string {
 Enable DNS Zone.
 */
 func (c *Client) DnszoneEnable(
+  ctx context.Context,
   reqArgs *DnszoneEnableArgs,
   optArgs *DnszoneEnableOptionalArgs, // can be nil
 ) (*DnszoneEnableResult, error) {
@@ -18787,7 +18915,7 @@ func (c *Client) DnszoneEnable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -18876,6 +19004,7 @@ func (t *DnszoneEnableResult) String() string {
 Search for DNS zones (SOA records).
 */
 func (c *Client) DnszoneFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *DnszoneFindArgs,
   optArgs *DnszoneFindOptionalArgs, // can be nil
@@ -18893,7 +19022,7 @@ func (c *Client) DnszoneFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -19152,6 +19281,7 @@ func (t *DnszoneFindResult) String() string {
 Modify DNS zone (SOA record).
 */
 func (c *Client) DnszoneMod(
+  ctx context.Context,
   reqArgs *DnszoneModArgs,
   optArgs *DnszoneModOptionalArgs, // can be nil
 ) (*DnszoneModResult, error) {
@@ -19168,7 +19298,7 @@ func (c *Client) DnszoneMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -19422,6 +19552,7 @@ func (t *DnszoneModResult) String() string {
 Remove a permission for per-zone access delegation.
 */
 func (c *Client) DnszoneRemovePermission(
+  ctx context.Context,
   reqArgs *DnszoneRemovePermissionArgs,
   optArgs *DnszoneRemovePermissionOptionalArgs, // can be nil
 ) (*DnszoneRemovePermissionResult, error) {
@@ -19438,7 +19569,7 @@ func (c *Client) DnszoneRemovePermission(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -19527,6 +19658,7 @@ func (t *DnszoneRemovePermissionResult) String() string {
 Display information about a DNS zone (SOA record).
 */
 func (c *Client) DnszoneShow(
+  ctx context.Context,
   reqArgs *DnszoneShowArgs,
   optArgs *DnszoneShowOptionalArgs, // can be nil
 ) (*DnszoneShowResult, error) {
@@ -19543,7 +19675,7 @@ func (c *Client) DnszoneShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -19650,6 +19782,7 @@ func (t *DnszoneShowResult) String() string {
 Query current Domain Level.
 */
 func (c *Client) DomainlevelGet(
+  ctx context.Context,
   reqArgs *DomainlevelGetArgs,
   optArgs *DomainlevelGetOptionalArgs, // can be nil
 ) (*DomainlevelGetResult, error) {
@@ -19666,7 +19799,7 @@ func (c *Client) DomainlevelGet(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -19733,6 +19866,7 @@ func (t *DomainlevelGetResult) String() string {
 Change current Domain Level.
 */
 func (c *Client) DomainlevelSet(
+  ctx context.Context,
   reqArgs *DomainlevelSetArgs,
   optArgs *DomainlevelSetOptionalArgs, // can be nil
 ) (*DomainlevelSetResult, error) {
@@ -19749,7 +19883,7 @@ func (c *Client) DomainlevelSet(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -19822,6 +19956,7 @@ func (t *DomainlevelSetResult) String() string {
 Create a new group.
 */
 func (c *Client) GroupAdd(
+  ctx context.Context,
   reqArgs *GroupAddArgs,
   optArgs *GroupAddOptionalArgs, // can be nil
 ) (*GroupAddResult, error) {
@@ -19838,7 +19973,7 @@ func (c *Client) GroupAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -19983,6 +20118,7 @@ func (t *GroupAddResult) String() string {
 Add members to a group.
 */
 func (c *Client) GroupAddMember(
+  ctx context.Context,
   reqArgs *GroupAddMemberArgs,
   optArgs *GroupAddMemberOptionalArgs, // can be nil
 ) (*GroupAddMemberResult, error) {
@@ -19999,7 +20135,7 @@ func (c *Client) GroupAddMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -20136,6 +20272,7 @@ func (t *GroupAddMemberResult) String() string {
 Add users that can manage members of this group.
 */
 func (c *Client) GroupAddMemberManager(
+  ctx context.Context,
   reqArgs *GroupAddMemberManagerArgs,
   optArgs *GroupAddMemberManagerOptionalArgs, // can be nil
 ) (*GroupAddMemberManagerResult, error) {
@@ -20152,7 +20289,7 @@ func (c *Client) GroupAddMemberManager(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -20271,6 +20408,7 @@ func (t *GroupAddMemberManagerResult) String() string {
 Delete group.
 */
 func (c *Client) GroupDel(
+  ctx context.Context,
   reqArgs *GroupDelArgs,
   optArgs *GroupDelOptionalArgs, // can be nil
 ) (*GroupDelResult, error) {
@@ -20287,7 +20425,7 @@ func (c *Client) GroupDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -20382,6 +20520,7 @@ func (t *GroupDelResult) String() string {
 Detach a managed group from a user.
 */
 func (c *Client) GroupDetach(
+  ctx context.Context,
   reqArgs *GroupDetachArgs,
   optArgs *GroupDetachOptionalArgs, // can be nil
 ) (*GroupDetachResult, error) {
@@ -20398,7 +20537,7 @@ func (c *Client) GroupDetach(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -20487,6 +20626,7 @@ func (t *GroupDetachResult) String() string {
 Search for groups.
 */
 func (c *Client) GroupFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *GroupFindArgs,
   optArgs *GroupFindOptionalArgs, // can be nil
@@ -20504,7 +20644,7 @@ func (c *Client) GroupFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -20805,6 +20945,7 @@ func (t *GroupFindResult) String() string {
 Modify a group.
 */
 func (c *Client) GroupMod(
+  ctx context.Context,
   reqArgs *GroupModArgs,
   optArgs *GroupModOptionalArgs, // can be nil
 ) (*GroupModResult, error) {
@@ -20821,7 +20962,7 @@ func (c *Client) GroupMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -20985,6 +21126,7 @@ func (t *GroupModResult) String() string {
 Remove members from a group.
 */
 func (c *Client) GroupRemoveMember(
+  ctx context.Context,
   reqArgs *GroupRemoveMemberArgs,
   optArgs *GroupRemoveMemberOptionalArgs, // can be nil
 ) (*GroupRemoveMemberResult, error) {
@@ -21001,7 +21143,7 @@ func (c *Client) GroupRemoveMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -21138,6 +21280,7 @@ func (t *GroupRemoveMemberResult) String() string {
 Remove users that can manage members of this group.
 */
 func (c *Client) GroupRemoveMemberManager(
+  ctx context.Context,
   reqArgs *GroupRemoveMemberManagerArgs,
   optArgs *GroupRemoveMemberManagerOptionalArgs, // can be nil
 ) (*GroupRemoveMemberManagerResult, error) {
@@ -21154,7 +21297,7 @@ func (c *Client) GroupRemoveMemberManager(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -21273,6 +21416,7 @@ func (t *GroupRemoveMemberManagerResult) String() string {
 Display information about a named group.
 */
 func (c *Client) GroupShow(
+  ctx context.Context,
   reqArgs *GroupShowArgs,
   optArgs *GroupShowOptionalArgs, // can be nil
 ) (*GroupShowResult, error) {
@@ -21289,7 +21433,7 @@ func (c *Client) GroupShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -21402,6 +21546,7 @@ func (t *GroupShowResult) String() string {
 Create a new HBAC rule.
 */
 func (c *Client) HbacruleAdd(
+  ctx context.Context,
   reqArgs *HbacruleAddArgs,
   optArgs *HbacruleAddOptionalArgs, // can be nil
 ) (*HbacruleAddResult, error) {
@@ -21418,7 +21563,7 @@ func (c *Client) HbacruleAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -21587,6 +21732,7 @@ func (t *HbacruleAddResult) String() string {
 Add target hosts and hostgroups to an HBAC rule.
 */
 func (c *Client) HbacruleAddHost(
+  ctx context.Context,
   reqArgs *HbacruleAddHostArgs,
   optArgs *HbacruleAddHostOptionalArgs, // can be nil
 ) (*HbacruleAddHostResult, error) {
@@ -21603,7 +21749,7 @@ func (c *Client) HbacruleAddHost(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -21722,6 +21868,7 @@ func (t *HbacruleAddHostResult) String() string {
 Add services to an HBAC rule.
 */
 func (c *Client) HbacruleAddService(
+  ctx context.Context,
   reqArgs *HbacruleAddServiceArgs,
   optArgs *HbacruleAddServiceOptionalArgs, // can be nil
 ) (*HbacruleAddServiceResult, error) {
@@ -21738,7 +21885,7 @@ func (c *Client) HbacruleAddService(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -21857,6 +22004,7 @@ func (t *HbacruleAddServiceResult) String() string {
 Add source hosts and hostgroups to an HBAC rule.
 */
 func (c *Client) HbacruleAddSourcehost(
+  ctx context.Context,
   reqArgs *HbacruleAddSourcehostArgs,
   optArgs *HbacruleAddSourcehostOptionalArgs, // can be nil
 ) (*HbacruleAddSourcehostResult, error) {
@@ -21873,7 +22021,7 @@ func (c *Client) HbacruleAddSourcehost(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -21992,6 +22140,7 @@ func (t *HbacruleAddSourcehostResult) String() string {
 Add users and groups to an HBAC rule.
 */
 func (c *Client) HbacruleAddUser(
+  ctx context.Context,
   reqArgs *HbacruleAddUserArgs,
   optArgs *HbacruleAddUserOptionalArgs, // can be nil
 ) (*HbacruleAddUserResult, error) {
@@ -22008,7 +22157,7 @@ func (c *Client) HbacruleAddUser(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -22127,6 +22276,7 @@ func (t *HbacruleAddUserResult) String() string {
 Delete an HBAC rule.
 */
 func (c *Client) HbacruleDel(
+  ctx context.Context,
   reqArgs *HbacruleDelArgs,
   optArgs *HbacruleDelOptionalArgs, // can be nil
 ) (*HbacruleDelResult, error) {
@@ -22143,7 +22293,7 @@ func (c *Client) HbacruleDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -22238,6 +22388,7 @@ func (t *HbacruleDelResult) String() string {
 Disable an HBAC rule.
 */
 func (c *Client) HbacruleDisable(
+  ctx context.Context,
   reqArgs *HbacruleDisableArgs,
   optArgs *HbacruleDisableOptionalArgs, // can be nil
 ) (*HbacruleDisableResult, error) {
@@ -22254,7 +22405,7 @@ func (c *Client) HbacruleDisable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -22343,6 +22494,7 @@ func (t *HbacruleDisableResult) String() string {
 Enable an HBAC rule.
 */
 func (c *Client) HbacruleEnable(
+  ctx context.Context,
   reqArgs *HbacruleEnableArgs,
   optArgs *HbacruleEnableOptionalArgs, // can be nil
 ) (*HbacruleEnableResult, error) {
@@ -22359,7 +22511,7 @@ func (c *Client) HbacruleEnable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -22448,6 +22600,7 @@ func (t *HbacruleEnableResult) String() string {
 Search for HBAC rules.
 */
 func (c *Client) HbacruleFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *HbacruleFindArgs,
   optArgs *HbacruleFindOptionalArgs, // can be nil
@@ -22465,7 +22618,7 @@ func (c *Client) HbacruleFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -22646,6 +22799,7 @@ func (t *HbacruleFindResult) String() string {
 Modify an HBAC rule.
 */
 func (c *Client) HbacruleMod(
+  ctx context.Context,
   reqArgs *HbacruleModArgs,
   optArgs *HbacruleModOptionalArgs, // can be nil
 ) (*HbacruleModResult, error) {
@@ -22662,7 +22816,7 @@ func (c *Client) HbacruleMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -22850,6 +23004,7 @@ func (t *HbacruleModResult) String() string {
 Remove target hosts and hostgroups from an HBAC rule.
 */
 func (c *Client) HbacruleRemoveHost(
+  ctx context.Context,
   reqArgs *HbacruleRemoveHostArgs,
   optArgs *HbacruleRemoveHostOptionalArgs, // can be nil
 ) (*HbacruleRemoveHostResult, error) {
@@ -22866,7 +23021,7 @@ func (c *Client) HbacruleRemoveHost(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -22985,6 +23140,7 @@ func (t *HbacruleRemoveHostResult) String() string {
 Remove service and service groups from an HBAC rule.
 */
 func (c *Client) HbacruleRemoveService(
+  ctx context.Context,
   reqArgs *HbacruleRemoveServiceArgs,
   optArgs *HbacruleRemoveServiceOptionalArgs, // can be nil
 ) (*HbacruleRemoveServiceResult, error) {
@@ -23001,7 +23157,7 @@ func (c *Client) HbacruleRemoveService(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -23120,6 +23276,7 @@ func (t *HbacruleRemoveServiceResult) String() string {
 Remove source hosts and hostgroups from an HBAC rule.
 */
 func (c *Client) HbacruleRemoveSourcehost(
+  ctx context.Context,
   reqArgs *HbacruleRemoveSourcehostArgs,
   optArgs *HbacruleRemoveSourcehostOptionalArgs, // can be nil
 ) (*HbacruleRemoveSourcehostResult, error) {
@@ -23136,7 +23293,7 @@ func (c *Client) HbacruleRemoveSourcehost(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -23255,6 +23412,7 @@ func (t *HbacruleRemoveSourcehostResult) String() string {
 Remove users and groups from an HBAC rule.
 */
 func (c *Client) HbacruleRemoveUser(
+  ctx context.Context,
   reqArgs *HbacruleRemoveUserArgs,
   optArgs *HbacruleRemoveUserOptionalArgs, // can be nil
 ) (*HbacruleRemoveUserResult, error) {
@@ -23271,7 +23429,7 @@ func (c *Client) HbacruleRemoveUser(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -23390,6 +23548,7 @@ func (t *HbacruleRemoveUserResult) String() string {
 Display the properties of an HBAC rule.
 */
 func (c *Client) HbacruleShow(
+  ctx context.Context,
   reqArgs *HbacruleShowArgs,
   optArgs *HbacruleShowOptionalArgs, // can be nil
 ) (*HbacruleShowResult, error) {
@@ -23406,7 +23565,7 @@ func (c *Client) HbacruleShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -23519,6 +23678,7 @@ func (t *HbacruleShowResult) String() string {
 Add a new HBAC service.
 */
 func (c *Client) HbacsvcAdd(
+  ctx context.Context,
   reqArgs *HbacsvcAddArgs,
   optArgs *HbacsvcAddOptionalArgs, // can be nil
 ) (*HbacsvcAddResult, error) {
@@ -23535,7 +23695,7 @@ func (c *Client) HbacsvcAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -23662,6 +23822,7 @@ func (t *HbacsvcAddResult) String() string {
 Delete an existing HBAC service.
 */
 func (c *Client) HbacsvcDel(
+  ctx context.Context,
   reqArgs *HbacsvcDelArgs,
   optArgs *HbacsvcDelOptionalArgs, // can be nil
 ) (*HbacsvcDelResult, error) {
@@ -23678,7 +23839,7 @@ func (c *Client) HbacsvcDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -23773,6 +23934,7 @@ func (t *HbacsvcDelResult) String() string {
 Search for HBAC services.
 */
 func (c *Client) HbacsvcFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *HbacsvcFindArgs,
   optArgs *HbacsvcFindOptionalArgs, // can be nil
@@ -23790,7 +23952,7 @@ func (c *Client) HbacsvcFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -23929,6 +24091,7 @@ func (t *HbacsvcFindResult) String() string {
 Modify an HBAC service.
 */
 func (c *Client) HbacsvcMod(
+  ctx context.Context,
   reqArgs *HbacsvcModArgs,
   optArgs *HbacsvcModOptionalArgs, // can be nil
 ) (*HbacsvcModResult, error) {
@@ -23945,7 +24108,7 @@ func (c *Client) HbacsvcMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -24085,6 +24248,7 @@ func (t *HbacsvcModResult) String() string {
 Display information about an HBAC service.
 */
 func (c *Client) HbacsvcShow(
+  ctx context.Context,
   reqArgs *HbacsvcShowArgs,
   optArgs *HbacsvcShowOptionalArgs, // can be nil
 ) (*HbacsvcShowResult, error) {
@@ -24101,7 +24265,7 @@ func (c *Client) HbacsvcShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -24214,6 +24378,7 @@ func (t *HbacsvcShowResult) String() string {
 Add a new HBAC service group.
 */
 func (c *Client) HbacsvcgroupAdd(
+  ctx context.Context,
   reqArgs *HbacsvcgroupAddArgs,
   optArgs *HbacsvcgroupAddOptionalArgs, // can be nil
 ) (*HbacsvcgroupAddResult, error) {
@@ -24230,7 +24395,7 @@ func (c *Client) HbacsvcgroupAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -24357,6 +24522,7 @@ func (t *HbacsvcgroupAddResult) String() string {
 Add members to an HBAC service group.
 */
 func (c *Client) HbacsvcgroupAddMember(
+  ctx context.Context,
   reqArgs *HbacsvcgroupAddMemberArgs,
   optArgs *HbacsvcgroupAddMemberOptionalArgs, // can be nil
 ) (*HbacsvcgroupAddMemberResult, error) {
@@ -24373,7 +24539,7 @@ func (c *Client) HbacsvcgroupAddMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -24486,6 +24652,7 @@ func (t *HbacsvcgroupAddMemberResult) String() string {
 Delete an HBAC service group.
 */
 func (c *Client) HbacsvcgroupDel(
+  ctx context.Context,
   reqArgs *HbacsvcgroupDelArgs,
   optArgs *HbacsvcgroupDelOptionalArgs, // can be nil
 ) (*HbacsvcgroupDelResult, error) {
@@ -24502,7 +24669,7 @@ func (c *Client) HbacsvcgroupDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -24597,6 +24764,7 @@ func (t *HbacsvcgroupDelResult) String() string {
 Search for an HBAC service group.
 */
 func (c *Client) HbacsvcgroupFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *HbacsvcgroupFindArgs,
   optArgs *HbacsvcgroupFindOptionalArgs, // can be nil
@@ -24614,7 +24782,7 @@ func (c *Client) HbacsvcgroupFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -24753,6 +24921,7 @@ func (t *HbacsvcgroupFindResult) String() string {
 Modify an HBAC service group.
 */
 func (c *Client) HbacsvcgroupMod(
+  ctx context.Context,
   reqArgs *HbacsvcgroupModArgs,
   optArgs *HbacsvcgroupModOptionalArgs, // can be nil
 ) (*HbacsvcgroupModResult, error) {
@@ -24769,7 +24938,7 @@ func (c *Client) HbacsvcgroupMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -24909,6 +25078,7 @@ func (t *HbacsvcgroupModResult) String() string {
 Remove members from an HBAC service group.
 */
 func (c *Client) HbacsvcgroupRemoveMember(
+  ctx context.Context,
   reqArgs *HbacsvcgroupRemoveMemberArgs,
   optArgs *HbacsvcgroupRemoveMemberOptionalArgs, // can be nil
 ) (*HbacsvcgroupRemoveMemberResult, error) {
@@ -24925,7 +25095,7 @@ func (c *Client) HbacsvcgroupRemoveMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -25038,6 +25208,7 @@ func (t *HbacsvcgroupRemoveMemberResult) String() string {
 Display information about an HBAC service group.
 */
 func (c *Client) HbacsvcgroupShow(
+  ctx context.Context,
   reqArgs *HbacsvcgroupShowArgs,
   optArgs *HbacsvcgroupShowOptionalArgs, // can be nil
 ) (*HbacsvcgroupShowResult, error) {
@@ -25054,7 +25225,7 @@ func (c *Client) HbacsvcgroupShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -25167,6 +25338,7 @@ func (t *HbacsvcgroupShowResult) String() string {
 Simulate use of Host-based access controls
 */
 func (c *Client) Hbactest(
+  ctx context.Context,
   reqArgs *HbactestArgs,
   optArgs *HbactestOptionalArgs, // can be nil
 ) (*HbactestResult, error) {
@@ -25183,7 +25355,7 @@ func (c *Client) Hbactest(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -25344,6 +25516,7 @@ func (t *HbactestResult) String() string {
 Add a new host.
 */
 func (c *Client) HostAdd(
+  ctx context.Context,
   reqArgs *HostAddArgs,
   optArgs *HostAddOptionalArgs, // can be nil
 ) (*HostAddResult, error) {
@@ -25360,7 +25533,7 @@ func (c *Client) HostAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -25595,6 +25768,7 @@ func (t *HostAddResult) String() string {
 Add certificates to host entry
 */
 func (c *Client) HostAddCert(
+  ctx context.Context,
   reqArgs *HostAddCertArgs,
   optArgs *HostAddCertOptionalArgs, // can be nil
 ) (*HostAddCertResult, error) {
@@ -25611,7 +25785,7 @@ func (c *Client) HostAddCert(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -25724,6 +25898,7 @@ func (t *HostAddCertResult) String() string {
 Add hosts that can manage this host.
 */
 func (c *Client) HostAddManagedby(
+  ctx context.Context,
   reqArgs *HostAddManagedbyArgs,
   optArgs *HostAddManagedbyOptionalArgs, // can be nil
 ) (*HostAddManagedbyResult, error) {
@@ -25740,7 +25915,7 @@ func (c *Client) HostAddManagedby(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -25853,6 +26028,7 @@ func (t *HostAddManagedbyResult) String() string {
 Add new principal alias to host entry
 */
 func (c *Client) HostAddPrincipal(
+  ctx context.Context,
   reqArgs *HostAddPrincipalArgs,
   optArgs *HostAddPrincipalOptionalArgs, // can be nil
 ) (*HostAddPrincipalResult, error) {
@@ -25869,7 +26045,7 @@ func (c *Client) HostAddPrincipal(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -25982,6 +26158,7 @@ func (t *HostAddPrincipalResult) String() string {
 Allow users, groups, hosts or host groups to create a keytab of this host.
 */
 func (c *Client) HostAllowCreateKeytab(
+  ctx context.Context,
   reqArgs *HostAllowCreateKeytabArgs,
   optArgs *HostAllowCreateKeytabOptionalArgs, // can be nil
 ) (*HostAllowCreateKeytabResult, error) {
@@ -25998,7 +26175,7 @@ func (c *Client) HostAllowCreateKeytab(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -26129,6 +26306,7 @@ func (t *HostAllowCreateKeytabResult) String() string {
 Allow users, groups, hosts or host groups to retrieve a keytab of this host.
 */
 func (c *Client) HostAllowRetrieveKeytab(
+  ctx context.Context,
   reqArgs *HostAllowRetrieveKeytabArgs,
   optArgs *HostAllowRetrieveKeytabOptionalArgs, // can be nil
 ) (*HostAllowRetrieveKeytabResult, error) {
@@ -26145,7 +26323,7 @@ func (c *Client) HostAllowRetrieveKeytab(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -26276,6 +26454,7 @@ func (t *HostAllowRetrieveKeytabResult) String() string {
 Delete a host.
 */
 func (c *Client) HostDel(
+  ctx context.Context,
   reqArgs *HostDelArgs,
   optArgs *HostDelOptionalArgs, // can be nil
 ) (*HostDelResult, error) {
@@ -26292,7 +26471,7 @@ func (c *Client) HostDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -26393,6 +26572,7 @@ func (t *HostDelResult) String() string {
 Disable the Kerberos key, SSL certificate and all services of a host.
 */
 func (c *Client) HostDisable(
+  ctx context.Context,
   reqArgs *HostDisableArgs,
   optArgs *HostDisableOptionalArgs, // can be nil
 ) (*HostDisableResult, error) {
@@ -26409,7 +26589,7 @@ func (c *Client) HostDisable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -26498,6 +26678,7 @@ func (t *HostDisableResult) String() string {
 Disallow users, groups, hosts or host groups to create a keytab of this host.
 */
 func (c *Client) HostDisallowCreateKeytab(
+  ctx context.Context,
   reqArgs *HostDisallowCreateKeytabArgs,
   optArgs *HostDisallowCreateKeytabOptionalArgs, // can be nil
 ) (*HostDisallowCreateKeytabResult, error) {
@@ -26514,7 +26695,7 @@ func (c *Client) HostDisallowCreateKeytab(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -26645,6 +26826,7 @@ func (t *HostDisallowCreateKeytabResult) String() string {
 Disallow users, groups, hosts or host groups to retrieve a keytab of this host.
 */
 func (c *Client) HostDisallowRetrieveKeytab(
+  ctx context.Context,
   reqArgs *HostDisallowRetrieveKeytabArgs,
   optArgs *HostDisallowRetrieveKeytabOptionalArgs, // can be nil
 ) (*HostDisallowRetrieveKeytabResult, error) {
@@ -26661,7 +26843,7 @@ func (c *Client) HostDisallowRetrieveKeytab(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -26792,6 +26974,7 @@ func (t *HostDisallowRetrieveKeytabResult) String() string {
 Search for hosts.
 */
 func (c *Client) HostFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *HostFindArgs,
   optArgs *HostFindOptionalArgs, // can be nil
@@ -26809,7 +26992,7 @@ func (c *Client) HostFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -27098,6 +27281,7 @@ func (t *HostFindResult) String() string {
 Modify information about a host.
 */
 func (c *Client) HostMod(
+  ctx context.Context,
   reqArgs *HostModArgs,
   optArgs *HostModOptionalArgs, // can be nil
 ) (*HostModResult, error) {
@@ -27114,7 +27298,7 @@ func (c *Client) HostMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -27356,6 +27540,7 @@ func (t *HostModResult) String() string {
 Remove certificates from host entry
 */
 func (c *Client) HostRemoveCert(
+  ctx context.Context,
   reqArgs *HostRemoveCertArgs,
   optArgs *HostRemoveCertOptionalArgs, // can be nil
 ) (*HostRemoveCertResult, error) {
@@ -27372,7 +27557,7 @@ func (c *Client) HostRemoveCert(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -27485,6 +27670,7 @@ func (t *HostRemoveCertResult) String() string {
 Remove hosts that can manage this host.
 */
 func (c *Client) HostRemoveManagedby(
+  ctx context.Context,
   reqArgs *HostRemoveManagedbyArgs,
   optArgs *HostRemoveManagedbyOptionalArgs, // can be nil
 ) (*HostRemoveManagedbyResult, error) {
@@ -27501,7 +27687,7 @@ func (c *Client) HostRemoveManagedby(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -27614,6 +27800,7 @@ func (t *HostRemoveManagedbyResult) String() string {
 Remove principal alias from a host entry
 */
 func (c *Client) HostRemovePrincipal(
+  ctx context.Context,
   reqArgs *HostRemovePrincipalArgs,
   optArgs *HostRemovePrincipalOptionalArgs, // can be nil
 ) (*HostRemovePrincipalResult, error) {
@@ -27630,7 +27817,7 @@ func (c *Client) HostRemovePrincipal(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -27743,6 +27930,7 @@ func (t *HostRemovePrincipalResult) String() string {
 Display information about a host.
 */
 func (c *Client) HostShow(
+  ctx context.Context,
   reqArgs *HostShowArgs,
   optArgs *HostShowOptionalArgs, // can be nil
 ) (*HostShowResult, error) {
@@ -27759,7 +27947,7 @@ func (c *Client) HostShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -27878,6 +28066,7 @@ func (t *HostShowResult) String() string {
 Add a new hostgroup.
 */
 func (c *Client) HostgroupAdd(
+  ctx context.Context,
   reqArgs *HostgroupAddArgs,
   optArgs *HostgroupAddOptionalArgs, // can be nil
 ) (*HostgroupAddResult, error) {
@@ -27894,7 +28083,7 @@ func (c *Client) HostgroupAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -28021,6 +28210,7 @@ func (t *HostgroupAddResult) String() string {
 Add members to a hostgroup.
 */
 func (c *Client) HostgroupAddMember(
+  ctx context.Context,
   reqArgs *HostgroupAddMemberArgs,
   optArgs *HostgroupAddMemberOptionalArgs, // can be nil
 ) (*HostgroupAddMemberResult, error) {
@@ -28037,7 +28227,7 @@ func (c *Client) HostgroupAddMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -28156,6 +28346,7 @@ func (t *HostgroupAddMemberResult) String() string {
 Add users that can manage members of this hostgroup.
 */
 func (c *Client) HostgroupAddMemberManager(
+  ctx context.Context,
   reqArgs *HostgroupAddMemberManagerArgs,
   optArgs *HostgroupAddMemberManagerOptionalArgs, // can be nil
 ) (*HostgroupAddMemberManagerResult, error) {
@@ -28172,7 +28363,7 @@ func (c *Client) HostgroupAddMemberManager(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -28291,6 +28482,7 @@ func (t *HostgroupAddMemberManagerResult) String() string {
 Delete a hostgroup.
 */
 func (c *Client) HostgroupDel(
+  ctx context.Context,
   reqArgs *HostgroupDelArgs,
   optArgs *HostgroupDelOptionalArgs, // can be nil
 ) (*HostgroupDelResult, error) {
@@ -28307,7 +28499,7 @@ func (c *Client) HostgroupDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -28402,6 +28594,7 @@ func (t *HostgroupDelResult) String() string {
 Search for hostgroups.
 */
 func (c *Client) HostgroupFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *HostgroupFindArgs,
   optArgs *HostgroupFindOptionalArgs, // can be nil
@@ -28419,7 +28612,7 @@ func (c *Client) HostgroupFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -28654,6 +28847,7 @@ func (t *HostgroupFindResult) String() string {
 Modify a hostgroup.
 */
 func (c *Client) HostgroupMod(
+  ctx context.Context,
   reqArgs *HostgroupModArgs,
   optArgs *HostgroupModOptionalArgs, // can be nil
 ) (*HostgroupModResult, error) {
@@ -28670,7 +28864,7 @@ func (c *Client) HostgroupMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -28816,6 +29010,7 @@ func (t *HostgroupModResult) String() string {
 Remove members from a hostgroup.
 */
 func (c *Client) HostgroupRemoveMember(
+  ctx context.Context,
   reqArgs *HostgroupRemoveMemberArgs,
   optArgs *HostgroupRemoveMemberOptionalArgs, // can be nil
 ) (*HostgroupRemoveMemberResult, error) {
@@ -28832,7 +29027,7 @@ func (c *Client) HostgroupRemoveMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -28951,6 +29146,7 @@ func (t *HostgroupRemoveMemberResult) String() string {
 Remove users that can manage members of this hostgroup.
 */
 func (c *Client) HostgroupRemoveMemberManager(
+  ctx context.Context,
   reqArgs *HostgroupRemoveMemberManagerArgs,
   optArgs *HostgroupRemoveMemberManagerOptionalArgs, // can be nil
 ) (*HostgroupRemoveMemberManagerResult, error) {
@@ -28967,7 +29163,7 @@ func (c *Client) HostgroupRemoveMemberManager(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -29086,6 +29282,7 @@ func (t *HostgroupRemoveMemberManagerResult) String() string {
 Display information about a hostgroup.
 */
 func (c *Client) HostgroupShow(
+  ctx context.Context,
   reqArgs *HostgroupShowArgs,
   optArgs *HostgroupShowOptionalArgs, // can be nil
 ) (*HostgroupShowResult, error) {
@@ -29102,7 +29299,7 @@ func (c *Client) HostgroupShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -29215,6 +29412,7 @@ func (t *HostgroupShowResult) String() string {
 Internationalization messages
 */
 func (c *Client) I18nMessages(
+  ctx context.Context,
   reqArgs *I18nMessagesArgs,
   optArgs *I18nMessagesOptionalArgs, // can be nil
 ) (*I18nMessagesResult, error) {
@@ -29231,7 +29429,7 @@ func (c *Client) I18nMessages(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -29298,6 +29496,7 @@ func (t *I18nMessagesResult) String() string {
 Add a new Group ID override.
 */
 func (c *Client) IdoverridegroupAdd(
+  ctx context.Context,
   reqArgs *IdoverridegroupAddArgs,
   optArgs *IdoverridegroupAddOptionalArgs, // can be nil
 ) (*IdoverridegroupAddResult, error) {
@@ -29314,7 +29513,7 @@ func (c *Client) IdoverridegroupAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -29459,6 +29658,7 @@ func (t *IdoverridegroupAddResult) String() string {
 Delete an Group ID override.
 */
 func (c *Client) IdoverridegroupDel(
+  ctx context.Context,
   reqArgs *IdoverridegroupDelArgs,
   optArgs *IdoverridegroupDelOptionalArgs, // can be nil
 ) (*IdoverridegroupDelResult, error) {
@@ -29475,7 +29675,7 @@ func (c *Client) IdoverridegroupDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -29582,6 +29782,7 @@ func (t *IdoverridegroupDelResult) String() string {
 Search for an Group ID override.
 */
 func (c *Client) IdoverridegroupFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *IdoverridegroupFindArgs,
   optArgs *IdoverridegroupFindOptionalArgs, // can be nil
@@ -29599,7 +29800,7 @@ func (c *Client) IdoverridegroupFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -29756,6 +29957,7 @@ func (t *IdoverridegroupFindResult) String() string {
 Modify an Group ID override.
 */
 func (c *Client) IdoverridegroupMod(
+  ctx context.Context,
   reqArgs *IdoverridegroupModArgs,
   optArgs *IdoverridegroupModOptionalArgs, // can be nil
 ) (*IdoverridegroupModResult, error) {
@@ -29772,7 +29974,7 @@ func (c *Client) IdoverridegroupMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -29936,6 +30138,7 @@ func (t *IdoverridegroupModResult) String() string {
 Display information about an Group ID override.
 */
 func (c *Client) IdoverridegroupShow(
+  ctx context.Context,
   reqArgs *IdoverridegroupShowArgs,
   optArgs *IdoverridegroupShowOptionalArgs, // can be nil
 ) (*IdoverridegroupShowResult, error) {
@@ -29952,7 +30155,7 @@ func (c *Client) IdoverridegroupShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -30071,6 +30274,7 @@ func (t *IdoverridegroupShowResult) String() string {
 Add a new User ID override.
 */
 func (c *Client) IdoverrideuserAdd(
+  ctx context.Context,
   reqArgs *IdoverrideuserAddArgs,
   optArgs *IdoverrideuserAddOptionalArgs, // can be nil
 ) (*IdoverrideuserAddResult, error) {
@@ -30087,7 +30291,7 @@ func (c *Client) IdoverrideuserAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -30280,6 +30484,7 @@ func (t *IdoverrideuserAddResult) String() string {
 Add one or more certificates to the idoverrideuser entry
 */
 func (c *Client) IdoverrideuserAddCert(
+  ctx context.Context,
   reqArgs *IdoverrideuserAddCertArgs,
   optArgs *IdoverrideuserAddCertOptionalArgs, // can be nil
 ) (*IdoverrideuserAddCertResult, error) {
@@ -30296,7 +30501,7 @@ func (c *Client) IdoverrideuserAddCert(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -30421,6 +30626,7 @@ func (t *IdoverrideuserAddCertResult) String() string {
 Delete an User ID override.
 */
 func (c *Client) IdoverrideuserDel(
+  ctx context.Context,
   reqArgs *IdoverrideuserDelArgs,
   optArgs *IdoverrideuserDelOptionalArgs, // can be nil
 ) (*IdoverrideuserDelResult, error) {
@@ -30437,7 +30643,7 @@ func (c *Client) IdoverrideuserDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -30544,6 +30750,7 @@ func (t *IdoverrideuserDelResult) String() string {
 Search for an User ID override.
 */
 func (c *Client) IdoverrideuserFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *IdoverrideuserFindArgs,
   optArgs *IdoverrideuserFindOptionalArgs, // can be nil
@@ -30561,7 +30768,7 @@ func (c *Client) IdoverrideuserFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -30754,6 +30961,7 @@ func (t *IdoverrideuserFindResult) String() string {
 Modify an User ID override.
 */
 func (c *Client) IdoverrideuserMod(
+  ctx context.Context,
   reqArgs *IdoverrideuserModArgs,
   optArgs *IdoverrideuserModOptionalArgs, // can be nil
 ) (*IdoverrideuserModResult, error) {
@@ -30770,7 +30978,7 @@ func (c *Client) IdoverrideuserMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -30982,6 +31190,7 @@ func (t *IdoverrideuserModResult) String() string {
 Remove one or more certificates to the idoverrideuser entry
 */
 func (c *Client) IdoverrideuserRemoveCert(
+  ctx context.Context,
   reqArgs *IdoverrideuserRemoveCertArgs,
   optArgs *IdoverrideuserRemoveCertOptionalArgs, // can be nil
 ) (*IdoverrideuserRemoveCertResult, error) {
@@ -30998,7 +31207,7 @@ func (c *Client) IdoverrideuserRemoveCert(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -31123,6 +31332,7 @@ func (t *IdoverrideuserRemoveCertResult) String() string {
 Display information about an User ID override.
 */
 func (c *Client) IdoverrideuserShow(
+  ctx context.Context,
   reqArgs *IdoverrideuserShowArgs,
   optArgs *IdoverrideuserShowOptionalArgs, // can be nil
 ) (*IdoverrideuserShowResult, error) {
@@ -31139,7 +31349,7 @@ func (c *Client) IdoverrideuserShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -31264,6 +31474,7 @@ func (t *IdoverrideuserShowResult) String() string {
 Add a new Identity Provider server.
 */
 func (c *Client) IdpAdd(
+  ctx context.Context,
   reqArgs *IdpAddArgs,
   optArgs *IdpAddOptionalArgs, // can be nil
 ) (*IdpAddResult, error) {
@@ -31280,7 +31491,7 @@ func (c *Client) IdpAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -31473,6 +31684,7 @@ func (t *IdpAddResult) String() string {
 Delete an Identity Provider server.
 */
 func (c *Client) IdpDel(
+  ctx context.Context,
   reqArgs *IdpDelArgs,
   optArgs *IdpDelOptionalArgs, // can be nil
 ) (*IdpDelResult, error) {
@@ -31489,7 +31701,7 @@ func (c *Client) IdpDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -31584,6 +31796,7 @@ func (t *IdpDelResult) String() string {
 Search for Identity Provider servers.
 */
 func (c *Client) IdpFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *IdpFindArgs,
   optArgs *IdpFindOptionalArgs, // can be nil
@@ -31601,7 +31814,7 @@ func (c *Client) IdpFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -31788,6 +32001,7 @@ func (t *IdpFindResult) String() string {
 Modify an Identity Provider server.
 */
 func (c *Client) IdpMod(
+  ctx context.Context,
   reqArgs *IdpModArgs,
   optArgs *IdpModOptionalArgs, // can be nil
 ) (*IdpModResult, error) {
@@ -31804,7 +32018,7 @@ func (c *Client) IdpMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -31998,6 +32212,7 @@ func (t *IdpModResult) String() string {
 Display information about an Identity Provider server.
 */
 func (c *Client) IdpShow(
+  ctx context.Context,
   reqArgs *IdpShowArgs,
   optArgs *IdpShowOptionalArgs, // can be nil
 ) (*IdpShowResult, error) {
@@ -32014,7 +32229,7 @@ func (c *Client) IdpShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -32156,6 +32371,7 @@ modified to match the new range.
 -------
 */
 func (c *Client) IdrangeAdd(
+  ctx context.Context,
   reqArgs *IdrangeAddArgs,
   optArgs *IdrangeAddOptionalArgs, // can be nil
 ) (*IdrangeAddResult, error) {
@@ -32172,7 +32388,7 @@ func (c *Client) IdrangeAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -32335,6 +32551,7 @@ func (t *IdrangeAddResult) String() string {
 Delete an ID range.
 */
 func (c *Client) IdrangeDel(
+  ctx context.Context,
   reqArgs *IdrangeDelArgs,
   optArgs *IdrangeDelOptionalArgs, // can be nil
 ) (*IdrangeDelResult, error) {
@@ -32351,7 +32568,7 @@ func (c *Client) IdrangeDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -32446,6 +32663,7 @@ func (t *IdrangeDelResult) String() string {
 Search for ranges.
 */
 func (c *Client) IdrangeFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *IdrangeFindArgs,
   optArgs *IdrangeFindOptionalArgs, // can be nil
@@ -32463,7 +32681,7 @@ func (c *Client) IdrangeFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -32646,6 +32864,7 @@ modified to match the new range.
 -------
 */
 func (c *Client) IdrangeMod(
+  ctx context.Context,
   reqArgs *IdrangeModArgs,
   optArgs *IdrangeModOptionalArgs, // can be nil
 ) (*IdrangeModResult, error) {
@@ -32662,7 +32881,7 @@ func (c *Client) IdrangeMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -32832,6 +33051,7 @@ func (t *IdrangeModResult) String() string {
 Display information about a range.
 */
 func (c *Client) IdrangeShow(
+  ctx context.Context,
   reqArgs *IdrangeShowArgs,
   optArgs *IdrangeShowOptionalArgs, // can be nil
 ) (*IdrangeShowResult, error) {
@@ -32848,7 +33068,7 @@ func (c *Client) IdrangeShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -32955,6 +33175,7 @@ func (t *IdrangeShowResult) String() string {
 Add a new ID View.
 */
 func (c *Client) IdviewAdd(
+  ctx context.Context,
   reqArgs *IdviewAddArgs,
   optArgs *IdviewAddOptionalArgs, // can be nil
 ) (*IdviewAddResult, error) {
@@ -32971,7 +33192,7 @@ func (c *Client) IdviewAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -33098,6 +33319,7 @@ func (t *IdviewAddResult) String() string {
 Applies ID View to specified hosts or current members of specified hostgroups. If any other ID View is applied to the host, it is overridden.
 */
 func (c *Client) IdviewApply(
+  ctx context.Context,
   reqArgs *IdviewApplyArgs,
   optArgs *IdviewApplyOptionalArgs, // can be nil
 ) (*IdviewApplyResult, error) {
@@ -33114,7 +33336,7 @@ func (c *Client) IdviewApply(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -33223,6 +33445,7 @@ func (t *IdviewApplyResult) String() string {
 Delete an ID View.
 */
 func (c *Client) IdviewDel(
+  ctx context.Context,
   reqArgs *IdviewDelArgs,
   optArgs *IdviewDelOptionalArgs, // can be nil
 ) (*IdviewDelResult, error) {
@@ -33239,7 +33462,7 @@ func (c *Client) IdviewDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -33334,6 +33557,7 @@ func (t *IdviewDelResult) String() string {
 Search for an ID View.
 */
 func (c *Client) IdviewFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *IdviewFindArgs,
   optArgs *IdviewFindOptionalArgs, // can be nil
@@ -33351,7 +33575,7 @@ func (c *Client) IdviewFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -33484,6 +33708,7 @@ func (t *IdviewFindResult) String() string {
 Modify an ID View.
 */
 func (c *Client) IdviewMod(
+  ctx context.Context,
   reqArgs *IdviewModArgs,
   optArgs *IdviewModOptionalArgs, // can be nil
 ) (*IdviewModResult, error) {
@@ -33500,7 +33725,7 @@ func (c *Client) IdviewMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -33646,6 +33871,7 @@ func (t *IdviewModResult) String() string {
 Display information about an ID View.
 */
 func (c *Client) IdviewShow(
+  ctx context.Context,
   reqArgs *IdviewShowArgs,
   optArgs *IdviewShowOptionalArgs, // can be nil
 ) (*IdviewShowResult, error) {
@@ -33662,7 +33888,7 @@ func (c *Client) IdviewShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -33775,6 +34001,7 @@ func (t *IdviewShowResult) String() string {
 Clears ID View from specified hosts or current members of specified hostgroups.
 */
 func (c *Client) IdviewUnapply(
+  ctx context.Context,
   reqArgs *IdviewUnapplyArgs,
   optArgs *IdviewUnapplyOptionalArgs, // can be nil
 ) (*IdviewUnapplyResult, error) {
@@ -33791,7 +34018,7 @@ func (c *Client) IdviewUnapply(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -33894,6 +34121,7 @@ func (t *IdviewUnapplyResult) String() string {
 Join an IPA domain
 */
 func (c *Client) Join(
+  ctx context.Context,
   reqArgs *JoinArgs,
   optArgs *JoinOptionalArgs, // can be nil
 ) (*JoinResult, error) {
@@ -33910,7 +34138,7 @@ func (c *Client) Join(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -33993,6 +34221,7 @@ func (t *JoinResult) String() string {
 Export plugin meta-data for the webUI.
 */
 func (c *Client) JSONMetadata(
+  ctx context.Context,
   objname string, // Name of object to export
   methodname string, // Name of method to export
   reqArgs *JSONMetadataArgs,
@@ -34011,7 +34240,7 @@ func (c *Client) JSONMetadata(
     Params: []interface{}{
       []interface{}{objname, methodname, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -34112,6 +34341,7 @@ func (t *JSONMetadataResult) String() string {
 Checks if any of the servers has the KRA service enabled
 */
 func (c *Client) KraIsEnabled(
+  ctx context.Context,
   reqArgs *KraIsEnabledArgs,
   optArgs *KraIsEnabledOptionalArgs, // can be nil
 ) (*KraIsEnabledResult, error) {
@@ -34128,7 +34358,7 @@ func (c *Client) KraIsEnabled(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -34211,6 +34441,7 @@ func (t *KraIsEnabledResult) String() string {
 Modify Kerberos ticket policy.
 */
 func (c *Client) KrbtpolicyMod(
+  ctx context.Context,
   uid string, // Manage ticket policy for specific user
   reqArgs *KrbtpolicyModArgs,
   optArgs *KrbtpolicyModOptionalArgs, // can be nil
@@ -34228,7 +34459,7 @@ func (c *Client) KrbtpolicyMod(
     Params: []interface{}{
       []interface{}{uid, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -34422,6 +34653,7 @@ func (t *KrbtpolicyModResult) String() string {
 Reset Kerberos ticket policy to the default values.
 */
 func (c *Client) KrbtpolicyReset(
+  ctx context.Context,
   uid string, // Manage ticket policy for specific user
   reqArgs *KrbtpolicyResetArgs,
   optArgs *KrbtpolicyResetOptionalArgs, // can be nil
@@ -34439,7 +34671,7 @@ func (c *Client) KrbtpolicyReset(
     Params: []interface{}{
       []interface{}{uid, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -34534,6 +34766,7 @@ func (t *KrbtpolicyResetResult) String() string {
 Display the current Kerberos ticket policy.
 */
 func (c *Client) KrbtpolicyShow(
+  ctx context.Context,
   uid string, // Manage ticket policy for specific user
   reqArgs *KrbtpolicyShowArgs,
   optArgs *KrbtpolicyShowOptionalArgs, // can be nil
@@ -34551,7 +34784,7 @@ func (c *Client) KrbtpolicyShow(
     Params: []interface{}{
       []interface{}{uid, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -34652,6 +34885,7 @@ func (t *KrbtpolicyShowResult) String() string {
 Add a new IPA location.
 */
 func (c *Client) LocationAdd(
+  ctx context.Context,
   reqArgs *LocationAddArgs,
   optArgs *LocationAddOptionalArgs, // can be nil
 ) (*LocationAddResult, error) {
@@ -34668,7 +34902,7 @@ func (c *Client) LocationAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -34789,6 +35023,7 @@ func (t *LocationAddResult) String() string {
 Delete an IPA location.
 */
 func (c *Client) LocationDel(
+  ctx context.Context,
   reqArgs *LocationDelArgs,
   optArgs *LocationDelOptionalArgs, // can be nil
 ) (*LocationDelResult, error) {
@@ -34805,7 +35040,7 @@ func (c *Client) LocationDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -34900,6 +35135,7 @@ func (t *LocationDelResult) String() string {
 Search for IPA locations.
 */
 func (c *Client) LocationFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *LocationFindArgs,
   optArgs *LocationFindOptionalArgs, // can be nil
@@ -34917,7 +35153,7 @@ func (c *Client) LocationFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -35050,6 +35286,7 @@ func (t *LocationFindResult) String() string {
 Modify information about an IPA location.
 */
 func (c *Client) LocationMod(
+  ctx context.Context,
   reqArgs *LocationModArgs,
   optArgs *LocationModOptionalArgs, // can be nil
 ) (*LocationModResult, error) {
@@ -35066,7 +35303,7 @@ func (c *Client) LocationMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -35200,6 +35437,7 @@ func (t *LocationModResult) String() string {
 Display information about an IPA location.
 */
 func (c *Client) LocationShow(
+  ctx context.Context,
   reqArgs *LocationShowArgs,
   optArgs *LocationShowOptionalArgs, // can be nil
 ) (*LocationShowResult, error) {
@@ -35216,7 +35454,7 @@ func (c *Client) LocationShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -35331,6 +35569,7 @@ func (t *LocationShowResult) String() string {
 Migrate users and groups from DS to IPA.
 */
 func (c *Client) MigrateDs(
+  ctx context.Context,
   reqArgs *MigrateDsArgs,
   optArgs *MigrateDsOptionalArgs, // can be nil
 ) (*MigrateDsResult, error) {
@@ -35347,7 +35586,7 @@ func (c *Client) MigrateDs(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -35564,6 +35803,7 @@ func (t *MigrateDsResult) String() string {
 Add a new netgroup.
 */
 func (c *Client) NetgroupAdd(
+  ctx context.Context,
   reqArgs *NetgroupAddArgs,
   optArgs *NetgroupAddOptionalArgs, // can be nil
 ) (*NetgroupAddResult, error) {
@@ -35580,7 +35820,7 @@ func (c *Client) NetgroupAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -35731,6 +35971,7 @@ func (t *NetgroupAddResult) String() string {
 Add members to a netgroup.
 */
 func (c *Client) NetgroupAddMember(
+  ctx context.Context,
   reqArgs *NetgroupAddMemberArgs,
   optArgs *NetgroupAddMemberOptionalArgs, // can be nil
 ) (*NetgroupAddMemberResult, error) {
@@ -35747,7 +35988,7 @@ func (c *Client) NetgroupAddMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -35884,6 +36125,7 @@ func (t *NetgroupAddMemberResult) String() string {
 Delete a netgroup.
 */
 func (c *Client) NetgroupDel(
+  ctx context.Context,
   reqArgs *NetgroupDelArgs,
   optArgs *NetgroupDelOptionalArgs, // can be nil
 ) (*NetgroupDelResult, error) {
@@ -35900,7 +36142,7 @@ func (c *Client) NetgroupDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -35995,6 +36237,7 @@ func (t *NetgroupDelResult) String() string {
 Search for a netgroup.
 */
 func (c *Client) NetgroupFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *NetgroupFindArgs,
   optArgs *NetgroupFindOptionalArgs, // can be nil
@@ -36012,7 +36255,7 @@ func (c *Client) NetgroupFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -36265,6 +36508,7 @@ func (t *NetgroupFindResult) String() string {
 Modify a netgroup.
 */
 func (c *Client) NetgroupMod(
+  ctx context.Context,
   reqArgs *NetgroupModArgs,
   optArgs *NetgroupModOptionalArgs, // can be nil
 ) (*NetgroupModResult, error) {
@@ -36281,7 +36525,7 @@ func (c *Client) NetgroupMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -36445,6 +36689,7 @@ func (t *NetgroupModResult) String() string {
 Remove members from a netgroup.
 */
 func (c *Client) NetgroupRemoveMember(
+  ctx context.Context,
   reqArgs *NetgroupRemoveMemberArgs,
   optArgs *NetgroupRemoveMemberOptionalArgs, // can be nil
 ) (*NetgroupRemoveMemberResult, error) {
@@ -36461,7 +36706,7 @@ func (c *Client) NetgroupRemoveMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -36598,6 +36843,7 @@ func (t *NetgroupRemoveMemberResult) String() string {
 Display information about a netgroup.
 */
 func (c *Client) NetgroupShow(
+  ctx context.Context,
   reqArgs *NetgroupShowArgs,
   optArgs *NetgroupShowOptionalArgs, // can be nil
 ) (*NetgroupShowResult, error) {
@@ -36614,7 +36860,7 @@ func (c *Client) NetgroupShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -36727,6 +36973,7 @@ func (t *NetgroupShowResult) String() string {
 Modify OTP configuration options.
 */
 func (c *Client) OtpconfigMod(
+  ctx context.Context,
   reqArgs *OtpconfigModArgs,
   optArgs *OtpconfigModOptionalArgs, // can be nil
 ) (*OtpconfigModResult, error) {
@@ -36743,7 +36990,7 @@ func (c *Client) OtpconfigMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -36889,6 +37136,7 @@ func (t *OtpconfigModResult) String() string {
 Show the current OTP configuration.
 */
 func (c *Client) OtpconfigShow(
+  ctx context.Context,
   reqArgs *OtpconfigShowArgs,
   optArgs *OtpconfigShowOptionalArgs, // can be nil
 ) (*OtpconfigShowResult, error) {
@@ -36905,7 +37153,7 @@ func (c *Client) OtpconfigShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -37006,6 +37254,7 @@ func (t *OtpconfigShowResult) String() string {
 Add a new OTP token.
 */
 func (c *Client) OtptokenAdd(
+  ctx context.Context,
   ipatokenuniqueid string, // 
   reqArgs *OtptokenAddArgs,
   optArgs *OtptokenAddOptionalArgs, // can be nil
@@ -37023,7 +37272,7 @@ func (c *Client) OtptokenAdd(
     Params: []interface{}{
       []interface{}{ipatokenuniqueid, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -37240,6 +37489,7 @@ func (t *OtptokenAddResult) String() string {
 Add users that can manage this token.
 */
 func (c *Client) OtptokenAddManagedby(
+  ctx context.Context,
   reqArgs *OtptokenAddManagedbyArgs,
   optArgs *OtptokenAddManagedbyOptionalArgs, // can be nil
 ) (*OtptokenAddManagedbyResult, error) {
@@ -37256,7 +37506,7 @@ func (c *Client) OtptokenAddManagedby(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -37369,6 +37619,7 @@ func (t *OtptokenAddManagedbyResult) String() string {
 Delete an OTP token.
 */
 func (c *Client) OtptokenDel(
+  ctx context.Context,
   reqArgs *OtptokenDelArgs,
   optArgs *OtptokenDelOptionalArgs, // can be nil
 ) (*OtptokenDelResult, error) {
@@ -37385,7 +37636,7 @@ func (c *Client) OtptokenDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -37480,6 +37731,7 @@ func (t *OtptokenDelResult) String() string {
 Search for OTP token.
 */
 func (c *Client) OtptokenFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *OtptokenFindArgs,
   optArgs *OtptokenFindOptionalArgs, // can be nil
@@ -37497,7 +37749,7 @@ func (c *Client) OtptokenFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -37714,6 +37966,7 @@ func (t *OtptokenFindResult) String() string {
 Modify a OTP token.
 */
 func (c *Client) OtptokenMod(
+  ctx context.Context,
   reqArgs *OtptokenModArgs,
   optArgs *OtptokenModOptionalArgs, // can be nil
 ) (*OtptokenModResult, error) {
@@ -37730,7 +37983,7 @@ func (c *Client) OtptokenMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -37918,6 +38171,7 @@ func (t *OtptokenModResult) String() string {
 Remove users that can manage this token.
 */
 func (c *Client) OtptokenRemoveManagedby(
+  ctx context.Context,
   reqArgs *OtptokenRemoveManagedbyArgs,
   optArgs *OtptokenRemoveManagedbyOptionalArgs, // can be nil
 ) (*OtptokenRemoveManagedbyResult, error) {
@@ -37934,7 +38188,7 @@ func (c *Client) OtptokenRemoveManagedby(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -38047,6 +38301,7 @@ func (t *OtptokenRemoveManagedbyResult) String() string {
 Display information about an OTP token.
 */
 func (c *Client) OtptokenShow(
+  ctx context.Context,
   reqArgs *OtptokenShowArgs,
   optArgs *OtptokenShowOptionalArgs, // can be nil
 ) (*OtptokenShowResult, error) {
@@ -38063,7 +38318,7 @@ func (c *Client) OtptokenShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -38176,6 +38431,7 @@ func (t *OtptokenShowResult) String() string {
 Search for command outputs.
 */
 func (c *Client) OutputFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *OutputFindArgs,
   optArgs *OutputFindOptionalArgs, // can be nil
@@ -38193,7 +38449,7 @@ func (c *Client) OutputFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -38308,6 +38564,7 @@ func (t *OutputFindResult) String() string {
 Display information about a command output.
 */
 func (c *Client) OutputShow(
+  ctx context.Context,
   reqArgs *OutputShowArgs,
   optArgs *OutputShowOptionalArgs, // can be nil
 ) (*OutputShowResult, error) {
@@ -38324,7 +38581,7 @@ func (c *Client) OutputShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -38431,6 +38688,7 @@ func (t *OutputShowResult) String() string {
 Search command parameters.
 */
 func (c *Client) ParamFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *ParamFindArgs,
   optArgs *ParamFindOptionalArgs, // can be nil
@@ -38448,7 +38706,7 @@ func (c *Client) ParamFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -38563,6 +38821,7 @@ func (t *ParamFindResult) String() string {
 Display information about a command parameter.
 */
 func (c *Client) ParamShow(
+  ctx context.Context,
   reqArgs *ParamShowArgs,
   optArgs *ParamShowOptionalArgs, // can be nil
 ) (*ParamShowResult, error) {
@@ -38579,7 +38838,7 @@ func (c *Client) ParamShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -38686,6 +38945,7 @@ func (t *ParamShowResult) String() string {
 Set a user's password.
 */
 func (c *Client) Passwd(
+  ctx context.Context,
   reqArgs *PasswdArgs,
   optArgs *PasswdOptionalArgs, // can be nil
 ) (*PasswdResult, error) {
@@ -38702,7 +38962,7 @@ func (c *Client) Passwd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -38809,6 +39069,7 @@ func (t *PasswdResult) String() string {
 Add a new permission.
 */
 func (c *Client) PermissionAdd(
+  ctx context.Context,
   reqArgs *PermissionAddArgs,
   optArgs *PermissionAddOptionalArgs, // can be nil
 ) (*PermissionAddResult, error) {
@@ -38825,7 +39086,7 @@ func (c *Client) PermissionAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -39036,6 +39297,7 @@ func (t *PermissionAddResult) String() string {
 Add members to a permission.
 */
 func (c *Client) PermissionAddMember(
+  ctx context.Context,
   reqArgs *PermissionAddMemberArgs,
   optArgs *PermissionAddMemberOptionalArgs, // can be nil
 ) (*PermissionAddMemberResult, error) {
@@ -39052,7 +39314,7 @@ func (c *Client) PermissionAddMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -39165,6 +39427,7 @@ func (t *PermissionAddMemberResult) String() string {
 Add a system permission without an ACI (internal command)
 */
 func (c *Client) PermissionAddNoaci(
+  ctx context.Context,
   reqArgs *PermissionAddNoaciArgs,
   optArgs *PermissionAddNoaciOptionalArgs, // can be nil
 ) (*PermissionAddNoaciResult, error) {
@@ -39181,7 +39444,7 @@ func (c *Client) PermissionAddNoaci(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -39294,6 +39557,7 @@ func (t *PermissionAddNoaciResult) String() string {
 Delete a permission.
 */
 func (c *Client) PermissionDel(
+  ctx context.Context,
   reqArgs *PermissionDelArgs,
   optArgs *PermissionDelOptionalArgs, // can be nil
 ) (*PermissionDelResult, error) {
@@ -39310,7 +39574,7 @@ func (c *Client) PermissionDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -39411,6 +39675,7 @@ func (t *PermissionDelResult) String() string {
 Search for permissions.
 */
 func (c *Client) PermissionFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *PermissionFindArgs,
   optArgs *PermissionFindOptionalArgs, // can be nil
@@ -39428,7 +39693,7 @@ func (c *Client) PermissionFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -39669,6 +39934,7 @@ func (t *PermissionFindResult) String() string {
 Modify a permission.
 */
 func (c *Client) PermissionMod(
+  ctx context.Context,
   reqArgs *PermissionModArgs,
   optArgs *PermissionModOptionalArgs, // can be nil
 ) (*PermissionModResult, error) {
@@ -39685,7 +39951,7 @@ func (c *Client) PermissionMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -39927,6 +40193,7 @@ func (t *PermissionModResult) String() string {
 Remove members from a permission.
 */
 func (c *Client) PermissionRemoveMember(
+  ctx context.Context,
   reqArgs *PermissionRemoveMemberArgs,
   optArgs *PermissionRemoveMemberOptionalArgs, // can be nil
 ) (*PermissionRemoveMemberResult, error) {
@@ -39943,7 +40210,7 @@ func (c *Client) PermissionRemoveMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -40056,6 +40323,7 @@ func (t *PermissionRemoveMemberResult) String() string {
 Display information about a permission.
 */
 func (c *Client) PermissionShow(
+  ctx context.Context,
   reqArgs *PermissionShowArgs,
   optArgs *PermissionShowOptionalArgs, // can be nil
 ) (*PermissionShowResult, error) {
@@ -40072,7 +40340,7 @@ func (c *Client) PermissionShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -40185,6 +40453,7 @@ func (t *PermissionShowResult) String() string {
 Ping a remote server.
 */
 func (c *Client) Ping(
+  ctx context.Context,
   reqArgs *PingArgs,
   optArgs *PingOptionalArgs, // can be nil
 ) (*PingResult, error) {
@@ -40201,7 +40470,7 @@ func (c *Client) Ping(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -40268,6 +40537,7 @@ func (t *PingResult) String() string {
 Report PKINIT status on the IPA masters
 */
 func (c *Client) PkinitStatus(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *PkinitStatusArgs,
   optArgs *PkinitStatusOptionalArgs, // can be nil
@@ -40285,7 +40555,7 @@ func (c *Client) PkinitStatus(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -40412,6 +40682,7 @@ func (t *PkinitStatusResult) String() string {
 Show all loaded plugins.
 */
 func (c *Client) Plugins(
+  ctx context.Context,
   reqArgs *PluginsArgs,
   optArgs *PluginsOptionalArgs, // can be nil
 ) (*PluginsResult, error) {
@@ -40428,7 +40699,7 @@ func (c *Client) Plugins(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -40523,6 +40794,7 @@ func (t *PluginsResult) String() string {
 Add a new privilege.
 */
 func (c *Client) PrivilegeAdd(
+  ctx context.Context,
   reqArgs *PrivilegeAddArgs,
   optArgs *PrivilegeAddOptionalArgs, // can be nil
 ) (*PrivilegeAddResult, error) {
@@ -40539,7 +40811,7 @@ func (c *Client) PrivilegeAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -40666,6 +40938,7 @@ func (t *PrivilegeAddResult) String() string {
 Add members to a privilege.
 */
 func (c *Client) PrivilegeAddMember(
+  ctx context.Context,
   reqArgs *PrivilegeAddMemberArgs,
   optArgs *PrivilegeAddMemberOptionalArgs, // can be nil
 ) (*PrivilegeAddMemberResult, error) {
@@ -40682,7 +40955,7 @@ func (c *Client) PrivilegeAddMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -40795,6 +41068,7 @@ func (t *PrivilegeAddMemberResult) String() string {
 Add permissions to a privilege.
 */
 func (c *Client) PrivilegeAddPermission(
+  ctx context.Context,
   reqArgs *PrivilegeAddPermissionArgs,
   optArgs *PrivilegeAddPermissionOptionalArgs, // can be nil
 ) (*PrivilegeAddPermissionResult, error) {
@@ -40811,7 +41085,7 @@ func (c *Client) PrivilegeAddPermission(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -40924,6 +41198,7 @@ func (t *PrivilegeAddPermissionResult) String() string {
 Delete a privilege.
 */
 func (c *Client) PrivilegeDel(
+  ctx context.Context,
   reqArgs *PrivilegeDelArgs,
   optArgs *PrivilegeDelOptionalArgs, // can be nil
 ) (*PrivilegeDelResult, error) {
@@ -40940,7 +41215,7 @@ func (c *Client) PrivilegeDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -41035,6 +41310,7 @@ func (t *PrivilegeDelResult) String() string {
 Search for privileges.
 */
 func (c *Client) PrivilegeFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *PrivilegeFindArgs,
   optArgs *PrivilegeFindOptionalArgs, // can be nil
@@ -41052,7 +41328,7 @@ func (c *Client) PrivilegeFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -41191,6 +41467,7 @@ func (t *PrivilegeFindResult) String() string {
 Modify a privilege.
 */
 func (c *Client) PrivilegeMod(
+  ctx context.Context,
   reqArgs *PrivilegeModArgs,
   optArgs *PrivilegeModOptionalArgs, // can be nil
 ) (*PrivilegeModResult, error) {
@@ -41207,7 +41484,7 @@ func (c *Client) PrivilegeMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -41353,6 +41630,7 @@ func (t *PrivilegeModResult) String() string {
 Remove members from a privilege
 */
 func (c *Client) PrivilegeRemoveMember(
+  ctx context.Context,
   reqArgs *PrivilegeRemoveMemberArgs,
   optArgs *PrivilegeRemoveMemberOptionalArgs, // can be nil
 ) (*PrivilegeRemoveMemberResult, error) {
@@ -41369,7 +41647,7 @@ func (c *Client) PrivilegeRemoveMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -41482,6 +41760,7 @@ func (t *PrivilegeRemoveMemberResult) String() string {
 Remove permissions from a privilege.
 */
 func (c *Client) PrivilegeRemovePermission(
+  ctx context.Context,
   reqArgs *PrivilegeRemovePermissionArgs,
   optArgs *PrivilegeRemovePermissionOptionalArgs, // can be nil
 ) (*PrivilegeRemovePermissionResult, error) {
@@ -41498,7 +41777,7 @@ func (c *Client) PrivilegeRemovePermission(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -41611,6 +41890,7 @@ func (t *PrivilegeRemovePermissionResult) String() string {
 Display information about a privilege.
 */
 func (c *Client) PrivilegeShow(
+  ctx context.Context,
   reqArgs *PrivilegeShowArgs,
   optArgs *PrivilegeShowOptionalArgs, // can be nil
 ) (*PrivilegeShowResult, error) {
@@ -41627,7 +41907,7 @@ func (c *Client) PrivilegeShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -41740,6 +42020,7 @@ func (t *PrivilegeShowResult) String() string {
 Add a new group password policy.
 */
 func (c *Client) PwpolicyAdd(
+  ctx context.Context,
   reqArgs *PwpolicyAddArgs,
   optArgs *PwpolicyAddOptionalArgs, // can be nil
 ) (*PwpolicyAddResult, error) {
@@ -41756,7 +42037,7 @@ func (c *Client) PwpolicyAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -41955,6 +42236,7 @@ func (t *PwpolicyAddResult) String() string {
 Delete a group password policy.
 */
 func (c *Client) PwpolicyDel(
+  ctx context.Context,
   reqArgs *PwpolicyDelArgs,
   optArgs *PwpolicyDelOptionalArgs, // can be nil
 ) (*PwpolicyDelResult, error) {
@@ -41971,7 +42253,7 @@ func (c *Client) PwpolicyDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -42066,6 +42348,7 @@ func (t *PwpolicyDelResult) String() string {
 Search for group password policies.
 */
 func (c *Client) PwpolicyFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *PwpolicyFindArgs,
   optArgs *PwpolicyFindOptionalArgs, // can be nil
@@ -42083,7 +42366,7 @@ func (c *Client) PwpolicyFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -42294,6 +42577,7 @@ func (t *PwpolicyFindResult) String() string {
 Modify a group password policy.
 */
 func (c *Client) PwpolicyMod(
+  ctx context.Context,
   cn string, // Manage password policy for specific group
   reqArgs *PwpolicyModArgs,
   optArgs *PwpolicyModOptionalArgs, // can be nil
@@ -42311,7 +42595,7 @@ func (c *Client) PwpolicyMod(
     Params: []interface{}{
       []interface{}{cn, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -42517,6 +42801,7 @@ func (t *PwpolicyModResult) String() string {
 Display information about password policy.
 */
 func (c *Client) PwpolicyShow(
+  ctx context.Context,
   cn string, // Manage password policy for specific group
   reqArgs *PwpolicyShowArgs,
   optArgs *PwpolicyShowOptionalArgs, // can be nil
@@ -42534,7 +42819,7 @@ func (c *Client) PwpolicyShow(
     Params: []interface{}{
       []interface{}{cn, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -42641,6 +42926,7 @@ func (t *PwpolicyShowResult) String() string {
 Add a new RADIUS proxy server.
 */
 func (c *Client) RadiusproxyAdd(
+  ctx context.Context,
   reqArgs *RadiusproxyAddArgs,
   optArgs *RadiusproxyAddOptionalArgs, // can be nil
 ) (*RadiusproxyAddResult, error) {
@@ -42657,7 +42943,7 @@ func (c *Client) RadiusproxyAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -42808,6 +43094,7 @@ func (t *RadiusproxyAddResult) String() string {
 Delete a RADIUS proxy server.
 */
 func (c *Client) RadiusproxyDel(
+  ctx context.Context,
   reqArgs *RadiusproxyDelArgs,
   optArgs *RadiusproxyDelOptionalArgs, // can be nil
 ) (*RadiusproxyDelResult, error) {
@@ -42824,7 +43111,7 @@ func (c *Client) RadiusproxyDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -42919,6 +43206,7 @@ func (t *RadiusproxyDelResult) String() string {
 Search for RADIUS proxy servers.
 */
 func (c *Client) RadiusproxyFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *RadiusproxyFindArgs,
   optArgs *RadiusproxyFindOptionalArgs, // can be nil
@@ -42936,7 +43224,7 @@ func (c *Client) RadiusproxyFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -43099,6 +43387,7 @@ func (t *RadiusproxyFindResult) String() string {
 Modify a RADIUS proxy server.
 */
 func (c *Client) RadiusproxyMod(
+  ctx context.Context,
   reqArgs *RadiusproxyModArgs,
   optArgs *RadiusproxyModOptionalArgs, // can be nil
 ) (*RadiusproxyModResult, error) {
@@ -43115,7 +43404,7 @@ func (c *Client) RadiusproxyMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -43285,6 +43574,7 @@ func (t *RadiusproxyModResult) String() string {
 Display information about a RADIUS proxy server.
 */
 func (c *Client) RadiusproxyShow(
+  ctx context.Context,
   reqArgs *RadiusproxyShowArgs,
   optArgs *RadiusproxyShowOptionalArgs, // can be nil
 ) (*RadiusproxyShowResult, error) {
@@ -43301,7 +43591,7 @@ func (c *Client) RadiusproxyShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -43419,6 +43709,7 @@ Modify realm domains
     itself are not affected.
 */
 func (c *Client) RealmdomainsMod(
+  ctx context.Context,
   reqArgs *RealmdomainsModArgs,
   optArgs *RealmdomainsModOptionalArgs, // can be nil
 ) (*RealmdomainsModResult, error) {
@@ -43435,7 +43726,7 @@ func (c *Client) RealmdomainsMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -43581,6 +43872,7 @@ func (t *RealmdomainsModResult) String() string {
 Display the list of realm domains.
 */
 func (c *Client) RealmdomainsShow(
+  ctx context.Context,
   reqArgs *RealmdomainsShowArgs,
   optArgs *RealmdomainsShowOptionalArgs, // can be nil
 ) (*RealmdomainsShowResult, error) {
@@ -43597,7 +43889,7 @@ func (c *Client) RealmdomainsShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -43698,6 +43990,7 @@ func (t *RealmdomainsShowResult) String() string {
 Add a new role.
 */
 func (c *Client) RoleAdd(
+  ctx context.Context,
   reqArgs *RoleAddArgs,
   optArgs *RoleAddOptionalArgs, // can be nil
 ) (*RoleAddResult, error) {
@@ -43714,7 +44007,7 @@ func (c *Client) RoleAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -43841,6 +44134,7 @@ func (t *RoleAddResult) String() string {
 Add members to a role.
 */
 func (c *Client) RoleAddMember(
+  ctx context.Context,
   reqArgs *RoleAddMemberArgs,
   optArgs *RoleAddMemberOptionalArgs, // can be nil
 ) (*RoleAddMemberResult, error) {
@@ -43857,7 +44151,7 @@ func (c *Client) RoleAddMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -44000,6 +44294,7 @@ func (t *RoleAddMemberResult) String() string {
 Add privileges to a role.
 */
 func (c *Client) RoleAddPrivilege(
+  ctx context.Context,
   reqArgs *RoleAddPrivilegeArgs,
   optArgs *RoleAddPrivilegeOptionalArgs, // can be nil
 ) (*RoleAddPrivilegeResult, error) {
@@ -44016,7 +44311,7 @@ func (c *Client) RoleAddPrivilege(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -44129,6 +44424,7 @@ func (t *RoleAddPrivilegeResult) String() string {
 Delete a role.
 */
 func (c *Client) RoleDel(
+  ctx context.Context,
   reqArgs *RoleDelArgs,
   optArgs *RoleDelOptionalArgs, // can be nil
 ) (*RoleDelResult, error) {
@@ -44145,7 +44441,7 @@ func (c *Client) RoleDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -44240,6 +44536,7 @@ func (t *RoleDelResult) String() string {
 Search for roles.
 */
 func (c *Client) RoleFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *RoleFindArgs,
   optArgs *RoleFindOptionalArgs, // can be nil
@@ -44257,7 +44554,7 @@ func (c *Client) RoleFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -44396,6 +44693,7 @@ func (t *RoleFindResult) String() string {
 Modify a role.
 */
 func (c *Client) RoleMod(
+  ctx context.Context,
   reqArgs *RoleModArgs,
   optArgs *RoleModOptionalArgs, // can be nil
 ) (*RoleModResult, error) {
@@ -44412,7 +44710,7 @@ func (c *Client) RoleMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -44558,6 +44856,7 @@ func (t *RoleModResult) String() string {
 Remove members from a role.
 */
 func (c *Client) RoleRemoveMember(
+  ctx context.Context,
   reqArgs *RoleRemoveMemberArgs,
   optArgs *RoleRemoveMemberOptionalArgs, // can be nil
 ) (*RoleRemoveMemberResult, error) {
@@ -44574,7 +44873,7 @@ func (c *Client) RoleRemoveMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -44717,6 +45016,7 @@ func (t *RoleRemoveMemberResult) String() string {
 Remove privileges from a role.
 */
 func (c *Client) RoleRemovePrivilege(
+  ctx context.Context,
   reqArgs *RoleRemovePrivilegeArgs,
   optArgs *RoleRemovePrivilegeOptionalArgs, // can be nil
 ) (*RoleRemovePrivilegeResult, error) {
@@ -44733,7 +45033,7 @@ func (c *Client) RoleRemovePrivilege(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -44846,6 +45146,7 @@ func (t *RoleRemovePrivilegeResult) String() string {
 Display information about a role.
 */
 func (c *Client) RoleShow(
+  ctx context.Context,
   reqArgs *RoleShowArgs,
   optArgs *RoleShowOptionalArgs, // can be nil
 ) (*RoleShowResult, error) {
@@ -44862,7 +45163,7 @@ func (c *Client) RoleShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -44975,6 +45276,7 @@ func (t *RoleShowResult) String() string {
 Store and provide schema for commands and topics
 */
 func (c *Client) Schema(
+  ctx context.Context,
   reqArgs *SchemaArgs,
   optArgs *SchemaOptionalArgs, // can be nil
 ) (*SchemaResult, error) {
@@ -44991,7 +45293,7 @@ func (c *Client) Schema(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -45064,6 +45366,7 @@ func (t *SchemaResult) String() string {
 Add a new self-service permission.
 */
 func (c *Client) SelfserviceAdd(
+  ctx context.Context,
   reqArgs *SelfserviceAddArgs,
   optArgs *SelfserviceAddOptionalArgs, // can be nil
 ) (*SelfserviceAddResult, error) {
@@ -45080,7 +45383,7 @@ func (c *Client) SelfserviceAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -45193,6 +45496,7 @@ func (t *SelfserviceAddResult) String() string {
 Delete a self-service permission.
 */
 func (c *Client) SelfserviceDel(
+  ctx context.Context,
   reqArgs *SelfserviceDelArgs,
   optArgs *SelfserviceDelOptionalArgs, // can be nil
 ) (*SelfserviceDelResult, error) {
@@ -45209,7 +45513,7 @@ func (c *Client) SelfserviceDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -45298,6 +45602,7 @@ func (t *SelfserviceDelResult) String() string {
 Search for a self-service permission.
 */
 func (c *Client) SelfserviceFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *SelfserviceFindArgs,
   optArgs *SelfserviceFindOptionalArgs, // can be nil
@@ -45315,7 +45620,7 @@ func (c *Client) SelfserviceFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -45442,6 +45747,7 @@ func (t *SelfserviceFindResult) String() string {
 Modify a self-service permission.
 */
 func (c *Client) SelfserviceMod(
+  ctx context.Context,
   reqArgs *SelfserviceModArgs,
   optArgs *SelfserviceModOptionalArgs, // can be nil
 ) (*SelfserviceModResult, error) {
@@ -45458,7 +45764,7 @@ func (c *Client) SelfserviceMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -45571,6 +45877,7 @@ func (t *SelfserviceModResult) String() string {
 Display information about a self-service permission.
 */
 func (c *Client) SelfserviceShow(
+  ctx context.Context,
   reqArgs *SelfserviceShowArgs,
   optArgs *SelfserviceShowOptionalArgs, // can be nil
 ) (*SelfserviceShowResult, error) {
@@ -45587,7 +45894,7 @@ func (c *Client) SelfserviceShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -45688,6 +45995,7 @@ func (t *SelfserviceShowResult) String() string {
 Create a new SELinux User Map.
 */
 func (c *Client) SelinuxusermapAdd(
+  ctx context.Context,
   reqArgs *SelinuxusermapAddArgs,
   optArgs *SelinuxusermapAddOptionalArgs, // can be nil
 ) (*SelinuxusermapAddResult, error) {
@@ -45704,7 +46012,7 @@ func (c *Client) SelinuxusermapAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -45861,6 +46169,7 @@ func (t *SelinuxusermapAddResult) String() string {
 Add target hosts and hostgroups to an SELinux User Map rule.
 */
 func (c *Client) SelinuxusermapAddHost(
+  ctx context.Context,
   reqArgs *SelinuxusermapAddHostArgs,
   optArgs *SelinuxusermapAddHostOptionalArgs, // can be nil
 ) (*SelinuxusermapAddHostResult, error) {
@@ -45877,7 +46186,7 @@ func (c *Client) SelinuxusermapAddHost(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -45996,6 +46305,7 @@ func (t *SelinuxusermapAddHostResult) String() string {
 Add users and groups to an SELinux User Map rule.
 */
 func (c *Client) SelinuxusermapAddUser(
+  ctx context.Context,
   reqArgs *SelinuxusermapAddUserArgs,
   optArgs *SelinuxusermapAddUserOptionalArgs, // can be nil
 ) (*SelinuxusermapAddUserResult, error) {
@@ -46012,7 +46322,7 @@ func (c *Client) SelinuxusermapAddUser(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -46131,6 +46441,7 @@ func (t *SelinuxusermapAddUserResult) String() string {
 Delete a SELinux User Map.
 */
 func (c *Client) SelinuxusermapDel(
+  ctx context.Context,
   reqArgs *SelinuxusermapDelArgs,
   optArgs *SelinuxusermapDelOptionalArgs, // can be nil
 ) (*SelinuxusermapDelResult, error) {
@@ -46147,7 +46458,7 @@ func (c *Client) SelinuxusermapDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -46242,6 +46553,7 @@ func (t *SelinuxusermapDelResult) String() string {
 Disable an SELinux User Map rule.
 */
 func (c *Client) SelinuxusermapDisable(
+  ctx context.Context,
   reqArgs *SelinuxusermapDisableArgs,
   optArgs *SelinuxusermapDisableOptionalArgs, // can be nil
 ) (*SelinuxusermapDisableResult, error) {
@@ -46258,7 +46570,7 @@ func (c *Client) SelinuxusermapDisable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -46347,6 +46659,7 @@ func (t *SelinuxusermapDisableResult) String() string {
 Enable an SELinux User Map rule.
 */
 func (c *Client) SelinuxusermapEnable(
+  ctx context.Context,
   reqArgs *SelinuxusermapEnableArgs,
   optArgs *SelinuxusermapEnableOptionalArgs, // can be nil
 ) (*SelinuxusermapEnableResult, error) {
@@ -46363,7 +46676,7 @@ func (c *Client) SelinuxusermapEnable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -46452,6 +46765,7 @@ func (t *SelinuxusermapEnableResult) String() string {
 Search for SELinux User Maps.
 */
 func (c *Client) SelinuxusermapFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *SelinuxusermapFindArgs,
   optArgs *SelinuxusermapFindOptionalArgs, // can be nil
@@ -46469,7 +46783,7 @@ func (c *Client) SelinuxusermapFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -46638,6 +46952,7 @@ func (t *SelinuxusermapFindResult) String() string {
 Modify a SELinux User Map.
 */
 func (c *Client) SelinuxusermapMod(
+  ctx context.Context,
   reqArgs *SelinuxusermapModArgs,
   optArgs *SelinuxusermapModOptionalArgs, // can be nil
 ) (*SelinuxusermapModResult, error) {
@@ -46654,7 +46969,7 @@ func (c *Client) SelinuxusermapMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -46824,6 +47139,7 @@ func (t *SelinuxusermapModResult) String() string {
 Remove target hosts and hostgroups from an SELinux User Map rule.
 */
 func (c *Client) SelinuxusermapRemoveHost(
+  ctx context.Context,
   reqArgs *SelinuxusermapRemoveHostArgs,
   optArgs *SelinuxusermapRemoveHostOptionalArgs, // can be nil
 ) (*SelinuxusermapRemoveHostResult, error) {
@@ -46840,7 +47156,7 @@ func (c *Client) SelinuxusermapRemoveHost(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -46959,6 +47275,7 @@ func (t *SelinuxusermapRemoveHostResult) String() string {
 Remove users and groups from an SELinux User Map rule.
 */
 func (c *Client) SelinuxusermapRemoveUser(
+  ctx context.Context,
   reqArgs *SelinuxusermapRemoveUserArgs,
   optArgs *SelinuxusermapRemoveUserOptionalArgs, // can be nil
 ) (*SelinuxusermapRemoveUserResult, error) {
@@ -46975,7 +47292,7 @@ func (c *Client) SelinuxusermapRemoveUser(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -47094,6 +47411,7 @@ func (t *SelinuxusermapRemoveUserResult) String() string {
 Display the properties of a SELinux User Map rule.
 */
 func (c *Client) SelinuxusermapShow(
+  ctx context.Context,
   reqArgs *SelinuxusermapShowArgs,
   optArgs *SelinuxusermapShowOptionalArgs, // can be nil
 ) (*SelinuxusermapShowResult, error) {
@@ -47110,7 +47428,7 @@ func (c *Client) SelinuxusermapShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -47223,6 +47541,7 @@ func (t *SelinuxusermapShowResult) String() string {
 Check connection to remote IPA server.
 */
 func (c *Client) ServerConncheck(
+  ctx context.Context,
   reqArgs *ServerConncheckArgs,
   optArgs *ServerConncheckOptionalArgs, // can be nil
 ) (*ServerConncheckResult, error) {
@@ -47239,7 +47558,7 @@ func (c *Client) ServerConncheck(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -47334,6 +47653,7 @@ func (t *ServerConncheckResult) String() string {
 Delete IPA server.
 */
 func (c *Client) ServerDel(
+  ctx context.Context,
   reqArgs *ServerDelArgs,
   optArgs *ServerDelOptionalArgs, // can be nil
 ) (*ServerDelResult, error) {
@@ -47350,7 +47670,7 @@ func (c *Client) ServerDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -47463,6 +47783,7 @@ func (t *ServerDelResult) String() string {
 Search for IPA servers.
 */
 func (c *Client) ServerFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *ServerFindArgs,
   optArgs *ServerFindOptionalArgs, // can be nil
@@ -47480,7 +47801,7 @@ func (c *Client) ServerFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -47655,6 +47976,7 @@ func (t *ServerFindResult) String() string {
 Modify information about an IPA server.
 */
 func (c *Client) ServerMod(
+  ctx context.Context,
   reqArgs *ServerModArgs,
   optArgs *ServerModOptionalArgs, // can be nil
 ) (*ServerModResult, error) {
@@ -47671,7 +47993,7 @@ func (c *Client) ServerMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -47817,6 +48139,7 @@ func (t *ServerModResult) String() string {
 Find a server role on a server(s)
 */
 func (c *Client) ServerRoleFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *ServerRoleFindArgs,
   optArgs *ServerRoleFindOptionalArgs, // can be nil
@@ -47834,7 +48157,7 @@ func (c *Client) ServerRoleFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -47973,6 +48296,7 @@ func (t *ServerRoleFindResult) String() string {
 Show role status on a server
 */
 func (c *Client) ServerRoleShow(
+  ctx context.Context,
   reqArgs *ServerRoleShowArgs,
   optArgs *ServerRoleShowOptionalArgs, // can be nil
 ) (*ServerRoleShowResult, error) {
@@ -47989,7 +48313,7 @@ func (c *Client) ServerRoleShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -48096,6 +48420,7 @@ func (t *ServerRoleShowResult) String() string {
 Show IPA server.
 */
 func (c *Client) ServerShow(
+  ctx context.Context,
   reqArgs *ServerShowArgs,
   optArgs *ServerShowOptionalArgs, // can be nil
 ) (*ServerShowResult, error) {
@@ -48112,7 +48437,7 @@ func (c *Client) ServerShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -48225,6 +48550,7 @@ func (t *ServerShowResult) String() string {
 Set enabled/hidden state of a server.
 */
 func (c *Client) ServerState(
+  ctx context.Context,
   reqArgs *ServerStateArgs,
   optArgs *ServerStateOptionalArgs, // can be nil
 ) (*ServerStateResult, error) {
@@ -48241,7 +48567,7 @@ func (c *Client) ServerState(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -48336,6 +48662,7 @@ func (t *ServerStateResult) String() string {
 Add a new IPA service.
 */
 func (c *Client) ServiceAdd(
+  ctx context.Context,
   reqArgs *ServiceAddArgs,
   optArgs *ServiceAddOptionalArgs, // can be nil
 ) (*ServiceAddResult, error) {
@@ -48352,7 +48679,7 @@ func (c *Client) ServiceAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -48521,6 +48848,7 @@ func (t *ServiceAddResult) String() string {
 Add new certificates to a service
 */
 func (c *Client) ServiceAddCert(
+  ctx context.Context,
   reqArgs *ServiceAddCertArgs,
   optArgs *ServiceAddCertOptionalArgs, // can be nil
 ) (*ServiceAddCertResult, error) {
@@ -48537,7 +48865,7 @@ func (c *Client) ServiceAddCert(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -48650,6 +48978,7 @@ func (t *ServiceAddCertResult) String() string {
 Add hosts that can manage this service.
 */
 func (c *Client) ServiceAddHost(
+  ctx context.Context,
   reqArgs *ServiceAddHostArgs,
   optArgs *ServiceAddHostOptionalArgs, // can be nil
 ) (*ServiceAddHostResult, error) {
@@ -48666,7 +48995,7 @@ func (c *Client) ServiceAddHost(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -48779,6 +49108,7 @@ func (t *ServiceAddHostResult) String() string {
 Add new principal alias to a service
 */
 func (c *Client) ServiceAddPrincipal(
+  ctx context.Context,
   reqArgs *ServiceAddPrincipalArgs,
   optArgs *ServiceAddPrincipalOptionalArgs, // can be nil
 ) (*ServiceAddPrincipalResult, error) {
@@ -48795,7 +49125,7 @@ func (c *Client) ServiceAddPrincipal(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -48908,6 +49238,7 @@ func (t *ServiceAddPrincipalResult) String() string {
 Add a new SMB service.
 */
 func (c *Client) ServiceAddSmb(
+  ctx context.Context,
   ipantflatname string, // 
   reqArgs *ServiceAddSmbArgs,
   optArgs *ServiceAddSmbOptionalArgs, // can be nil
@@ -48925,7 +49256,7 @@ func (c *Client) ServiceAddSmb(
     Params: []interface{}{
       []interface{}{ipantflatname, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -49064,6 +49395,7 @@ func (t *ServiceAddSmbResult) String() string {
 Allow users, groups, hosts or host groups to create a keytab of this service.
 */
 func (c *Client) ServiceAllowCreateKeytab(
+  ctx context.Context,
   reqArgs *ServiceAllowCreateKeytabArgs,
   optArgs *ServiceAllowCreateKeytabOptionalArgs, // can be nil
 ) (*ServiceAllowCreateKeytabResult, error) {
@@ -49080,7 +49412,7 @@ func (c *Client) ServiceAllowCreateKeytab(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -49211,6 +49543,7 @@ func (t *ServiceAllowCreateKeytabResult) String() string {
 Allow users, groups, hosts or host groups to retrieve a keytab of this service.
 */
 func (c *Client) ServiceAllowRetrieveKeytab(
+  ctx context.Context,
   reqArgs *ServiceAllowRetrieveKeytabArgs,
   optArgs *ServiceAllowRetrieveKeytabOptionalArgs, // can be nil
 ) (*ServiceAllowRetrieveKeytabResult, error) {
@@ -49227,7 +49560,7 @@ func (c *Client) ServiceAllowRetrieveKeytab(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -49358,6 +49691,7 @@ func (t *ServiceAllowRetrieveKeytabResult) String() string {
 Delete an IPA service.
 */
 func (c *Client) ServiceDel(
+  ctx context.Context,
   reqArgs *ServiceDelArgs,
   optArgs *ServiceDelOptionalArgs, // can be nil
 ) (*ServiceDelResult, error) {
@@ -49374,7 +49708,7 @@ func (c *Client) ServiceDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -49469,6 +49803,7 @@ func (t *ServiceDelResult) String() string {
 Disable the Kerberos key and SSL certificate of a service.
 */
 func (c *Client) ServiceDisable(
+  ctx context.Context,
   reqArgs *ServiceDisableArgs,
   optArgs *ServiceDisableOptionalArgs, // can be nil
 ) (*ServiceDisableResult, error) {
@@ -49485,7 +49820,7 @@ func (c *Client) ServiceDisable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -49574,6 +49909,7 @@ func (t *ServiceDisableResult) String() string {
 Disallow users, groups, hosts or host groups to create a keytab of this service.
 */
 func (c *Client) ServiceDisallowCreateKeytab(
+  ctx context.Context,
   reqArgs *ServiceDisallowCreateKeytabArgs,
   optArgs *ServiceDisallowCreateKeytabOptionalArgs, // can be nil
 ) (*ServiceDisallowCreateKeytabResult, error) {
@@ -49590,7 +49926,7 @@ func (c *Client) ServiceDisallowCreateKeytab(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -49721,6 +50057,7 @@ func (t *ServiceDisallowCreateKeytabResult) String() string {
 Disallow users, groups, hosts or host groups to retrieve a keytab of this service.
 */
 func (c *Client) ServiceDisallowRetrieveKeytab(
+  ctx context.Context,
   reqArgs *ServiceDisallowRetrieveKeytabArgs,
   optArgs *ServiceDisallowRetrieveKeytabOptionalArgs, // can be nil
 ) (*ServiceDisallowRetrieveKeytabResult, error) {
@@ -49737,7 +50074,7 @@ func (c *Client) ServiceDisallowRetrieveKeytab(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -49868,6 +50205,7 @@ func (t *ServiceDisallowRetrieveKeytabResult) String() string {
 Search for IPA services.
 */
 func (c *Client) ServiceFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *ServiceFindArgs,
   optArgs *ServiceFindOptionalArgs, // can be nil
@@ -49885,7 +50223,7 @@ func (c *Client) ServiceFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -50048,6 +50386,7 @@ func (t *ServiceFindResult) String() string {
 Modify an existing IPA service.
 */
 func (c *Client) ServiceMod(
+  ctx context.Context,
   reqArgs *ServiceModArgs,
   optArgs *ServiceModOptionalArgs, // can be nil
 ) (*ServiceModResult, error) {
@@ -50064,7 +50403,7 @@ func (c *Client) ServiceMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -50240,6 +50579,7 @@ func (t *ServiceModResult) String() string {
 Remove certificates from a service
 */
 func (c *Client) ServiceRemoveCert(
+  ctx context.Context,
   reqArgs *ServiceRemoveCertArgs,
   optArgs *ServiceRemoveCertOptionalArgs, // can be nil
 ) (*ServiceRemoveCertResult, error) {
@@ -50256,7 +50596,7 @@ func (c *Client) ServiceRemoveCert(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -50369,6 +50709,7 @@ func (t *ServiceRemoveCertResult) String() string {
 Remove hosts that can manage this service.
 */
 func (c *Client) ServiceRemoveHost(
+  ctx context.Context,
   reqArgs *ServiceRemoveHostArgs,
   optArgs *ServiceRemoveHostOptionalArgs, // can be nil
 ) (*ServiceRemoveHostResult, error) {
@@ -50385,7 +50726,7 @@ func (c *Client) ServiceRemoveHost(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -50498,6 +50839,7 @@ func (t *ServiceRemoveHostResult) String() string {
 Remove principal alias from a service
 */
 func (c *Client) ServiceRemovePrincipal(
+  ctx context.Context,
   reqArgs *ServiceRemovePrincipalArgs,
   optArgs *ServiceRemovePrincipalOptionalArgs, // can be nil
 ) (*ServiceRemovePrincipalResult, error) {
@@ -50514,7 +50856,7 @@ func (c *Client) ServiceRemovePrincipal(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -50627,6 +50969,7 @@ func (t *ServiceRemovePrincipalResult) String() string {
 Display information about an IPA service.
 */
 func (c *Client) ServiceShow(
+  ctx context.Context,
   reqArgs *ServiceShowArgs,
   optArgs *ServiceShowOptionalArgs, // can be nil
 ) (*ServiceShowResult, error) {
@@ -50643,7 +50986,7 @@ func (c *Client) ServiceShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -50762,6 +51105,7 @@ func (t *ServiceShowResult) String() string {
 Create a new service delegation rule.
 */
 func (c *Client) ServicedelegationruleAdd(
+  ctx context.Context,
   reqArgs *ServicedelegationruleAddArgs,
   optArgs *ServicedelegationruleAddOptionalArgs, // can be nil
 ) (*ServicedelegationruleAddResult, error) {
@@ -50778,7 +51122,7 @@ func (c *Client) ServicedelegationruleAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -50899,6 +51243,7 @@ func (t *ServicedelegationruleAddResult) String() string {
 Add member to a named service delegation rule.
 */
 func (c *Client) ServicedelegationruleAddMember(
+  ctx context.Context,
   reqArgs *ServicedelegationruleAddMemberArgs,
   optArgs *ServicedelegationruleAddMemberOptionalArgs, // can be nil
 ) (*ServicedelegationruleAddMemberResult, error) {
@@ -50915,7 +51260,7 @@ func (c *Client) ServicedelegationruleAddMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -51028,6 +51373,7 @@ func (t *ServicedelegationruleAddMemberResult) String() string {
 Add target to a named service delegation rule.
 */
 func (c *Client) ServicedelegationruleAddTarget(
+  ctx context.Context,
   reqArgs *ServicedelegationruleAddTargetArgs,
   optArgs *ServicedelegationruleAddTargetOptionalArgs, // can be nil
 ) (*ServicedelegationruleAddTargetResult, error) {
@@ -51044,7 +51390,7 @@ func (c *Client) ServicedelegationruleAddTarget(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -51157,6 +51503,7 @@ func (t *ServicedelegationruleAddTargetResult) String() string {
 Delete service delegation.
 */
 func (c *Client) ServicedelegationruleDel(
+  ctx context.Context,
   reqArgs *ServicedelegationruleDelArgs,
   optArgs *ServicedelegationruleDelOptionalArgs, // can be nil
 ) (*ServicedelegationruleDelResult, error) {
@@ -51173,7 +51520,7 @@ func (c *Client) ServicedelegationruleDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -51268,6 +51615,7 @@ func (t *ServicedelegationruleDelResult) String() string {
 Search for service delegations rule.
 */
 func (c *Client) ServicedelegationruleFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *ServicedelegationruleFindArgs,
   optArgs *ServicedelegationruleFindOptionalArgs, // can be nil
@@ -51285,7 +51633,7 @@ func (c *Client) ServicedelegationruleFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -51418,6 +51766,7 @@ func (t *ServicedelegationruleFindResult) String() string {
 Remove member from a named service delegation rule.
 */
 func (c *Client) ServicedelegationruleRemoveMember(
+  ctx context.Context,
   reqArgs *ServicedelegationruleRemoveMemberArgs,
   optArgs *ServicedelegationruleRemoveMemberOptionalArgs, // can be nil
 ) (*ServicedelegationruleRemoveMemberResult, error) {
@@ -51434,7 +51783,7 @@ func (c *Client) ServicedelegationruleRemoveMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -51547,6 +51896,7 @@ func (t *ServicedelegationruleRemoveMemberResult) String() string {
 Remove target from a named service delegation rule.
 */
 func (c *Client) ServicedelegationruleRemoveTarget(
+  ctx context.Context,
   reqArgs *ServicedelegationruleRemoveTargetArgs,
   optArgs *ServicedelegationruleRemoveTargetOptionalArgs, // can be nil
 ) (*ServicedelegationruleRemoveTargetResult, error) {
@@ -51563,7 +51913,7 @@ func (c *Client) ServicedelegationruleRemoveTarget(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -51676,6 +52026,7 @@ func (t *ServicedelegationruleRemoveTargetResult) String() string {
 Display information about a named service delegation rule.
 */
 func (c *Client) ServicedelegationruleShow(
+  ctx context.Context,
   reqArgs *ServicedelegationruleShowArgs,
   optArgs *ServicedelegationruleShowOptionalArgs, // can be nil
 ) (*ServicedelegationruleShowResult, error) {
@@ -51692,7 +52043,7 @@ func (c *Client) ServicedelegationruleShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -51805,6 +52156,7 @@ func (t *ServicedelegationruleShowResult) String() string {
 Create a new service delegation target.
 */
 func (c *Client) ServicedelegationtargetAdd(
+  ctx context.Context,
   reqArgs *ServicedelegationtargetAddArgs,
   optArgs *ServicedelegationtargetAddOptionalArgs, // can be nil
 ) (*ServicedelegationtargetAddResult, error) {
@@ -51821,7 +52173,7 @@ func (c *Client) ServicedelegationtargetAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -51936,6 +52288,7 @@ func (t *ServicedelegationtargetAddResult) String() string {
 Add member to a named service delegation target.
 */
 func (c *Client) ServicedelegationtargetAddMember(
+  ctx context.Context,
   reqArgs *ServicedelegationtargetAddMemberArgs,
   optArgs *ServicedelegationtargetAddMemberOptionalArgs, // can be nil
 ) (*ServicedelegationtargetAddMemberResult, error) {
@@ -51952,7 +52305,7 @@ func (c *Client) ServicedelegationtargetAddMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -52059,6 +52412,7 @@ func (t *ServicedelegationtargetAddMemberResult) String() string {
 Delete service delegation target.
 */
 func (c *Client) ServicedelegationtargetDel(
+  ctx context.Context,
   reqArgs *ServicedelegationtargetDelArgs,
   optArgs *ServicedelegationtargetDelOptionalArgs, // can be nil
 ) (*ServicedelegationtargetDelResult, error) {
@@ -52075,7 +52429,7 @@ func (c *Client) ServicedelegationtargetDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -52170,6 +52524,7 @@ func (t *ServicedelegationtargetDelResult) String() string {
 Search for service delegation target.
 */
 func (c *Client) ServicedelegationtargetFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *ServicedelegationtargetFindArgs,
   optArgs *ServicedelegationtargetFindOptionalArgs, // can be nil
@@ -52187,7 +52542,7 @@ func (c *Client) ServicedelegationtargetFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -52314,6 +52669,7 @@ func (t *ServicedelegationtargetFindResult) String() string {
 Remove member from a named service delegation target.
 */
 func (c *Client) ServicedelegationtargetRemoveMember(
+  ctx context.Context,
   reqArgs *ServicedelegationtargetRemoveMemberArgs,
   optArgs *ServicedelegationtargetRemoveMemberOptionalArgs, // can be nil
 ) (*ServicedelegationtargetRemoveMemberResult, error) {
@@ -52330,7 +52686,7 @@ func (c *Client) ServicedelegationtargetRemoveMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -52437,6 +52793,7 @@ func (t *ServicedelegationtargetRemoveMemberResult) String() string {
 Display information about a named service delegation target.
 */
 func (c *Client) ServicedelegationtargetShow(
+  ctx context.Context,
   reqArgs *ServicedelegationtargetShowArgs,
   optArgs *ServicedelegationtargetShowOptionalArgs, // can be nil
 ) (*ServicedelegationtargetShowResult, error) {
@@ -52453,7 +52810,7 @@ func (c *Client) ServicedelegationtargetShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -52560,6 +52917,7 @@ func (t *ServicedelegationtargetShowResult) String() string {
 RPC command used to log the current user out of their session.
 */
 func (c *Client) SessionLogout(
+  ctx context.Context,
   reqArgs *SessionLogoutArgs,
   optArgs *SessionLogoutOptionalArgs, // can be nil
 ) (*SessionLogoutResult, error) {
@@ -52576,7 +52934,7 @@ func (c *Client) SessionLogout(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -52643,6 +53001,7 @@ func (t *SessionLogoutResult) String() string {
 Determine whether ipa-adtrust-install has been run with sidgen task
 */
 func (c *Client) SidgenWasRun(
+  ctx context.Context,
   reqArgs *SidgenWasRunArgs,
   optArgs *SidgenWasRunOptionalArgs, // can be nil
 ) (*SidgenWasRunResult, error) {
@@ -52659,7 +53018,7 @@ func (c *Client) SidgenWasRun(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -52726,6 +53085,7 @@ func (t *SidgenWasRunResult) String() string {
 Activate a stage user.
 */
 func (c *Client) StageuserActivate(
+  ctx context.Context,
   reqArgs *StageuserActivateArgs,
   optArgs *StageuserActivateOptionalArgs, // can be nil
 ) (*StageuserActivateResult, error) {
@@ -52742,7 +53102,7 @@ func (c *Client) StageuserActivate(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -52849,6 +53209,7 @@ func (t *StageuserActivateResult) String() string {
 Add a new stage user.
 */
 func (c *Client) StageuserAdd(
+  ctx context.Context,
   reqArgs *StageuserAddArgs,
   optArgs *StageuserAddOptionalArgs, // can be nil
 ) (*StageuserAddResult, error) {
@@ -52865,7 +53226,7 @@ func (c *Client) StageuserAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -53232,6 +53593,7 @@ func (t *StageuserAddResult) String() string {
 Add one or more certificates to the stageuser entry
 */
 func (c *Client) StageuserAddCert(
+  ctx context.Context,
   reqArgs *StageuserAddCertArgs,
   optArgs *StageuserAddCertOptionalArgs, // can be nil
 ) (*StageuserAddCertResult, error) {
@@ -53248,7 +53610,7 @@ func (c *Client) StageuserAddCert(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -53361,6 +53723,7 @@ func (t *StageuserAddCertResult) String() string {
 Add one or more certificate mappings to the stage user entry.
 */
 func (c *Client) StageuserAddCertmapdata(
+  ctx context.Context,
   ipacertmapdata string, // Certificate mapping data
   reqArgs *StageuserAddCertmapdataArgs,
   optArgs *StageuserAddCertmapdataOptionalArgs, // can be nil
@@ -53378,7 +53741,7 @@ func (c *Client) StageuserAddCertmapdata(
     Params: []interface{}{
       []interface{}{ipacertmapdata, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -53503,6 +53866,7 @@ func (t *StageuserAddCertmapdataResult) String() string {
 Add a manager to the stage user entry
 */
 func (c *Client) StageuserAddManager(
+  ctx context.Context,
   reqArgs *StageuserAddManagerArgs,
   optArgs *StageuserAddManagerOptionalArgs, // can be nil
 ) (*StageuserAddManagerResult, error) {
@@ -53519,7 +53883,7 @@ func (c *Client) StageuserAddManager(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -53632,6 +53996,7 @@ func (t *StageuserAddManagerResult) String() string {
 Add new principal alias to the stageuser entry
 */
 func (c *Client) StageuserAddPrincipal(
+  ctx context.Context,
   reqArgs *StageuserAddPrincipalArgs,
   optArgs *StageuserAddPrincipalOptionalArgs, // can be nil
 ) (*StageuserAddPrincipalResult, error) {
@@ -53648,7 +54013,7 @@ func (c *Client) StageuserAddPrincipal(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -53761,6 +54126,7 @@ func (t *StageuserAddPrincipalResult) String() string {
 Delete a stage user.
 */
 func (c *Client) StageuserDel(
+  ctx context.Context,
   reqArgs *StageuserDelArgs,
   optArgs *StageuserDelOptionalArgs, // can be nil
 ) (*StageuserDelResult, error) {
@@ -53777,7 +54143,7 @@ func (c *Client) StageuserDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -53872,6 +54238,7 @@ func (t *StageuserDelResult) String() string {
 Search for stage users.
 */
 func (c *Client) StageuserFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *StageuserFindArgs,
   optArgs *StageuserFindOptionalArgs, // can be nil
@@ -53889,7 +54256,7 @@ func (c *Client) StageuserFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -54346,6 +54713,7 @@ func (t *StageuserFindResult) String() string {
 Modify a stage user.
 */
 func (c *Client) StageuserMod(
+  ctx context.Context,
   reqArgs *StageuserModArgs,
   optArgs *StageuserModOptionalArgs, // can be nil
 ) (*StageuserModResult, error) {
@@ -54362,7 +54730,7 @@ func (c *Client) StageuserMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -54766,6 +55134,7 @@ func (t *StageuserModResult) String() string {
 Remove one or more certificates to the stageuser entry
 */
 func (c *Client) StageuserRemoveCert(
+  ctx context.Context,
   reqArgs *StageuserRemoveCertArgs,
   optArgs *StageuserRemoveCertOptionalArgs, // can be nil
 ) (*StageuserRemoveCertResult, error) {
@@ -54782,7 +55151,7 @@ func (c *Client) StageuserRemoveCert(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -54895,6 +55264,7 @@ func (t *StageuserRemoveCertResult) String() string {
 Remove one or more certificate mappings from the stage user entry.
 */
 func (c *Client) StageuserRemoveCertmapdata(
+  ctx context.Context,
   ipacertmapdata string, // Certificate mapping data
   reqArgs *StageuserRemoveCertmapdataArgs,
   optArgs *StageuserRemoveCertmapdataOptionalArgs, // can be nil
@@ -54912,7 +55282,7 @@ func (c *Client) StageuserRemoveCertmapdata(
     Params: []interface{}{
       []interface{}{ipacertmapdata, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -55037,6 +55407,7 @@ func (t *StageuserRemoveCertmapdataResult) String() string {
 Remove a manager to the stage user entry
 */
 func (c *Client) StageuserRemoveManager(
+  ctx context.Context,
   reqArgs *StageuserRemoveManagerArgs,
   optArgs *StageuserRemoveManagerOptionalArgs, // can be nil
 ) (*StageuserRemoveManagerResult, error) {
@@ -55053,7 +55424,7 @@ func (c *Client) StageuserRemoveManager(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -55166,6 +55537,7 @@ func (t *StageuserRemoveManagerResult) String() string {
 Remove principal alias from the stageuser entry
 */
 func (c *Client) StageuserRemovePrincipal(
+  ctx context.Context,
   reqArgs *StageuserRemovePrincipalArgs,
   optArgs *StageuserRemovePrincipalOptionalArgs, // can be nil
 ) (*StageuserRemovePrincipalResult, error) {
@@ -55182,7 +55554,7 @@ func (c *Client) StageuserRemovePrincipal(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -55295,6 +55667,7 @@ func (t *StageuserRemovePrincipalResult) String() string {
 Display information about a stage user.
 */
 func (c *Client) StageuserShow(
+  ctx context.Context,
   reqArgs *StageuserShowArgs,
   optArgs *StageuserShowOptionalArgs, // can be nil
 ) (*StageuserShowResult, error) {
@@ -55311,7 +55684,7 @@ func (c *Client) StageuserShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -55424,6 +55797,7 @@ func (t *StageuserShowResult) String() string {
 Add a new subordinate id.
 */
 func (c *Client) SubidAdd(
+  ctx context.Context,
   ipauniqueid string, // 
   reqArgs *SubidAddArgs,
   optArgs *SubidAddOptionalArgs, // can be nil
@@ -55441,7 +55815,7 @@ func (c *Client) SubidAdd(
     Params: []interface{}{
       []interface{}{ipauniqueid, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -55568,6 +55942,7 @@ func (t *SubidAddResult) String() string {
 Delete a subordinate id.
 */
 func (c *Client) SubidDel(
+  ctx context.Context,
   reqArgs *SubidDelArgs,
   optArgs *SubidDelOptionalArgs, // can be nil
 ) (*SubidDelResult, error) {
@@ -55584,7 +55959,7 @@ func (c *Client) SubidDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -55679,6 +56054,7 @@ func (t *SubidDelResult) String() string {
 Search for subordinate id.
 */
 func (c *Client) SubidFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *SubidFindArgs,
   optArgs *SubidFindOptionalArgs, // can be nil
@@ -55696,7 +56072,7 @@ func (c *Client) SubidFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -55847,6 +56223,7 @@ func (t *SubidFindResult) String() string {
 Generate and auto-assign subuid and subgid range to user entry
 */
 func (c *Client) SubidGenerate(
+  ctx context.Context,
   reqArgs *SubidGenerateArgs,
   optArgs *SubidGenerateOptionalArgs, // can be nil
 ) (*SubidGenerateResult, error) {
@@ -55863,7 +56240,7 @@ func (c *Client) SubidGenerate(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -55964,6 +56341,7 @@ func (t *SubidGenerateResult) String() string {
 Match users by any subordinate uid in their range
 */
 func (c *Client) SubidMatch(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *SubidMatchArgs,
   optArgs *SubidMatchOptionalArgs, // can be nil
@@ -55981,7 +56359,7 @@ func (c *Client) SubidMatch(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -56108,6 +56486,7 @@ func (t *SubidMatchResult) String() string {
 Modify a subordinate id.
 */
 func (c *Client) SubidMod(
+  ctx context.Context,
   reqArgs *SubidModArgs,
   optArgs *SubidModOptionalArgs, // can be nil
 ) (*SubidModResult, error) {
@@ -56124,7 +56503,7 @@ func (c *Client) SubidMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -56258,6 +56637,7 @@ func (t *SubidModResult) String() string {
 Display information about a subordinate id.
 */
 func (c *Client) SubidShow(
+  ctx context.Context,
   reqArgs *SubidShowArgs,
   optArgs *SubidShowOptionalArgs, // can be nil
 ) (*SubidShowResult, error) {
@@ -56274,7 +56654,7 @@ func (c *Client) SubidShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -56381,6 +56761,7 @@ func (t *SubidShowResult) String() string {
 Subordinate id statistics
 */
 func (c *Client) SubidStats(
+  ctx context.Context,
   reqArgs *SubidStatsArgs,
   optArgs *SubidStatsOptionalArgs, // can be nil
 ) (*SubidStatsResult, error) {
@@ -56397,7 +56778,7 @@ func (c *Client) SubidStats(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -56484,6 +56865,7 @@ func (t *SubidStatsResult) String() string {
 Create new Sudo Command.
 */
 func (c *Client) SudocmdAdd(
+  ctx context.Context,
   reqArgs *SudocmdAddArgs,
   optArgs *SudocmdAddOptionalArgs, // can be nil
 ) (*SudocmdAddResult, error) {
@@ -56500,7 +56882,7 @@ func (c *Client) SudocmdAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -56627,6 +57009,7 @@ func (t *SudocmdAddResult) String() string {
 Delete Sudo Command.
 */
 func (c *Client) SudocmdDel(
+  ctx context.Context,
   reqArgs *SudocmdDelArgs,
   optArgs *SudocmdDelOptionalArgs, // can be nil
 ) (*SudocmdDelResult, error) {
@@ -56643,7 +57026,7 @@ func (c *Client) SudocmdDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -56738,6 +57121,7 @@ func (t *SudocmdDelResult) String() string {
 Search for Sudo Commands.
 */
 func (c *Client) SudocmdFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *SudocmdFindArgs,
   optArgs *SudocmdFindOptionalArgs, // can be nil
@@ -56755,7 +57139,7 @@ func (c *Client) SudocmdFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -56894,6 +57278,7 @@ func (t *SudocmdFindResult) String() string {
 Modify Sudo Command.
 */
 func (c *Client) SudocmdMod(
+  ctx context.Context,
   reqArgs *SudocmdModArgs,
   optArgs *SudocmdModOptionalArgs, // can be nil
 ) (*SudocmdModResult, error) {
@@ -56910,7 +57295,7 @@ func (c *Client) SudocmdMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -57050,6 +57435,7 @@ func (t *SudocmdModResult) String() string {
 Display Sudo Command.
 */
 func (c *Client) SudocmdShow(
+  ctx context.Context,
   reqArgs *SudocmdShowArgs,
   optArgs *SudocmdShowOptionalArgs, // can be nil
 ) (*SudocmdShowResult, error) {
@@ -57066,7 +57452,7 @@ func (c *Client) SudocmdShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -57179,6 +57565,7 @@ func (t *SudocmdShowResult) String() string {
 Create new Sudo Command Group.
 */
 func (c *Client) SudocmdgroupAdd(
+  ctx context.Context,
   reqArgs *SudocmdgroupAddArgs,
   optArgs *SudocmdgroupAddOptionalArgs, // can be nil
 ) (*SudocmdgroupAddResult, error) {
@@ -57195,7 +57582,7 @@ func (c *Client) SudocmdgroupAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -57322,6 +57709,7 @@ func (t *SudocmdgroupAddResult) String() string {
 Add members to Sudo Command Group.
 */
 func (c *Client) SudocmdgroupAddMember(
+  ctx context.Context,
   reqArgs *SudocmdgroupAddMemberArgs,
   optArgs *SudocmdgroupAddMemberOptionalArgs, // can be nil
 ) (*SudocmdgroupAddMemberResult, error) {
@@ -57338,7 +57726,7 @@ func (c *Client) SudocmdgroupAddMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -57451,6 +57839,7 @@ func (t *SudocmdgroupAddMemberResult) String() string {
 Delete Sudo Command Group.
 */
 func (c *Client) SudocmdgroupDel(
+  ctx context.Context,
   reqArgs *SudocmdgroupDelArgs,
   optArgs *SudocmdgroupDelOptionalArgs, // can be nil
 ) (*SudocmdgroupDelResult, error) {
@@ -57467,7 +57856,7 @@ func (c *Client) SudocmdgroupDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -57562,6 +57951,7 @@ func (t *SudocmdgroupDelResult) String() string {
 Search for Sudo Command Groups.
 */
 func (c *Client) SudocmdgroupFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *SudocmdgroupFindArgs,
   optArgs *SudocmdgroupFindOptionalArgs, // can be nil
@@ -57579,7 +57969,7 @@ func (c *Client) SudocmdgroupFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -57718,6 +58108,7 @@ func (t *SudocmdgroupFindResult) String() string {
 Modify Sudo Command Group.
 */
 func (c *Client) SudocmdgroupMod(
+  ctx context.Context,
   reqArgs *SudocmdgroupModArgs,
   optArgs *SudocmdgroupModOptionalArgs, // can be nil
 ) (*SudocmdgroupModResult, error) {
@@ -57734,7 +58125,7 @@ func (c *Client) SudocmdgroupMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -57874,6 +58265,7 @@ func (t *SudocmdgroupModResult) String() string {
 Remove members from Sudo Command Group.
 */
 func (c *Client) SudocmdgroupRemoveMember(
+  ctx context.Context,
   reqArgs *SudocmdgroupRemoveMemberArgs,
   optArgs *SudocmdgroupRemoveMemberOptionalArgs, // can be nil
 ) (*SudocmdgroupRemoveMemberResult, error) {
@@ -57890,7 +58282,7 @@ func (c *Client) SudocmdgroupRemoveMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -58003,6 +58395,7 @@ func (t *SudocmdgroupRemoveMemberResult) String() string {
 Display Sudo Command Group.
 */
 func (c *Client) SudocmdgroupShow(
+  ctx context.Context,
   reqArgs *SudocmdgroupShowArgs,
   optArgs *SudocmdgroupShowOptionalArgs, // can be nil
 ) (*SudocmdgroupShowResult, error) {
@@ -58019,7 +58412,7 @@ func (c *Client) SudocmdgroupShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -58132,6 +58525,7 @@ func (t *SudocmdgroupShowResult) String() string {
 Create new Sudo Rule.
 */
 func (c *Client) SudoruleAdd(
+  ctx context.Context,
   reqArgs *SudoruleAddArgs,
   optArgs *SudoruleAddOptionalArgs, // can be nil
 ) (*SudoruleAddResult, error) {
@@ -58148,7 +58542,7 @@ func (c *Client) SudoruleAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -58341,6 +58735,7 @@ func (t *SudoruleAddResult) String() string {
 Add commands and sudo command groups affected by Sudo Rule.
 */
 func (c *Client) SudoruleAddAllowCommand(
+  ctx context.Context,
   reqArgs *SudoruleAddAllowCommandArgs,
   optArgs *SudoruleAddAllowCommandOptionalArgs, // can be nil
 ) (*SudoruleAddAllowCommandResult, error) {
@@ -58357,7 +58752,7 @@ func (c *Client) SudoruleAddAllowCommand(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -58476,6 +58871,7 @@ func (t *SudoruleAddAllowCommandResult) String() string {
 Add commands and sudo command groups affected by Sudo Rule.
 */
 func (c *Client) SudoruleAddDenyCommand(
+  ctx context.Context,
   reqArgs *SudoruleAddDenyCommandArgs,
   optArgs *SudoruleAddDenyCommandOptionalArgs, // can be nil
 ) (*SudoruleAddDenyCommandResult, error) {
@@ -58492,7 +58888,7 @@ func (c *Client) SudoruleAddDenyCommand(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -58611,6 +59007,7 @@ func (t *SudoruleAddDenyCommandResult) String() string {
 Add hosts and hostgroups affected by Sudo Rule.
 */
 func (c *Client) SudoruleAddHost(
+  ctx context.Context,
   reqArgs *SudoruleAddHostArgs,
   optArgs *SudoruleAddHostOptionalArgs, // can be nil
 ) (*SudoruleAddHostResult, error) {
@@ -58627,7 +59024,7 @@ func (c *Client) SudoruleAddHost(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -58752,6 +59149,7 @@ func (t *SudoruleAddHostResult) String() string {
 Add an option to the Sudo Rule.
 */
 func (c *Client) SudoruleAddOption(
+  ctx context.Context,
   reqArgs *SudoruleAddOptionArgs,
   optArgs *SudoruleAddOptionOptionalArgs, // can be nil
 ) (*SudoruleAddOptionResult, error) {
@@ -58768,7 +59166,7 @@ func (c *Client) SudoruleAddOption(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -58881,6 +59279,7 @@ func (t *SudoruleAddOptionResult) String() string {
 Add group for Sudo to execute as.
 */
 func (c *Client) SudoruleAddRunasgroup(
+  ctx context.Context,
   reqArgs *SudoruleAddRunasgroupArgs,
   optArgs *SudoruleAddRunasgroupOptionalArgs, // can be nil
 ) (*SudoruleAddRunasgroupResult, error) {
@@ -58897,7 +59296,7 @@ func (c *Client) SudoruleAddRunasgroup(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -59010,6 +59409,7 @@ func (t *SudoruleAddRunasgroupResult) String() string {
 Add users and groups for Sudo to execute as.
 */
 func (c *Client) SudoruleAddRunasuser(
+  ctx context.Context,
   reqArgs *SudoruleAddRunasuserArgs,
   optArgs *SudoruleAddRunasuserOptionalArgs, // can be nil
 ) (*SudoruleAddRunasuserResult, error) {
@@ -59026,7 +59426,7 @@ func (c *Client) SudoruleAddRunasuser(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -59145,6 +59545,7 @@ func (t *SudoruleAddRunasuserResult) String() string {
 Add users and groups affected by Sudo Rule.
 */
 func (c *Client) SudoruleAddUser(
+  ctx context.Context,
   reqArgs *SudoruleAddUserArgs,
   optArgs *SudoruleAddUserOptionalArgs, // can be nil
 ) (*SudoruleAddUserResult, error) {
@@ -59161,7 +59562,7 @@ func (c *Client) SudoruleAddUser(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -59280,6 +59681,7 @@ func (t *SudoruleAddUserResult) String() string {
 Delete Sudo Rule.
 */
 func (c *Client) SudoruleDel(
+  ctx context.Context,
   reqArgs *SudoruleDelArgs,
   optArgs *SudoruleDelOptionalArgs, // can be nil
 ) (*SudoruleDelResult, error) {
@@ -59296,7 +59698,7 @@ func (c *Client) SudoruleDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -59391,6 +59793,7 @@ func (t *SudoruleDelResult) String() string {
 Disable a Sudo Rule.
 */
 func (c *Client) SudoruleDisable(
+  ctx context.Context,
   reqArgs *SudoruleDisableArgs,
   optArgs *SudoruleDisableOptionalArgs, // can be nil
 ) (*SudoruleDisableResult, error) {
@@ -59407,7 +59810,7 @@ func (c *Client) SudoruleDisable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -59480,6 +59883,7 @@ func (t *SudoruleDisableResult) String() string {
 Enable a Sudo Rule.
 */
 func (c *Client) SudoruleEnable(
+  ctx context.Context,
   reqArgs *SudoruleEnableArgs,
   optArgs *SudoruleEnableOptionalArgs, // can be nil
 ) (*SudoruleEnableResult, error) {
@@ -59496,7 +59900,7 @@ func (c *Client) SudoruleEnable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -59569,6 +59973,7 @@ func (t *SudoruleEnableResult) String() string {
 Search for Sudo Rule.
 */
 func (c *Client) SudoruleFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *SudoruleFindArgs,
   optArgs *SudoruleFindOptionalArgs, // can be nil
@@ -59586,7 +59991,7 @@ func (c *Client) SudoruleFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -59791,6 +60196,7 @@ func (t *SudoruleFindResult) String() string {
 Modify Sudo Rule.
 */
 func (c *Client) SudoruleMod(
+  ctx context.Context,
   reqArgs *SudoruleModArgs,
   optArgs *SudoruleModOptionalArgs, // can be nil
 ) (*SudoruleModResult, error) {
@@ -59807,7 +60213,7 @@ func (c *Client) SudoruleMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -60019,6 +60425,7 @@ func (t *SudoruleModResult) String() string {
 Remove commands and sudo command groups affected by Sudo Rule.
 */
 func (c *Client) SudoruleRemoveAllowCommand(
+  ctx context.Context,
   reqArgs *SudoruleRemoveAllowCommandArgs,
   optArgs *SudoruleRemoveAllowCommandOptionalArgs, // can be nil
 ) (*SudoruleRemoveAllowCommandResult, error) {
@@ -60035,7 +60442,7 @@ func (c *Client) SudoruleRemoveAllowCommand(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -60154,6 +60561,7 @@ func (t *SudoruleRemoveAllowCommandResult) String() string {
 Remove commands and sudo command groups affected by Sudo Rule.
 */
 func (c *Client) SudoruleRemoveDenyCommand(
+  ctx context.Context,
   reqArgs *SudoruleRemoveDenyCommandArgs,
   optArgs *SudoruleRemoveDenyCommandOptionalArgs, // can be nil
 ) (*SudoruleRemoveDenyCommandResult, error) {
@@ -60170,7 +60578,7 @@ func (c *Client) SudoruleRemoveDenyCommand(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -60289,6 +60697,7 @@ func (t *SudoruleRemoveDenyCommandResult) String() string {
 Remove hosts and hostgroups affected by Sudo Rule.
 */
 func (c *Client) SudoruleRemoveHost(
+  ctx context.Context,
   reqArgs *SudoruleRemoveHostArgs,
   optArgs *SudoruleRemoveHostOptionalArgs, // can be nil
 ) (*SudoruleRemoveHostResult, error) {
@@ -60305,7 +60714,7 @@ func (c *Client) SudoruleRemoveHost(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -60430,6 +60839,7 @@ func (t *SudoruleRemoveHostResult) String() string {
 Remove an option from Sudo Rule.
 */
 func (c *Client) SudoruleRemoveOption(
+  ctx context.Context,
   reqArgs *SudoruleRemoveOptionArgs,
   optArgs *SudoruleRemoveOptionOptionalArgs, // can be nil
 ) (*SudoruleRemoveOptionResult, error) {
@@ -60446,7 +60856,7 @@ func (c *Client) SudoruleRemoveOption(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -60559,6 +60969,7 @@ func (t *SudoruleRemoveOptionResult) String() string {
 Remove group for Sudo to execute as.
 */
 func (c *Client) SudoruleRemoveRunasgroup(
+  ctx context.Context,
   reqArgs *SudoruleRemoveRunasgroupArgs,
   optArgs *SudoruleRemoveRunasgroupOptionalArgs, // can be nil
 ) (*SudoruleRemoveRunasgroupResult, error) {
@@ -60575,7 +60986,7 @@ func (c *Client) SudoruleRemoveRunasgroup(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -60688,6 +61099,7 @@ func (t *SudoruleRemoveRunasgroupResult) String() string {
 Remove users and groups for Sudo to execute as.
 */
 func (c *Client) SudoruleRemoveRunasuser(
+  ctx context.Context,
   reqArgs *SudoruleRemoveRunasuserArgs,
   optArgs *SudoruleRemoveRunasuserOptionalArgs, // can be nil
 ) (*SudoruleRemoveRunasuserResult, error) {
@@ -60704,7 +61116,7 @@ func (c *Client) SudoruleRemoveRunasuser(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -60823,6 +61235,7 @@ func (t *SudoruleRemoveRunasuserResult) String() string {
 Remove users and groups affected by Sudo Rule.
 */
 func (c *Client) SudoruleRemoveUser(
+  ctx context.Context,
   reqArgs *SudoruleRemoveUserArgs,
   optArgs *SudoruleRemoveUserOptionalArgs, // can be nil
 ) (*SudoruleRemoveUserResult, error) {
@@ -60839,7 +61252,7 @@ func (c *Client) SudoruleRemoveUser(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -60958,6 +61371,7 @@ func (t *SudoruleRemoveUserResult) String() string {
 Display Sudo Rule.
 */
 func (c *Client) SudoruleShow(
+  ctx context.Context,
   reqArgs *SudoruleShowArgs,
   optArgs *SudoruleShowOptionalArgs, // can be nil
 ) (*SudoruleShowResult, error) {
@@ -60974,7 +61388,7 @@ func (c *Client) SudoruleShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -61087,6 +61501,7 @@ func (t *SudoruleShowResult) String() string {
 Search for help topics.
 */
 func (c *Client) TopicFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *TopicFindArgs,
   optArgs *TopicFindOptionalArgs, // can be nil
@@ -61104,7 +61519,7 @@ func (c *Client) TopicFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -61213,6 +61628,7 @@ func (t *TopicFindResult) String() string {
 Display information about a help topic.
 */
 func (c *Client) TopicShow(
+  ctx context.Context,
   reqArgs *TopicShowArgs,
   optArgs *TopicShowOptionalArgs, // can be nil
 ) (*TopicShowResult, error) {
@@ -61229,7 +61645,7 @@ func (c *Client) TopicShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -61330,6 +61746,7 @@ func (t *TopicShowResult) String() string {
 Add a new segment.
 */
 func (c *Client) TopologysegmentAdd(
+  ctx context.Context,
   reqArgs *TopologysegmentAddArgs,
   optArgs *TopologysegmentAddOptionalArgs, // can be nil
 ) (*TopologysegmentAddResult, error) {
@@ -61346,7 +61763,7 @@ func (c *Client) TopologysegmentAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -61515,6 +61932,7 @@ func (t *TopologysegmentAddResult) String() string {
 Delete a segment.
 */
 func (c *Client) TopologysegmentDel(
+  ctx context.Context,
   reqArgs *TopologysegmentDelArgs,
   optArgs *TopologysegmentDelOptionalArgs, // can be nil
 ) (*TopologysegmentDelResult, error) {
@@ -61531,7 +61949,7 @@ func (c *Client) TopologysegmentDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -61632,6 +62050,7 @@ func (t *TopologysegmentDelResult) String() string {
 Search for topology segments.
 */
 func (c *Client) TopologysegmentFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *TopologysegmentFindArgs,
   optArgs *TopologysegmentFindOptionalArgs, // can be nil
@@ -61649,7 +62068,7 @@ func (c *Client) TopologysegmentFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -61830,6 +62249,7 @@ func (t *TopologysegmentFindResult) String() string {
 Modify a segment.
 */
 func (c *Client) TopologysegmentMod(
+  ctx context.Context,
   reqArgs *TopologysegmentModArgs,
   optArgs *TopologysegmentModOptionalArgs, // can be nil
 ) (*TopologysegmentModResult, error) {
@@ -61846,7 +62266,7 @@ func (c *Client) TopologysegmentMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -62010,6 +62430,7 @@ func (t *TopologysegmentModResult) String() string {
 Request a full re-initialization of the node retrieving data from the other node.
 */
 func (c *Client) TopologysegmentReinitialize(
+  ctx context.Context,
   reqArgs *TopologysegmentReinitializeArgs,
   optArgs *TopologysegmentReinitializeOptionalArgs, // can be nil
 ) (*TopologysegmentReinitializeResult, error) {
@@ -62026,7 +62447,7 @@ func (c *Client) TopologysegmentReinitialize(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -62139,6 +62560,7 @@ func (t *TopologysegmentReinitializeResult) String() string {
 Display a segment.
 */
 func (c *Client) TopologysegmentShow(
+  ctx context.Context,
   reqArgs *TopologysegmentShowArgs,
   optArgs *TopologysegmentShowOptionalArgs, // can be nil
 ) (*TopologysegmentShowResult, error) {
@@ -62155,7 +62577,7 @@ func (c *Client) TopologysegmentShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -62268,6 +62690,7 @@ func (t *TopologysegmentShowResult) String() string {
 Add a new topology suffix to be managed.
 */
 func (c *Client) TopologysuffixAdd(
+  ctx context.Context,
   reqArgs *TopologysuffixAddArgs,
   optArgs *TopologysuffixAddOptionalArgs, // can be nil
 ) (*TopologysuffixAddResult, error) {
@@ -62284,7 +62707,7 @@ func (c *Client) TopologysuffixAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -62405,6 +62828,7 @@ func (t *TopologysuffixAddResult) String() string {
 Delete a topology suffix.
 */
 func (c *Client) TopologysuffixDel(
+  ctx context.Context,
   reqArgs *TopologysuffixDelArgs,
   optArgs *TopologysuffixDelOptionalArgs, // can be nil
 ) (*TopologysuffixDelResult, error) {
@@ -62421,7 +62845,7 @@ func (c *Client) TopologysuffixDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -62516,6 +62940,7 @@ func (t *TopologysuffixDelResult) String() string {
 Search for topology suffixes.
 */
 func (c *Client) TopologysuffixFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *TopologysuffixFindArgs,
   optArgs *TopologysuffixFindOptionalArgs, // can be nil
@@ -62533,7 +62958,7 @@ func (c *Client) TopologysuffixFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -62666,6 +63091,7 @@ func (t *TopologysuffixFindResult) String() string {
 Modify a topology suffix.
 */
 func (c *Client) TopologysuffixMod(
+  ctx context.Context,
   reqArgs *TopologysuffixModArgs,
   optArgs *TopologysuffixModOptionalArgs, // can be nil
 ) (*TopologysuffixModResult, error) {
@@ -62682,7 +63108,7 @@ func (c *Client) TopologysuffixMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -62816,6 +63242,7 @@ func (t *TopologysuffixModResult) String() string {
 Show managed suffix.
 */
 func (c *Client) TopologysuffixShow(
+  ctx context.Context,
   reqArgs *TopologysuffixShowArgs,
   optArgs *TopologysuffixShowOptionalArgs, // can be nil
 ) (*TopologysuffixShowResult, error) {
@@ -62832,7 +63259,7 @@ func (c *Client) TopologysuffixShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -62945,6 +63372,7 @@ Checks done:
      replication agreements
 */
 func (c *Client) TopologysuffixVerify(
+  ctx context.Context,
   reqArgs *TopologysuffixVerifyArgs,
   optArgs *TopologysuffixVerifyOptionalArgs, // can be nil
 ) (*TopologysuffixVerifyResult, error) {
@@ -62961,7 +63389,7 @@ func (c *Client) TopologysuffixVerify(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -63049,6 +63477,7 @@ different range type, you may need to delete first the ID range using
 ipa idrange-del before retrying the command with the desired range type.
 */
 func (c *Client) TrustAdd(
+  ctx context.Context,
   reqArgs *TrustAddArgs,
   optArgs *TrustAddOptionalArgs, // can be nil
 ) (*TrustAddResult, error) {
@@ -63065,7 +63494,7 @@ func (c *Client) TrustAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -63240,6 +63669,7 @@ func (t *TrustAddResult) String() string {
 Delete a trust.
 */
 func (c *Client) TrustDel(
+  ctx context.Context,
   reqArgs *TrustDelArgs,
   optArgs *TrustDelOptionalArgs, // can be nil
 ) (*TrustDelResult, error) {
@@ -63256,7 +63686,7 @@ func (c *Client) TrustDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -63351,6 +63781,7 @@ func (t *TrustDelResult) String() string {
 Configure this server as a trust agent.
 */
 func (c *Client) TrustEnableAgent(
+  ctx context.Context,
   reqArgs *TrustEnableAgentArgs,
   optArgs *TrustEnableAgentOptionalArgs, // can be nil
 ) (*TrustEnableAgentResult, error) {
@@ -63367,7 +63798,7 @@ func (c *Client) TrustEnableAgent(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -63462,6 +63893,7 @@ func (t *TrustEnableAgentResult) String() string {
 Refresh list of the domains associated with the trust
 */
 func (c *Client) TrustFetchDomains(
+  ctx context.Context,
   reqArgs *TrustFetchDomainsArgs,
   optArgs *TrustFetchDomainsOptionalArgs, // can be nil
 ) (*TrustFetchDomainsResult, error) {
@@ -63478,7 +63910,7 @@ func (c *Client) TrustFetchDomains(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -63611,6 +64043,7 @@ func (t *TrustFetchDomainsResult) String() string {
 Search for trusts.
 */
 func (c *Client) TrustFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *TrustFindArgs,
   optArgs *TrustFindOptionalArgs, // can be nil
@@ -63628,7 +64061,7 @@ func (c *Client) TrustFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -63782,6 +64215,7 @@ Modify a trust (for future use).
     available. More specific options will be added in coming releases.
 */
 func (c *Client) TrustMod(
+  ctx context.Context,
   reqArgs *TrustModArgs,
   optArgs *TrustModOptionalArgs, // can be nil
 ) (*TrustModResult, error) {
@@ -63798,7 +64232,7 @@ func (c *Client) TrustMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -63944,6 +64378,7 @@ func (t *TrustModResult) String() string {
 Resolve security identifiers of users and groups in trusted domains
 */
 func (c *Client) TrustResolve(
+  ctx context.Context,
   reqArgs *TrustResolveArgs,
   optArgs *TrustResolveOptionalArgs, // can be nil
 ) (*TrustResolveResult, error) {
@@ -63960,7 +64395,7 @@ func (c *Client) TrustResolve(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -64045,6 +64480,7 @@ func (t *TrustResolveResult) String() string {
 Display information about a trust.
 */
 func (c *Client) TrustShow(
+  ctx context.Context,
   reqArgs *TrustShowArgs,
   optArgs *TrustShowOptionalArgs, // can be nil
 ) (*TrustShowResult, error) {
@@ -64061,7 +64497,7 @@ func (c *Client) TrustShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -64168,6 +64604,7 @@ func (t *TrustShowResult) String() string {
 Modify global trust configuration.
 */
 func (c *Client) TrustconfigMod(
+  ctx context.Context,
   reqArgs *TrustconfigModArgs,
   optArgs *TrustconfigModOptionalArgs, // can be nil
 ) (*TrustconfigModResult, error) {
@@ -64184,7 +64621,7 @@ func (c *Client) TrustconfigMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -64318,6 +64755,7 @@ func (t *TrustconfigModResult) String() string {
 Show global trust configuration.
 */
 func (c *Client) TrustconfigShow(
+  ctx context.Context,
   reqArgs *TrustconfigShowArgs,
   optArgs *TrustconfigShowOptionalArgs, // can be nil
 ) (*TrustconfigShowResult, error) {
@@ -64334,7 +64772,7 @@ func (c *Client) TrustconfigShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -64441,6 +64879,7 @@ func (t *TrustconfigShowResult) String() string {
 Allow access from the trusted domain
 */
 func (c *Client) TrustdomainAdd(
+  ctx context.Context,
   reqArgs *TrustdomainAddArgs,
   optArgs *TrustdomainAddOptionalArgs, // can be nil
 ) (*TrustdomainAddResult, error) {
@@ -64457,7 +64896,7 @@ func (c *Client) TrustdomainAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -64596,6 +65035,7 @@ func (t *TrustdomainAddResult) String() string {
 Remove information about the domain associated with the trust.
 */
 func (c *Client) TrustdomainDel(
+  ctx context.Context,
   reqArgs *TrustdomainDelArgs,
   optArgs *TrustdomainDelOptionalArgs, // can be nil
 ) (*TrustdomainDelResult, error) {
@@ -64612,7 +65052,7 @@ func (c *Client) TrustdomainDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -64713,6 +65153,7 @@ func (t *TrustdomainDelResult) String() string {
 Disable use of IPA resources by the domain of the trust
 */
 func (c *Client) TrustdomainDisable(
+  ctx context.Context,
   reqArgs *TrustdomainDisableArgs,
   optArgs *TrustdomainDisableOptionalArgs, // can be nil
 ) (*TrustdomainDisableResult, error) {
@@ -64729,7 +65170,7 @@ func (c *Client) TrustdomainDisable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -64824,6 +65265,7 @@ func (t *TrustdomainDisableResult) String() string {
 Allow use of IPA resources by the domain of the trust
 */
 func (c *Client) TrustdomainEnable(
+  ctx context.Context,
   reqArgs *TrustdomainEnableArgs,
   optArgs *TrustdomainEnableOptionalArgs, // can be nil
 ) (*TrustdomainEnableResult, error) {
@@ -64840,7 +65282,7 @@ func (c *Client) TrustdomainEnable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -64935,6 +65377,7 @@ func (t *TrustdomainEnableResult) String() string {
 Search domains of the trust
 */
 func (c *Client) TrustdomainFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *TrustdomainFindArgs,
   optArgs *TrustdomainFindOptionalArgs, // can be nil
@@ -64952,7 +65395,7 @@ func (c *Client) TrustdomainFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -65097,6 +65540,7 @@ func (t *TrustdomainFindResult) String() string {
 Modify trustdomain of the trust
 */
 func (c *Client) TrustdomainMod(
+  ctx context.Context,
   reqArgs *TrustdomainModArgs,
   optArgs *TrustdomainModOptionalArgs, // can be nil
 ) (*TrustdomainModResult, error) {
@@ -65113,7 +65557,7 @@ func (c *Client) TrustdomainMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -65265,6 +65709,7 @@ func (t *TrustdomainModResult) String() string {
 Add a new user.
 */
 func (c *Client) UserAdd(
+  ctx context.Context,
   reqArgs *UserAddArgs,
   optArgs *UserAddOptionalArgs, // can be nil
 ) (*UserAddResult, error) {
@@ -65281,7 +65726,7 @@ func (c *Client) UserAdd(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -65654,6 +66099,7 @@ func (t *UserAddResult) String() string {
 Add one or more certificates to the user entry
 */
 func (c *Client) UserAddCert(
+  ctx context.Context,
   reqArgs *UserAddCertArgs,
   optArgs *UserAddCertOptionalArgs, // can be nil
 ) (*UserAddCertResult, error) {
@@ -65670,7 +66116,7 @@ func (c *Client) UserAddCert(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -65783,6 +66229,7 @@ func (t *UserAddCertResult) String() string {
 Add one or more certificate mappings to the user entry.
 */
 func (c *Client) UserAddCertmapdata(
+  ctx context.Context,
   ipacertmapdata string, // Certificate mapping data
   reqArgs *UserAddCertmapdataArgs,
   optArgs *UserAddCertmapdataOptionalArgs, // can be nil
@@ -65800,7 +66247,7 @@ func (c *Client) UserAddCertmapdata(
     Params: []interface{}{
       []interface{}{ipacertmapdata, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -65925,6 +66372,7 @@ func (t *UserAddCertmapdataResult) String() string {
 Add a manager to the user entry
 */
 func (c *Client) UserAddManager(
+  ctx context.Context,
   reqArgs *UserAddManagerArgs,
   optArgs *UserAddManagerOptionalArgs, // can be nil
 ) (*UserAddManagerResult, error) {
@@ -65941,7 +66389,7 @@ func (c *Client) UserAddManager(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -66054,6 +66502,7 @@ func (t *UserAddManagerResult) String() string {
 Add new principal alias to the user entry
 */
 func (c *Client) UserAddPrincipal(
+  ctx context.Context,
   reqArgs *UserAddPrincipalArgs,
   optArgs *UserAddPrincipalOptionalArgs, // can be nil
 ) (*UserAddPrincipalResult, error) {
@@ -66070,7 +66519,7 @@ func (c *Client) UserAddPrincipal(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -66183,6 +66632,7 @@ func (t *UserAddPrincipalResult) String() string {
 Delete a user.
 */
 func (c *Client) UserDel(
+  ctx context.Context,
   reqArgs *UserDelArgs,
   optArgs *UserDelOptionalArgs, // can be nil
 ) (*UserDelResult, error) {
@@ -66199,7 +66649,7 @@ func (c *Client) UserDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -66300,6 +66750,7 @@ func (t *UserDelResult) String() string {
 Disable a user account.
 */
 func (c *Client) UserDisable(
+  ctx context.Context,
   reqArgs *UserDisableArgs,
   optArgs *UserDisableOptionalArgs, // can be nil
 ) (*UserDisableResult, error) {
@@ -66316,7 +66767,7 @@ func (c *Client) UserDisable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -66405,6 +66856,7 @@ func (t *UserDisableResult) String() string {
 Enable a user account.
 */
 func (c *Client) UserEnable(
+  ctx context.Context,
   reqArgs *UserEnableArgs,
   optArgs *UserEnableOptionalArgs, // can be nil
 ) (*UserEnableResult, error) {
@@ -66421,7 +66873,7 @@ func (c *Client) UserEnable(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -66510,6 +66962,7 @@ func (t *UserEnableResult) String() string {
 Search for users.
 */
 func (c *Client) UserFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *UserFindArgs,
   optArgs *UserFindOptionalArgs, // can be nil
@@ -66527,7 +66980,7 @@ func (c *Client) UserFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -67002,6 +67455,7 @@ func (t *UserFindResult) String() string {
 Modify a user.
 */
 func (c *Client) UserMod(
+  ctx context.Context,
   reqArgs *UserModArgs,
   optArgs *UserModOptionalArgs, // can be nil
 ) (*UserModResult, error) {
@@ -67018,7 +67472,7 @@ func (c *Client) UserMod(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -67428,6 +67882,7 @@ func (t *UserModResult) String() string {
 Remove one or more certificates to the user entry
 */
 func (c *Client) UserRemoveCert(
+  ctx context.Context,
   reqArgs *UserRemoveCertArgs,
   optArgs *UserRemoveCertOptionalArgs, // can be nil
 ) (*UserRemoveCertResult, error) {
@@ -67444,7 +67899,7 @@ func (c *Client) UserRemoveCert(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -67557,6 +68012,7 @@ func (t *UserRemoveCertResult) String() string {
 Remove one or more certificate mappings from the user entry.
 */
 func (c *Client) UserRemoveCertmapdata(
+  ctx context.Context,
   ipacertmapdata string, // Certificate mapping data
   reqArgs *UserRemoveCertmapdataArgs,
   optArgs *UserRemoveCertmapdataOptionalArgs, // can be nil
@@ -67574,7 +68030,7 @@ func (c *Client) UserRemoveCertmapdata(
     Params: []interface{}{
       []interface{}{ipacertmapdata, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -67699,6 +68155,7 @@ func (t *UserRemoveCertmapdataResult) String() string {
 Remove a manager to the user entry
 */
 func (c *Client) UserRemoveManager(
+  ctx context.Context,
   reqArgs *UserRemoveManagerArgs,
   optArgs *UserRemoveManagerOptionalArgs, // can be nil
 ) (*UserRemoveManagerResult, error) {
@@ -67715,7 +68172,7 @@ func (c *Client) UserRemoveManager(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -67828,6 +68285,7 @@ func (t *UserRemoveManagerResult) String() string {
 Remove principal alias from the user entry
 */
 func (c *Client) UserRemovePrincipal(
+  ctx context.Context,
   reqArgs *UserRemovePrincipalArgs,
   optArgs *UserRemovePrincipalOptionalArgs, // can be nil
 ) (*UserRemovePrincipalResult, error) {
@@ -67844,7 +68302,7 @@ func (c *Client) UserRemovePrincipal(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -67957,6 +68415,7 @@ func (t *UserRemovePrincipalResult) String() string {
 Display information about a user.
 */
 func (c *Client) UserShow(
+  ctx context.Context,
   reqArgs *UserShowArgs,
   optArgs *UserShowOptionalArgs, // can be nil
 ) (*UserShowResult, error) {
@@ -67973,7 +68432,7 @@ func (c *Client) UserShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -68092,6 +68551,7 @@ func (t *UserShowResult) String() string {
 Move deleted user into staged area
 */
 func (c *Client) UserStage(
+  ctx context.Context,
   reqArgs *UserStageArgs,
   optArgs *UserStageOptionalArgs, // can be nil
 ) (*UserStageResult, error) {
@@ -68108,7 +68568,7 @@ func (c *Client) UserStage(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -68222,6 +68682,7 @@ Lockout status of a user account
     means that the user may attempt a login again.
 */
 func (c *Client) UserStatus(
+  ctx context.Context,
   reqArgs *UserStatusArgs,
   optArgs *UserStatusOptionalArgs, // can be nil
 ) (*UserStatusResult, error) {
@@ -68238,7 +68699,7 @@ func (c *Client) UserStatus(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -68347,6 +68808,7 @@ func (t *UserStatusResult) String() string {
 Undelete a delete user account.
 */
 func (c *Client) UserUndel(
+  ctx context.Context,
   reqArgs *UserUndelArgs,
   optArgs *UserUndelOptionalArgs, // can be nil
 ) (*UserUndelResult, error) {
@@ -68363,7 +68825,7 @@ func (c *Client) UserUndel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -68457,6 +68919,7 @@ Unlock a user account
     an administrator.
 */
 func (c *Client) UserUnlock(
+  ctx context.Context,
   reqArgs *UserUnlockArgs,
   optArgs *UserUnlockOptionalArgs, // can be nil
 ) (*UserUnlockResult, error) {
@@ -68473,7 +68936,7 @@ func (c *Client) UserUnlock(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -68562,6 +69025,7 @@ func (t *UserUnlockResult) String() string {
 Add a vault.
 */
 func (c *Client) VaultAddInternal(
+  ctx context.Context,
   reqArgs *VaultAddInternalArgs,
   optArgs *VaultAddInternalOptionalArgs, // can be nil
 ) (*VaultAddInternalResult, error) {
@@ -68578,7 +69042,7 @@ func (c *Client) VaultAddInternal(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -68741,6 +69205,7 @@ func (t *VaultAddInternalResult) String() string {
 Add members to a vault.
 */
 func (c *Client) VaultAddMember(
+  ctx context.Context,
   reqArgs *VaultAddMemberArgs,
   optArgs *VaultAddMemberOptionalArgs, // can be nil
 ) (*VaultAddMemberResult, error) {
@@ -68757,7 +69222,7 @@ func (c *Client) VaultAddMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -68900,6 +69365,7 @@ func (t *VaultAddMemberResult) String() string {
 Add owners to a vault.
 */
 func (c *Client) VaultAddOwner(
+  ctx context.Context,
   reqArgs *VaultAddOwnerArgs,
   optArgs *VaultAddOwnerOptionalArgs, // can be nil
 ) (*VaultAddOwnerResult, error) {
@@ -68916,7 +69382,7 @@ func (c *Client) VaultAddOwner(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -69059,6 +69525,7 @@ func (t *VaultAddOwnerResult) String() string {
 Archive data into a vault.
 */
 func (c *Client) VaultArchiveInternal(
+  ctx context.Context,
   reqArgs *VaultArchiveInternalArgs,
   optArgs *VaultArchiveInternalOptionalArgs, // can be nil
 ) (*VaultArchiveInternalResult, error) {
@@ -69075,7 +69542,7 @@ func (c *Client) VaultArchiveInternal(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -69218,6 +69685,7 @@ func (t *VaultArchiveInternalResult) String() string {
 Delete a vault.
 */
 func (c *Client) VaultDel(
+  ctx context.Context,
   reqArgs *VaultDelArgs,
   optArgs *VaultDelOptionalArgs, // can be nil
 ) (*VaultDelResult, error) {
@@ -69234,7 +69702,7 @@ func (c *Client) VaultDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -69347,6 +69815,7 @@ func (t *VaultDelResult) String() string {
 Search for vaults.
 */
 func (c *Client) VaultFind(
+  ctx context.Context,
   criteria string, // A string searched in all relevant object attributes
   reqArgs *VaultFindArgs,
   optArgs *VaultFindOptionalArgs, // can be nil
@@ -69364,7 +69833,7 @@ func (c *Client) VaultFind(
     Params: []interface{}{
       []interface{}{criteria, }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -69539,6 +70008,7 @@ func (t *VaultFindResult) String() string {
 Modify a vault.
 */
 func (c *Client) VaultModInternal(
+  ctx context.Context,
   reqArgs *VaultModInternalArgs,
   optArgs *VaultModInternalOptionalArgs, // can be nil
 ) (*VaultModInternalResult, error) {
@@ -69555,7 +70025,7 @@ func (c *Client) VaultModInternal(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -69731,6 +70201,7 @@ func (t *VaultModInternalResult) String() string {
 Remove members from a vault.
 */
 func (c *Client) VaultRemoveMember(
+  ctx context.Context,
   reqArgs *VaultRemoveMemberArgs,
   optArgs *VaultRemoveMemberOptionalArgs, // can be nil
 ) (*VaultRemoveMemberResult, error) {
@@ -69747,7 +70218,7 @@ func (c *Client) VaultRemoveMember(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -69890,6 +70361,7 @@ func (t *VaultRemoveMemberResult) String() string {
 Remove owners from a vault.
 */
 func (c *Client) VaultRemoveOwner(
+  ctx context.Context,
   reqArgs *VaultRemoveOwnerArgs,
   optArgs *VaultRemoveOwnerOptionalArgs, // can be nil
 ) (*VaultRemoveOwnerResult, error) {
@@ -69906,7 +70378,7 @@ func (c *Client) VaultRemoveOwner(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -70049,6 +70521,7 @@ func (t *VaultRemoveOwnerResult) String() string {
 Retrieve data from a vault.
 */
 func (c *Client) VaultRetrieveInternal(
+  ctx context.Context,
   reqArgs *VaultRetrieveInternalArgs,
   optArgs *VaultRetrieveInternalOptionalArgs, // can be nil
 ) (*VaultRetrieveInternalResult, error) {
@@ -70065,7 +70538,7 @@ func (c *Client) VaultRetrieveInternal(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -70196,6 +70669,7 @@ func (t *VaultRetrieveInternalResult) String() string {
 Display information about a vault.
 */
 func (c *Client) VaultShow(
+  ctx context.Context,
   reqArgs *VaultShowArgs,
   optArgs *VaultShowOptionalArgs, // can be nil
 ) (*VaultShowResult, error) {
@@ -70212,7 +70686,7 @@ func (c *Client) VaultShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -70343,6 +70817,7 @@ func (t *VaultShowResult) String() string {
 Show vault configuration.
 */
 func (c *Client) VaultconfigShow(
+  ctx context.Context,
   reqArgs *VaultconfigShowArgs,
   optArgs *VaultconfigShowOptionalArgs, // can be nil
 ) (*VaultconfigShowResult, error) {
@@ -70359,7 +70834,7 @@ func (c *Client) VaultconfigShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -70460,6 +70935,7 @@ func (t *VaultconfigShowResult) String() string {
 Add owners to a vault container.
 */
 func (c *Client) VaultcontainerAddOwner(
+  ctx context.Context,
   reqArgs *VaultcontainerAddOwnerArgs,
   optArgs *VaultcontainerAddOwnerOptionalArgs, // can be nil
 ) (*VaultcontainerAddOwnerResult, error) {
@@ -70476,7 +70952,7 @@ func (c *Client) VaultcontainerAddOwner(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -70613,6 +71089,7 @@ func (t *VaultcontainerAddOwnerResult) String() string {
 Delete a vault container.
 */
 func (c *Client) VaultcontainerDel(
+  ctx context.Context,
   reqArgs *VaultcontainerDelArgs,
   optArgs *VaultcontainerDelOptionalArgs, // can be nil
 ) (*VaultcontainerDelResult, error) {
@@ -70629,7 +71106,7 @@ func (c *Client) VaultcontainerDel(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -70736,6 +71213,7 @@ func (t *VaultcontainerDelResult) String() string {
 Remove owners from a vault container.
 */
 func (c *Client) VaultcontainerRemoveOwner(
+  ctx context.Context,
   reqArgs *VaultcontainerRemoveOwnerArgs,
   optArgs *VaultcontainerRemoveOwnerOptionalArgs, // can be nil
 ) (*VaultcontainerRemoveOwnerResult, error) {
@@ -70752,7 +71230,7 @@ func (c *Client) VaultcontainerRemoveOwner(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -70889,6 +71367,7 @@ func (t *VaultcontainerRemoveOwnerResult) String() string {
 Display information about a vault container.
 */
 func (c *Client) VaultcontainerShow(
+  ctx context.Context,
   reqArgs *VaultcontainerShowArgs,
   optArgs *VaultcontainerShowOptionalArgs, // can be nil
 ) (*VaultcontainerShowResult, error) {
@@ -70905,7 +71384,7 @@ func (c *Client) VaultcontainerShow(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -71030,6 +71509,7 @@ func (t *VaultcontainerShowResult) String() string {
 Describe currently authenticated identity.
 */
 func (c *Client) Whoami(
+  ctx context.Context,
   reqArgs *WhoamiArgs,
   optArgs *WhoamiOptionalArgs, // can be nil
 ) (*WhoamiResult, error) {
@@ -71046,7 +71526,7 @@ func (c *Client) Whoami(
     Params: []interface{}{
       []interface{}{}, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
@@ -120938,3 +121418,4 @@ const TrustErrorCode = 4500
 const TrustTopologyConflictErrorCode = 4501
 
 const GenericErrorCode = 5000
+

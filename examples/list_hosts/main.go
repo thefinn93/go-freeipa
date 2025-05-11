@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"crypto/tls"
 	"fmt"
 	"log"
@@ -39,12 +40,14 @@ func main() {
 		},
 	}
 
-	c, err := freeipa.ConnectWithKerberos(os.Getenv("IPA_HOST"), tspt, krb5ConnectOption)
+	ctx := context.Background()
+
+	c, err := freeipa.ConnectWithKerberos(ctx, os.Getenv("IPA_HOST"), tspt, krb5ConnectOption)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	res, err := c.HostFind("", &freeipa.HostFindArgs{}, &freeipa.HostFindOptionalArgs{
+	res, err := c.HostFind(ctx, "", &freeipa.HostFindArgs{}, &freeipa.HostFindOptionalArgs{
 		Sizelimit: freeipa.Int(0),
 	})
 	if err != nil {

@@ -32,6 +32,7 @@
 package freeipa_test
 
 import (
+	"context"
 	"crypto/tls"
 	"fmt"
 	"math/rand"
@@ -49,7 +50,7 @@ func setup(t *testing.T) *freeipa.Client {
 			InsecureSkipVerify: true,
 		},
 	}
-	client, e := freeipa.Connect("dc1.test.local", tspt, "admin", "walrus123")
+	client, e := freeipa.Connect(context.Background(), "dc1.test.local", tspt, "admin", "walrus123")
 	if e != nil {
 		t.Fatal(e)
 	}
@@ -63,16 +64,18 @@ func noErr(t *testing.T, e error) {
 }
 
 func TestUser(t *testing.T) {
+	ctx := context.Background()
+
 	rand.Seed(time.Now().UTC().UnixNano())
 	client := setup(t)
 	testNum := rand.Int()
 	testUID := fmt.Sprintf("jdoe%v", testNum)
 
-	find1Res, e := client.UserFind("", &freeipa.UserFindArgs{}, nil)
+	find1Res, e := client.UserFind(ctx, "", &freeipa.UserFindArgs{}, nil)
 	noErr(t, e)
 	find1Len := len(find1Res.Result)
 
-	addRes, e := client.UserAdd(&freeipa.UserAddArgs{
+	addRes, e := client.UserAdd(ctx, &freeipa.UserAddArgs{
 		Givenname: "John",
 		Sn:        "Doe",
 	}, &freeipa.UserAddOptionalArgs{
@@ -83,7 +86,7 @@ func TestUser(t *testing.T) {
 		t.Errorf("unexpected names in: %v", addRes.Result)
 	}
 
-	find2Res, e := client.UserFind("", &freeipa.UserFindArgs{}, nil)
+	find2Res, e := client.UserFind(ctx, "", &freeipa.UserFindArgs{}, nil)
 	noErr(t, e)
 	if find1Len+1 != len(find2Res.Result) {
 		t.Errorf("expected one new user, but got: %v and then %v", find1Res.Result, find2Res.Result)
@@ -98,7 +101,7 @@ func TestUser(t *testing.T) {
 		t.Errorf("new user has wrong name: got %v %v, want John Doe", newUserF.Givenname, newUserF.Sn)
 	}
 
-	showRes, e := client.UserShow(&freeipa.UserShowArgs{}, &freeipa.UserShowOptionalArgs{
+	showRes, e := client.UserShow(ctx, &freeipa.UserShowArgs{}, &freeipa.UserShowOptionalArgs{
 		UID:       freeipa.String(testUID),
 		NoMembers: freeipa.Bool(true),
 	})
@@ -110,7 +113,7 @@ func TestUser(t *testing.T) {
 		t.Errorf("expected user from Find and Show be equal: %v %v", &newUserF, &showRes.Result)
 	}
 
-	delRes, e := client.UserDel(&freeipa.UserDelArgs{}, &freeipa.UserDelOptionalArgs{
+	delRes, e := client.UserDel(ctx, &freeipa.UserDelArgs{}, &freeipa.UserDelOptionalArgs{
 		UID: &[]string{testUID},
 	})
 	noErr(t, e)
@@ -118,13 +121,13 @@ func TestUser(t *testing.T) {
 		t.Errorf("user not reported deleted, got: %v", delRes.Value)
 	}
 
-	find3Res, e := client.UserFind("", &freeipa.UserFindArgs{}, nil)
+	find3Res, e := client.UserFind(ctx, "", &freeipa.UserFindArgs{}, nil)
 	noErr(t, e)
 	if len(find3Res.Result) != find1Len {
 		t.Errorf("expected the same users as at the start of the test, but initially got %v and now %v", find1Res.Result, find3Res.Result)
 	}
 
-	_, e = client.UserShow(&freeipa.UserShowArgs{}, &freeipa.UserShowOptionalArgs{
+	_, e = client.UserShow(ctx, &freeipa.UserShowArgs{}, &freeipa.UserShowOptionalArgs{
 		UID:       freeipa.String(testUID),
 		NoMembers: freeipa.Bool(true),
 	})

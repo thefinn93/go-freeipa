@@ -3,6 +3,7 @@
 package freeipa;
 
 import (
+  "context"
   "time"
 	"encoding/json"
   "fmt"
@@ -22,6 +23,7 @@ type request struct {
 {{TrimSpace .Doc}}
 */
 func (c *Client) {{.UpperName}}(
+  ctx context.Context,
   {{range .PosParams -}}
     {{.LowerName}} {{ToGoType .Type}}, // {{.Doc}}
   {{end -}}
@@ -43,7 +45,7 @@ func (c *Client) {{.UpperName}}(
         {{- range .PosParams}}{{.LowerName}}, {{end -}}
       }, &kwp},
   }
-  readCloser, e := c.exec(&req)
+  readCloser, e := c.exec(ctx, &req)
   if e != nil {
     return nil, e
   }
