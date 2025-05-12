@@ -193,12 +193,10 @@ func (c *Client) login(ctx context.Context) error {
 		"password": []string{c.pw},
 	}
 
-	req, e := http.NewRequest(http.MethodPost, fmt.Sprintf("https://%v/ipa/session/login_password", c.host), strings.NewReader(data.Encode()))
+	req, e := http.NewRequestWithContext(ctx, http.MethodPost, fmt.Sprintf("https://%v/ipa/session/login_password", c.host), strings.NewReader(data.Encode()))
 	if e != nil {
 		return errors.WithMessage(e, "building login HTTP request")
 	}
-
-	req = req.WithContext(ctx)
 
 	req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
 	req.Header.Add("Referer", fmt.Sprintf("https://%s/ipa", c.host))
@@ -223,12 +221,10 @@ func (c *Client) loginWithKerberos(ctx context.Context) error {
 	k5LoginEndpoint := fmt.Sprintf("https://%s/ipa/session/login_kerberos", c.host)
 	spnegoCl := spnego.NewClient(c.k5client, c.hc, "")
 
-	req, err := http.NewRequest("POST", k5LoginEndpoint, nil)
+	req, err := http.NewRequestWithContext(ctx, "POST", k5LoginEndpoint, nil)
 	if err != nil {
 		return errors.WithMessage(err, "building login HTTP request")
 	}
-
-	req = req.WithContext(ctx)
 
 	req.Header.Add("Referer", fmt.Sprintf("https://%s/ipa", c.host))
 
@@ -249,11 +245,11 @@ func (c *Client) sendRequest(ctx context.Context, req *request) (*http.Response,
 	if e != nil {
 		return nil, e
 	}
-	reqH, e := http.NewRequest("POST", fmt.Sprintf("https://%v/ipa/session/json", c.host), bytes.NewBuffer(reqB))
+	reqH, e := http.NewRequestWithContext(ctx, "POST", fmt.Sprintf("https://%v/ipa/session/json", c.host), bytes.NewBuffer(reqB))
 	if e != nil {
 		return nil, e
 	}
-	reqH = reqH.WithContext(ctx)
+
 	reqH.Header.Set("Content-Type", "application/json")
 	reqH.Header.Set("Accept", "application/json")
 	reqH.Header.Set("Referer", fmt.Sprintf("https://%v/ipa/ui", c.host))
